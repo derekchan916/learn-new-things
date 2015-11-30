@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My First Component</title>
+    <script src="https://fb.me/react-0.14.2.js"></script>
+    <script src="https://fb.me/react-dom-0.14.2.js"></script>
+  </head>
+  <body>
+    <div id="my-component">
+    </div>
+
+    <script>
+    // ReactDOM.render(
+    //   React.createElement('div', {}, 'Hello from React!'),
+    //   document.getElementById('my-component')
+    // );
+
+    var ClickCounter = React.createClass({
+      render: function(){
+        return (
+        React.createElement('div', {},
+          React.createElement(
+            'button',
+            {},
+            "CLICK ME"
+          )
+        )
+       );
+      }
+    });
+
+    ReactDOM.render(
+      React.createElement(ClickCounter, {}, ""),
+      document.getElementById('my-component')
+    );
+    </script>
+  </body>
+</html>
