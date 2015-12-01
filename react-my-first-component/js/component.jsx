@@ -1,3 +1,6 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 var ClickCounter = React.createClass({
   getInitialState: function(){
     return {count: 0};
