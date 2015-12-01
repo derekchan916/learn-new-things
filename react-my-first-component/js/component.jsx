@@ -1,3 +1,5 @@
+/** @jsx React.DOM */
+
 var ClickCounter = React.createClass({
   getInitialState: function(){
     return {count: 0};
@@ -32,8 +34,8 @@ ReactDOM.render(
   React.createElement(ClickCounter, {}, ""),
   document.getElementById('my-component')
 );
-
-ReactDOM.render(
-  <h1>Hello, world!</h1>,
-  document.getElementById('example')
-);
+//
+// ReactDOM.render(
+//   <h1>Hello, world!</h1>,
+//   document.getElementById('example')
+// );
