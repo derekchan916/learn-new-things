@@ -8,6 +8,7 @@ run$ npm init --yes
 This will give you a package.json file.
 
 run$ npm install --save react
+
 Ignore the WARNs. If you want to fix it, change it to look like this
 ```JavaScript
 {
@@ -55,17 +56,27 @@ module.exports = {
   }
 };
 ```
-Here is my build so far
+Here is my build so far:
+
 /html
+
 --my-first-component.html
+
 /js
+
 --component.jsx
+
 /node_modules
+
 -package.json
+
 -webpack.config.js
 
+
 run$ npm install --save babel-core
+
 run$ npm install --save babel-loader
+
 run$ npm install --save babel-preset-react
 
 Now make sure you put the following code in component.jsx
@@ -84,9 +95,10 @@ ReactDOM.render(
   document.getElementById('my-component')
 );
 ```
-
 run$ npm install webpack -g
+
 run$ webpack
+
 this should put a bundle.js file into your ish.
 
 put this into your HTML file
