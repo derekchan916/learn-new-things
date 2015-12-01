@@ -2,7 +2,9 @@
 Instructions on how to install Webpack to compile JSX files.
 
 Create a new project directory called hello_world_app.
+
 run$ npm init --yes
+
 This will give you a package.json file.
 
 run$ npm install --save react
