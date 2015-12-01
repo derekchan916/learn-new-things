@@ -7,7 +7,7 @@ This will give you a package.json file.
 
 run$ npm install --save react
 Ignore the WARNs. If you want to fix it, change it to look like this
-``JavaScript
+```JavaScript
 {
   "name": "react-my-first-component",
   "version": "1.0.0",
@@ -29,9 +29,9 @@ Ignore the WARNs. If you want to fix it, change it to look like this
     "webpack": "^1.12.9"
   }
 }
-``
+```
 Create a new webpack.config.js file and copy this into it.
-`` JavaScript
+```JavaScript
 module.exports = {
   context: __dirname,
   entry: "./js/component.jsx",
@@ -52,7 +52,7 @@ module.exports = {
     ]
   }
 };
-``
+```
 Here is my build so far
 /html
 --my-first-component.html
@@ -67,7 +67,7 @@ run$ npm install --save babel-loader
 run$ npm install --save babel-preset-react
 
 Now make sure you put the following code in component.jsx
-``JavaScript
+```JavaScript
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -81,15 +81,17 @@ ReactDOM.render(
   React.createElement(ClickCounter, {}, ""),
   document.getElementById('my-component')
 );
-``
+```
 
 run$ npm install webpack -g
+run$ webpack
+this should put a bundle.js file into your ish.
 
 put this into your HTML file
-``HTML
+```HTML
 <body>
   <script src="../bundle.js"></script>
 </body>
-``
+```
 
 Run webpack in your terminal, then open the html file.
