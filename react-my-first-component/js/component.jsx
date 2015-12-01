@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var ClickCounter = React.createClass({
   getInitialState: function(){
     return {count: 0};
