@@ -86,4 +86,11 @@ ReactDOM.render(
 
 run$ npm install webpack -g
 
+put this into your HTML file
+``HTML
+<body>
+  <script src="../bundle.js"></script>
+</body>
+``
+
 Run webpack in your terminal, then open the html file.
