@@ -59,7 +59,6 @@ Here is my build so far
 /js
 --component.jsx
 /node_modules
--bundle.js
 -package.json
 -webpack.config.js
 
