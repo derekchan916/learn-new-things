@@ -124,7 +124,8 @@
 //data taken from machine learning
 var svg = d3.select("body").append("svg").attr("width", 250).attr("height", 250);
 var xScale = d3.scale.linear().range([0, 250]);
-var yScale = d3.scale.linear().range([0, 250]);
+var yScale = d3.scale.linear().range([250, 0]);
+//what this inversion of range does is invert it so min value is on bottom left
 
 function render(data){
   xScale.domain(d3.extent(data, function(d){ return d.sepal_length; })); //getting min and max of sepal_length
