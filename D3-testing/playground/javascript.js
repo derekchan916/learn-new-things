@@ -11,7 +11,7 @@
 //     return d;
 //   }
 // });
-//
+//---------------------------
 // var scale = d3.scale.linear()
 //   .domain([0, 1]) //data space, like input, setter
 //   .range([0, 100]); //pixel space, like output
@@ -36,7 +36,7 @@
 // fruitScale.rangeRoundPoints([0, 100]);
 //
 // console.log(fruitScale("B")); //prints 50
-
+//--------------------
 // var svg = d3.select("body").append("svg");
 // svg.attr("width", 250);
 // svg.attr("height", 250);
@@ -46,18 +46,36 @@
 // .attr("y", 50)
 // .attr("width", 100)
 // .attr("height", 100);
-
-var data = [1, 2, 3, 4, 5];
+// ------------------
+// var data = [1, 2, 3, 4, 5];
+//
+// var scale = d3.scale.linear().domain([1, 5]).range([0, 200]);
+//
+// var svg = d3.select("body").append("svg").attr("width", 250).attr("height", 250);
+//
+// svg.selectAll("rect")//databinding, gives you all the rect elements
+//   .data(data) //pass in the array data
+//   .enter().append("rect") //there are no rects so enter will append the rect
+//   // .attr("x", function (d){ return scale(d); }) //d will iterate through array data
+//   .attr("x", scale) //can also do this because scale is basically a function
+//   .attr("y", 50)
+//   .attr("width", 20)
+//   .attr("height", 50);
+//-----------------------
 
 var scale = d3.scale.linear().domain([1, 5]).range([0, 200]);
-
 var svg = d3.select("body").append("svg").attr("width", 250).attr("height", 250);
 
-svg.selectAll("rect")//databinding, gives you all the rect elements
-  .data(data) //pass in the array data
-  .enter().append("rect") //there are no rects so enter will append the rect
-  // .attr("x", function (d){ return scale(d); }) //d will iterate through array data
-  .attr("x", scale)
-  .attr("y", 50)
-  .attr("width", 20)
-  .attr("height", 50);
+function render (data, color) {
+  var rects = svg.selectAll("rect").data(data)
+
+  rects.enter().append("rect")
+    .attr("x", scale)
+    .attr("y", 50)
+    .attr("width", 20)
+    .attr("height", 20)
+    .attr("fill", color);
+}
+
+render([1, 2, 3], "red");
+render([1, 2, 3, 4, 5], "blue");
