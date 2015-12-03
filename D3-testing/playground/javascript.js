@@ -37,12 +37,27 @@
 //
 // console.log(fruitScale("B")); //prints 50
 
-var svg = d3.select("body").append("svg");
-svg.attr("width", 250);
-svg.attr("height", 250);
+// var svg = d3.select("body").append("svg");
+// svg.attr("width", 250);
+// svg.attr("height", 250);
+//
+// var rect = svg.append("rect")
+// .attr("x", 50)
+// .attr("y", 50)
+// .attr("width", 100)
+// .attr("height", 100);
 
-var rect = svg.append("rect")
-rect.attr("x", 50);
-rect.attr("y", 50);
-rect.attr("width", 100);
-rect.attr("height", 100);
+var data = [1, 2, 3, 4, 5];
+
+var scale = d3.scale.linear().domain([1, 5]).range([0, 200]);
+
+var svg = d3.select("body").append("svg").attr("width", 250).attr("height", 250);
+
+svg.selectAll("rect")//databinding, gives you all the rect elements
+  .data(data) //pass in the array data
+  .enter().append("rect") //there are no rects so enter will append the rect
+  // .attr("x", function (d){ return scale(d); }) //d will iterate through array data
+  .attr("x", scale)
+  .attr("y", 50)
+  .attr("width", 20)
+  .attr("height", 50);
