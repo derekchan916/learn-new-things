@@ -86,29 +86,65 @@
 // //it doesn't care about the values, just the number of elements in the array
 // console.log(scale(6))
 // ------------------------------------
-
-var scale = d3.scale.linear().domain([1, 5]).range([0, 200]);
+//
+// var scale = d3.scale.linear().domain([1, 5]).range([0, 200]);
+// var svg = d3.select("body").append("svg").attr("width", 250).attr("height", 250);
+//
+// function render (data, color) {
+//   //bind data
+//   var rects = svg.selectAll("rect").data(data)
+//
+//   //enter
+//   rects.enter().append("rect")
+//     .attr("y", 50)
+//     .attr("width", 20)
+//     .attr("height", 20);
+//
+//   //update
+//   rects
+//     .attr("x", scale)
+//     .attr("fill", color);
+//
+//   //exit
+//   rects.exit().remove();
+// }
+//
+// setTimeout( function() { render([1, 2, 3], "red"); }, 1000);
+// setTimeout( function() { render([1, 2, 3, 4, 5], "blue"); }, 2000);
+// setTimeout( function() { render([1, 2], "green"); }, 3000);//try removing the exit
+// ----------------------------------
+//
+// d3.csv("iris.csv", type, function(data){
+//   var min = d3.min(data, function(d){ return d.sepal_length; });
+//   var max = d3.max(data, function(d){ return d.sepal_length; });
+//   console.log([min, max])
+// });
+// // --------------------------------
+//extent computes min and max and returns the array right away
+//data taken from machine learning
 var svg = d3.select("body").append("svg").attr("width", 250).attr("height", 250);
+var xScale = d3.scale.linear().range([0, 250]);
+var yScale = d3.scale.linear().range([0, 250]);
 
-function render (data, color) {
-  //bind data
-  var rects = svg.selectAll("rect").data(data)
+function render(data){
+  xScale.domain(d3.extent(data, function(d){ return d.sepal_length; })); //getting min and max of sepal_length
+  yScale.domain(d3.extent(data, function(d){ return d.sepal_length; }));
 
-  //enter
-  rects.enter().append("rect")
-    .attr("y", 50)
-    .attr("width", 20)
-    .attr("height", 20);
+  var circles = svg.selectAll("circle").data(data);
+  circles.enter().append("circle").attr("r", 10);
+  circles
+    .attr("cx", function (d){ return xScale(d.sepal_length); })
+    .attr("cy", function (d){ return yScale(d.sepal_length); });
 
-  //update
-  rects
-    .attr("x", scale)
-    .attr("fill", color);
-
-  //exit
-  rects.exit().remove();
+  circles.exit().remove();
 }
 
-setTimeout( function() { render([1, 2, 3], "red"); }, 1000);
-setTimeout( function() { render([1, 2, 3, 4, 5], "blue"); }, 2000);
-setTimeout( function() { render([1, 2], "green"); }, 3000);//try removing the exit
+function type(d){
+  d.sepal_length = +d.sepal_length;
+  d.sepal_width = +d.sepal_width;
+  d.petal_length = +d.petal_length;
+  d.petal_width = +d.petal_width;
+  return d;
+}
+
+d3.csv("iris.csv", type, render);
