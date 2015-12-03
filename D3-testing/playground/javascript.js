@@ -176,6 +176,8 @@ var yAxisG = g.append("g");
 var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 var yAxis = d3.svg.axis().scale(yScale).orient("left");
 
+//we can manually edit ticks by using .ticks(num)
+
 function render(data){
   xScale.domain(data.map(function(d){ return d[xColumn]; }));
   yScale.domain([0, d3.max(data, function(d){ return d[yColumn]; })]);
