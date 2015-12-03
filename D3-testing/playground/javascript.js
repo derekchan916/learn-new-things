@@ -120,32 +120,46 @@
 //   console.log([min, max])
 // });
 // // --------------------------------
-//extent computes min and max and returns the array right away
-//data taken from machine learning
-var svg = d3.select("body").append("svg").attr("width", 250).attr("height", 250);
-var xScale = d3.scale.linear().range([0, 250]);
-var yScale = d3.scale.linear().range([250, 0]);
-//what this inversion of range does is invert it so min value is on bottom left
+// //extent computes min and max and returns the array right away
+// //data taken from machine learning
+// var svg = d3.select("body").append("svg").attr("width", 250).attr("height", 250);
+// var xScale = d3.scale.linear().range([0, 250]);
+// var yScale = d3.scale.linear().range([250, 0]);
+// //we can use d3.scale.log().range() if the distribution is skewed to one part
+// //we could also use species color with d3.scale.category10(); which is given for free
+// var xColumn = "sepal_length";
+// var yColumn = "petal_length";
+// //what this inversion of range does is invert it so min value is on bottom left
+//
+// function render(data){
+//   xScale.domain(d3.extent(data, function(d){ return d[xColumn]; })); //getting min and max of sepal_length
+//   yScale.domain(d3.extent(data, function(d){ return d[yColumn]; })); //d[yColumn] === d.petal_length
+//
+//   var circles = svg.selectAll("circle").data(data);
+//   circles.enter().append("circle").attr("r", 10);
+//   circles
+//     .attr("cx", function (d){ return xScale(d[xColumn]); })
+//     .attr("cy", function (d){ return yScale(d[yColumn]); });
+//
+//   circles.exit().remove();
+// }
+//
+// function type(d){
+//   d.sepal_length = +d.sepal_length;
+//   d.sepal_width = +d.sepal_width;
+//   d.petal_length = +d.petal_length;
+//   d.petal_width = +d.petal_width;
+//   return d;
+// }
+//
+// d3.csv("iris.csv", type, render);
+//-------------------------
+var line = d3.svg.line()
+  .x(function(d) {return xScale(d[xColumn]); })
+  .y(function(d) {return yScale(d[yColumn]); });
 
 function render(data){
-  xScale.domain(d3.extent(data, function(d){ return d.sepal_length; })); //getting min and max of sepal_length
-  yScale.domain(d3.extent(data, function(d){ return d.sepal_length; }));
-
-  var circles = svg.selectAll("circle").data(data);
-  circles.enter().append("circle").attr("r", 10);
-  circles
-    .attr("cx", function (d){ return xScale(d.sepal_length); })
-    .attr("cy", function (d){ return yScale(d.sepal_length); });
-
-  circles.exit().remove();
+  xScale.domain....
+  yScale.domain...
+  path.attr("d", line(data)); //this will do that whole thing with M50 50 etc.
 }
-
-function type(d){
-  d.sepal_length = +d.sepal_length;
-  d.sepal_width = +d.sepal_width;
-  d.petal_length = +d.petal_length;
-  d.petal_width = +d.petal_width;
-  return d;
-}
-
-d3.csv("iris.csv", type, render);
