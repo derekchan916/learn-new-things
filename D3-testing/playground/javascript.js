@@ -153,13 +153,44 @@
 // }
 //
 // d3.csv("iris.csv", type, render);
-//-------------------------
-var line = d3.svg.line()
-  .x(function(d) {return xScale(d[xColumn]); })
-  .y(function(d) {return yScale(d[yColumn]); });
+// -------------------------
+// var line = d3.svg.line()
+//   .x(function(d) {return xScale(d[xColumn]); })
+//   .y(function(d) {return yScale(d[yColumn]); });
+//
+// function render(data){
+//   xScale.domain....
+//   yScale.domain...
+//   path.attr("d", line(data)); //this will do that whole thing with M50 50 etc.
+// }
+// // -----------------------------
+var xScale = d3.scale.ordinal().rangeBands([0, innerWidth]);// can also take in
+//bar padding .rangeBands([0, innerWidth], 0.2);
+var yScale = d3.scale.linear().range([innerHeight, 0]); //notice the inversion
+
+//putting in axis below
+var xAxisG = g.append("g")
+  .attr("transform", "translate(0," + innerHeight + ")");
+var yAxisG = g.append("g");
+
+var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+var yAxis = d3.svg.axis().scale(yScale).orient("left");
 
 function render(data){
-  xScale.domain....
-  yScale.domain...
-  path.attr("d", line(data)); //this will do that whole thing with M50 50 etc.
+  xScale.domain(data.map(function(d){ return d[xColumn]; }));
+  yScale.domain([0, d3.max(data, function(d){ return d[yColumn]; })]);
+
+  xAxisG.call(xAxis);
+  yAxisG.call(yAxis);
+
+  var bars = g.selectAll("rect").data(data);
+  bars.enter().append("rect")
+    .attr("width", xScale.rangeBand());
+
+  bars
+    .attr("x", function(d){ return xScale(d[xColumn]); })
+    .attr("y", function(d){ return yScale(d[yColumn]); })
+    .attr("height", function(d){ return innerHeight - yScale(d[yColumn]); });
+
+  bars.exit().remove();
 }
