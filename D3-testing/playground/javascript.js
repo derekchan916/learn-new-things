@@ -62,20 +62,53 @@
 //   .attr("width", 20)
 //   .attr("height", 50);
 //-----------------------
+//
+// var scale = d3.scale.linear().domain([1, 5]).range([0, 200]);
+// var svg = d3.select("body").append("svg").attr("width", 250).attr("height", 250);
+//
+// function render (data, color) {
+//   //bind data
+//   var rects = svg.selectAll("rect").data(data)
+//
+//   //enter
+//   rects.enter().append("rect");
+//   //update
+//   rects
+//     .attr("x", scale)
+//     .attr("y", 50)
+//     .attr("width", 20)
+//     .attr("height", 20)
+//     .attr("fill", color);
+// }
+//
+// render([1, 2, 3], "red");
+// render([1, 2, 3, 4, 5], "blue"); //try chaining the enter and update together.
+// //it doesn't care about the values, just the number of elements in the array
+// console.log(scale(6))
+// ------------------------------------
 
 var scale = d3.scale.linear().domain([1, 5]).range([0, 200]);
 var svg = d3.select("body").append("svg").attr("width", 250).attr("height", 250);
 
 function render (data, color) {
+  //bind data
   var rects = svg.selectAll("rect").data(data)
 
+  //enter
   rects.enter().append("rect")
-    .attr("x", scale)
     .attr("y", 50)
     .attr("width", 20)
-    .attr("height", 20)
+    .attr("height", 20);
+
+  //update
+  rects
+    .attr("x", scale)
     .attr("fill", color);
+
+  //exit
+  rects.exit().remove();
 }
 
-render([1, 2, 3], "red");
-render([1, 2, 3, 4, 5], "blue");
+setTimeout( function() { render([1, 2, 3], "red"); }, 1000);
+setTimeout( function() { render([1, 2, 3, 4, 5], "blue"); }, 2000);
+setTimeout( function() { render([1, 2], "green"); }, 3000);//try removing the exit
