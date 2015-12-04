@@ -13,11 +13,22 @@ var svg = d3.select("#chart").append("svg")
 var g = svg.append("g")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+var xAxisG = g.append("g")
+  .attr("class", "axis")
+  .attr("transform", "translate(0," + innerHeight + ")");
+var yAxisG = g.append("g")
+  .attr("class", "axis");
 
 g.append("text")
   .attr("y", -25)
   .style("text-anchor", "end")
   .text("Count");
+
+var xScale = d3.scale.ordinal().rangeBands([0, innerWidth], barPadding);
+var yScale = d3.scale.linear().range([innerHeight, 0]);
+
+var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5)
 
 function render(data){
   var letters = [];
