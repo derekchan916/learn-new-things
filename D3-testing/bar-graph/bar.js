@@ -20,6 +20,12 @@ g.append("text")
   .text("Count");
 
 function render(data){
+  var letters = [];
+  var maxCount = 0;
+  for (var i = 0; i < data.length; i++){
+    letters[i] = data[i].letter;
+    if (maxCount < data[i].count) { maxCount = data[i].count }
+  };
 
   xScale.domain(letters);
   yScale.domain([0, maxCount]);
