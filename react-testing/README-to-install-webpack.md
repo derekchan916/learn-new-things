@@ -119,3 +119,9 @@ IF it doesn't work, and it says it cannot resolve module then do this
 run $npm install --save react@0.14.0-rc1
 
 run $npm install --save react-dom@0.14.0-rc1
+
+we can also run this in a local environment.
+
+run$ npm install -g http-server
+
+We can now load the server by simply running http-server. Do this in another terminal tab, then navigate to http://localhost:8080 and ensure you can still see your modified "Hello World" component.

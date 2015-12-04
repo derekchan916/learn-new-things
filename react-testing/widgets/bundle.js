@@ -46,38 +46,25 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(157);
+	var AutoComplete = __webpack_require__(158);
 
-	var ClickCounter = React.createClass({
-	  displayName: 'ClickCounter',
-
-	  getInitialState: function () {
-	    return { count: 0 };
-	  },
-
-	  click: function (event) {
-	    event.preventDefault();
-	    this.setState({ count: this.state.count + 1 });
-	  },
+	var MyComponent = React.createClass({
+	  displayName: 'MyComponent',
 
 	  render: function () {
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(
-	        'button',
-	        { onClick: this.click },
-	        'CLICK ME'
-	      ),
-	      React.createElement(
-	        'span',
-	        null,
-	        this.state.count
-	      )
+	      React.createElement(AutoComplete, { names: names })
 	    );
 	  }
 	});
 
-	ReactDOM.render(React.createElement(ClickCounter, {}, ""), document.getElementById('main'));
+	var names = ['Abba', 'Barney', 'Barbara', 'Jeff', 'Jenny', 'Sarah', 'Sally', 'Xander'];
+
+	document.addEventListener("DOMContentLoaded", function () {
+	  ReactDOM.render(React.createElement(MyComponent, null), document.getElementById('main'));
+	});
 
 /***/ },
 /* 1 */
@@ -19448,6 +19435,70 @@
 
 	module.exports = __webpack_require__(3);
 
+
+/***/ },
+/* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var AutoComplete = React.createClass({
+	  displayName: "AutoComplete",
+
+	  getInitialState: function () {
+	    return { inputVal: "" };
+	  },
+
+	  handleInput: function (event) {
+	    this.setState({ inputVal: event.currentTarget.value });
+	  },
+
+	  matches: function () {
+	    var matches = [];
+	    if (this.state.inputVal.length === 0) {
+	      return this.props.names;
+	    }
+
+	    this.props.names.forEach((function (name) {
+	      var sub = name.slice(0, this.state.inputVal.length);
+	      if (sub.toLowerCase() === this.state.inputVal.toLowerCase()) {
+	        matches.push(name);
+	      }
+	    }).bind(this));
+
+	    if (matches.length === 0) {
+	      matches.push("No matches");
+	    }
+
+	    return matches;
+	  },
+
+	  selectName: function (event) {
+	    var name = event.currentTarget.innerText;
+	    this.setState({ inputVal: name });
+	  },
+
+	  render: function () {
+	    var results = this.matches();
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement("input", { onChange: this.handleInput, value: this.state.inputVal }),
+	      React.createElement(
+	        "ul",
+	        null,
+	        results.map((function (result, i) {
+	          return React.createElement(
+	            "li",
+	            { key: i, onClick: this.selectName },
+	            result
+	          );
+	        }).bind(this))
+	      )
+	    );
+	  }
+	});
+	module.exports = AutoComplete;
 
 /***/ }
 /******/ ]);
