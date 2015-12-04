@@ -18,3 +18,21 @@ g.append("text")
   .attr("y", -25)
   .style("text-anchor", "end")
   .text("Count");
+
+function render(data){
+
+  xScale.domain(letters);
+  yScale.domain([0, maxCount]);
+
+  var bars = g.selectAll("rect").data(data);
+  bars.enter().append("rect")
+    .attr("class", "bar")
+    .attr("width", xScale.rangeBand());
+
+  bars
+    .attr("x", function(d){ return xScale(d.letter); })
+    .attr("y", function(d){ return yScale(d.count); })
+    .attr("height", function(d){ return innerHeight - yScale(d.count); });
+
+  bars.exit().remove();
+}
