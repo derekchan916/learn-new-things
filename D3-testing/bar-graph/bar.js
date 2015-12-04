@@ -9,3 +9,6 @@ var innerHeight = outerHeight - margin.top - margin.bottom;
 var svg = d3.select("#chart").append("svg")
   .attr("width", outerWidth)
   .attr("height", outerHeight);
+
+var g = svg.append("g")
+.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
