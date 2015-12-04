@@ -31,15 +31,8 @@ var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 var yAxis = d3.svg.axis().scale(yScale).orient("left").ticks(5)
 
 function render(data){
-  var letters = [];
-  var maxCount = 0;
-  for (var i = 0; i < data.length; i++){
-    letters[i] = data[i].letter;
-    if (maxCount < data[i].count) { maxCount = data[i].count }
-  };
-
-  xScale.domain(letters);
-  yScale.domain([0, maxCount]);
+  xScale.domain(data.map(function(d){ return d[letter]; }));
+  yScale.domain([0, d3.max(data, function(d){ return d[count]; })]);
 
   xAxisG.call(xAxis);
   yAxisG.call(yAxis);
@@ -50,9 +43,9 @@ function render(data){
     .attr("width", xScale.rangeBand());
 
   bars
-    .attr("x", function(d){ return xScale(d.letter); })
-    .attr("y", function(d){ return yScale(d.count); })
-    .attr("height", function(d){ return innerHeight - yScale(d.count); });
+    .attr("x", function(d){ return xScale(d[letter]); })
+    .attr("y", function(d){ return yScale(d[count]); })
+    .attr("height", function(d){ return innerHeight - yScale(d[count]); });
 
   bars.exit().remove();
 }
