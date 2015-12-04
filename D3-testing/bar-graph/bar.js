@@ -49,3 +49,23 @@ function render(data){
 
   bars.exit().remove();
 }
+
+function type(d) {
+  d.frequency = +d.frequency;
+  return d;
+}
+// d3.csv("letter-count.csv")
+//   .header("Content-Type", "application/json")
+//   .get(function(data) {
+//     console.log(data);
+//   });
+d3.tsv("letter-count.tsv", type, render);
+
+// $(document).ready(function() {
+//     $.ajax({
+//         type: "GET",
+//         url: "letter-count.csv",
+//         dataType: "text",
+//         success: function(data) {console.log(data)}
+//      });
+// });
