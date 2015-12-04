@@ -12,3 +12,9 @@ var svg = d3.select("#chart").append("svg")
 
 var g = svg.append("g")
 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+g.append("text")
+  .attr("y", -25)
+  .style("text-anchor", "end")
+  .text("Count");
