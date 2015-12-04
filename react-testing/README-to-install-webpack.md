@@ -9,6 +9,10 @@ This will give you a package.json file.
 
 run$ npm install --save react
 
+run$ npm install --save react-dom
+
+run$ npm install --save webpack
+
 Ignore the WARNs. If you want to fix it, change it to look like this
 ```JavaScript
 {
@@ -109,3 +113,9 @@ put this into your HTML file
 ```
 
 Run webpack in your terminal, then open the html file.
+
+IF it doesn't work, and it says it cannot resolve module then do this
+
+run $npm install --save react@0.14.0-rc1
+
+run $npm install --save react-dom@0.14.0-rc1
