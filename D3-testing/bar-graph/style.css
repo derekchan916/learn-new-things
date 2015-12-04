@@ -1,0 +1,28 @@
+body {
+  font-family: sans-serif;
+}
+
+svg {
+  display: block;
+  margin: 30px auto;
+}
+
+.bar {
+  fill: #4285F4;
+}
+
+.bar:hover {
+  fill: #EA4335;
+}
+
+.axis {
+  font-size: 10px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+  /*taken from SVG docs*/
+}
