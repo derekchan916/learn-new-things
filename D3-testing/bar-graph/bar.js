@@ -30,6 +30,9 @@ function render(data){
   xScale.domain(letters);
   yScale.domain([0, maxCount]);
 
+  xAxisG.call(xAxis);
+  yAxisG.call(yAxis);
+
   var bars = g.selectAll("rect").data(data);
   bars.enter().append("rect")
     .attr("class", "bar")
