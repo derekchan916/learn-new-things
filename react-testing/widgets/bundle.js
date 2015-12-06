@@ -19448,8 +19448,11 @@
 	  getInitialState: function () {
 	    return { input: "" };
 	  },
+	  handleInput: function (e) {
+	    this.setState({ input: e.currentTarget.value });
+	  },
 	  matches: function () {
-	    return this.props.name;
+	    return this.props.names;
 	  },
 	  render: function () {
 	    var results = this.matches();
@@ -19457,7 +19460,7 @@
 	    return React.createElement(
 	      "div",
 	      null,
-	      React.createElement("input", { value: this.state.input }),
+	      React.createElement("input", { onChange: this.handleInput, value: this.state.input }),
 	      React.createElement(
 	        "ul",
 	        null,
@@ -19465,7 +19468,7 @@
 	          return React.createElement(
 	            "li",
 	            null,
-	            "result"
+	            result
 	          );
 	        })
 	      )
