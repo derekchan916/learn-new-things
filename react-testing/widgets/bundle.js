@@ -19448,18 +19448,16 @@
 	  getInitialState: function () {
 	    return { input: "" };
 	  },
+	  matches: function () {
+	    return this.props.name;
+	  },
 	  render: function () {
-	    var results = ["whoa", "guy"];
+	    var results = this.matches();
 
 	    return React.createElement(
 	      "div",
 	      null,
-	      React.createElement(
-	        "input",
-	        null,
-	        "value=",
-	        this.state.input
-	      ),
+	      React.createElement("input", { value: this.state.input }),
 	      React.createElement(
 	        "ul",
 	        null,

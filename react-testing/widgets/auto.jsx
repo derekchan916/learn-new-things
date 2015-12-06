@@ -4,8 +4,11 @@ var AutoComplete = React.createClass({
   getInitialState: function() {
     return { input: "" };
   },
+  matches: function() {
+    return this.props.name
+  },
   render: function() {
-    var results = ["whoa", "guy"];
+    var results = this.matches();
 
     return (
       <div>
