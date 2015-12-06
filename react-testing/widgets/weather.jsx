@@ -66,14 +66,21 @@ var Weather = React.createClass({
     xmlhttp.send();
   },
 
-  render: function() {
+  render: function () {
     var content = "";
-
+    if (this.state.weather) {
+      var weather = this.state.weather;
+      var temp = (weather.main.temp - 273.15) * 1.8 + 32;
+      content += weather.name + "\n";
+      content += temp.toFixed(1)  + " degrees";
+    } else {
+      content = "loading weather...";
+    }
     return (
       <div className="weather">
         {content}
       </div>
-    )
+    );
   }
 })
 
