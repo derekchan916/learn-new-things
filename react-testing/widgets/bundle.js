@@ -19451,6 +19451,10 @@
 	  handleInput: function (e) {
 	    this.setState({ input: e.currentTarget.value });
 	  },
+	  handleClick: function (e) {
+	    var name = e.currentTarget.innerText;
+	    this.setState({ input: name });
+	  },
 	  matches: function () {
 	    var matches = [];
 	    var names = this.props.names;
@@ -19478,13 +19482,13 @@
 	      React.createElement(
 	        "ul",
 	        null,
-	        results.map(function (result) {
+	        results.map((function (result) {
 	          return React.createElement(
 	            "li",
-	            null,
+	            { onClick: this.handleClick },
 	            result
 	          );
-	        })
+	        }).bind(this))
 	      )
 	    );
 	  }

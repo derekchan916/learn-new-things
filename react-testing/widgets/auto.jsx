@@ -7,13 +7,17 @@ var AutoComplete = React.createClass({
   handleInput: function(e) {
     this.setState({ input: e.currentTarget.value });
   },
+  handleClick:function(e) {
+    var name = e.currentTarget.innerText;
+    this.setState({ input: name });
+  },
   matches: function() {
-    var matches = []
-    var names = this.props.names
-    var input = this.state.input
+    var matches = [];
+    var names = this.props.names;
+    var input = this.state.input;
 
     if (input.length === 0) {
-      return names
+      return names;
     }
 
     names.forEach(function(name) {
@@ -22,7 +26,7 @@ var AutoComplete = React.createClass({
       }
     });
 
-    return matches
+    return matches;
   },
   render: function() {
     var results = this.matches();
@@ -33,8 +37,8 @@ var AutoComplete = React.createClass({
         <ul>
           {
             results.map(function(result) {
-              return <li>{result}</li>
-            })
+              return <li onClick={this.handleClick}>{result}</li>
+            }.bind(this))
           }
         </ul>
       </div>
