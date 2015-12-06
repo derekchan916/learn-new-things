@@ -19452,7 +19452,14 @@
 	    this.setState({ input: e.currentTarget.value });
 	  },
 	  matches: function () {
-	    return this.props.names;
+	    var matches = [];
+	    var names = this.props.names;
+
+	    if (this.state.input.length === 0) {
+	      return names;
+	    }
+
+	    return matches;
 	  },
 	  render: function () {
 	    var results = this.matches();
