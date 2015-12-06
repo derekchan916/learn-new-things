@@ -47,6 +47,8 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(157);
 	var AutoComplete = __webpack_require__(158);
+	var Clock = __webpack_require__(159).Clock;
+	// var Weather = require('./clock.jsx').Weather;
 
 	var MyComponent = React.createClass({
 	  displayName: 'MyComponent',
@@ -55,7 +57,8 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(AutoComplete, { names: names })
+	      React.createElement(AutoComplete, { names: names }),
+	      React.createElement(Clock, null)
 	    );
 	  }
 	});
@@ -19448,13 +19451,16 @@
 	  getInitialState: function () {
 	    return { input: "" };
 	  },
+
 	  handleInput: function (e) {
 	    this.setState({ input: e.currentTarget.value });
 	  },
+
 	  handleClick: function (e) {
 	    var name = e.currentTarget.innerText;
 	    this.setState({ input: name });
 	  },
+
 	  matches: function () {
 	    var matches = [];
 	    var names = this.props.names;
@@ -19476,6 +19482,7 @@
 
 	    return matches;
 	  },
+
 	  render: function () {
 	    var results = this.matches();
 
@@ -19499,6 +19506,61 @@
 	});
 
 	module.exports = AutoComplete;
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {var React = __webpack_require__(1);
+
+	var clock = React.createClass({
+	  displayName: "clock",
+
+	  getInitialState: function () {
+	    return { time: new Date() };
+	  },
+
+	  render: function () {
+	    return React.createElement(
+	      "div",
+	      { className: "clock" },
+	      React.createElement(
+	        "p",
+	        null,
+	        "Time: ",
+	        this.state.time.toTimeString()
+	      ),
+	      React.createElement(
+	        "p",
+	        null,
+	        "Date: ",
+	        this.state.time.toDateString()
+	      )
+	    );
+	  }
+
+	});
+
+	module.export = {
+	  Clock: clock
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(160)(module)))
+
+/***/ },
+/* 160 */
+/***/ function(module, exports) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
 
 /***/ }
 /******/ ]);
