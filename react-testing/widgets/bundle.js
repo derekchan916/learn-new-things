@@ -19520,6 +19520,14 @@
 	    return { time: new Date() };
 	  },
 
+	  componentDidMount: function () {
+	    this.intervalId = setInterval(this.tick, 1000);
+	  },
+
+	  tick: function () {
+	    this.setState({ time: new Date() });
+	  },
+
 	  render: function () {
 	    return React.createElement(
 	      'div',

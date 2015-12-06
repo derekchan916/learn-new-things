@@ -5,8 +5,8 @@ var Clock = React.createClass({
     return { time: new Date() };
   },
 
-  compenentDidMount: function() {
-    this.intervalId = setInterval(this.tick, 1000)
+  componentDidMount: function() {
+    this.intervalId = setInterval(this.tick, 1000);
   },
 
   tick: function() {
