@@ -7,6 +7,7 @@ var MyComponent = React.createClass({
     return(
       <div>
         <AutoComplete names={names} />
+        <WeatherClock />
       </div>
     );
   }
