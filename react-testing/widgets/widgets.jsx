@@ -4,17 +4,6 @@ var AutoComplete = require('./auto.jsx');
 var Clock = require('./weather.jsx').Clock;
 // var Weather = require('./clock.jsx').Weather;
 
-var MyComponent = React.createClass({
-  render: function () {
-    return(
-      <div>
-        <AutoComplete names={names} />
-        <Clock />
-      </div>
-    );
-  }
-});
-
 var names = [
   'Abba',
   'Barney',
@@ -25,6 +14,17 @@ var names = [
   'Sally',
   'Xander'
 ];
+
+var MyComponent = React.createClass({
+  render: function () {
+    return(
+      <div>
+        <AutoComplete names={names} />
+        <Clock />
+      </div>
+    );
+  }
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   ReactDOM.render(<MyComponent />, document.getElementById('main'));

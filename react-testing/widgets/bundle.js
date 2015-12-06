@@ -50,6 +50,8 @@
 	var Clock = __webpack_require__(159).Clock;
 	// var Weather = require('./clock.jsx').Weather;
 
+	var names = ['Abba', 'Barney', 'Barbara', 'Jeff', 'Jenny', 'Sarah', 'Sally', 'Xander'];
+
 	var MyComponent = React.createClass({
 	  displayName: 'MyComponent',
 
@@ -62,8 +64,6 @@
 	    );
 	  }
 	});
-
-	var names = ['Abba', 'Barney', 'Barbara', 'Jeff', 'Jenny', 'Sarah', 'Sally', 'Xander'];
 
 	document.addEventListener("DOMContentLoaded", function () {
 	  ReactDOM.render(React.createElement(MyComponent, null), document.getElementById('main'));
@@ -19511,10 +19511,10 @@
 /* 159 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(module) {var React = __webpack_require__(1);
+	var React = __webpack_require__(1);
 
-	var clock = React.createClass({
-	  displayName: "clock",
+	var Clock = React.createClass({
+	  displayName: 'Clock',
 
 	  getInitialState: function () {
 	    return { time: new Date() };
@@ -19522,45 +19522,30 @@
 
 	  render: function () {
 	    return React.createElement(
-	      "div",
-	      { className: "clock" },
+	      'div',
+	      { className: 'clock' },
 	      React.createElement(
-	        "p",
+	        'p',
 	        null,
-	        "Time: ",
+	        'Time: ',
 	        this.state.time.toTimeString()
 	      ),
 	      React.createElement(
-	        "p",
+	        'p',
 	        null,
-	        "Date: ",
+	        'Date: ',
 	        this.state.time.toDateString()
 	      )
 	    );
 	  }
-
 	});
 
-	module.export = {
-	  Clock: clock
+	var Weather = true;
+
+	module.exports = {
+	  Clock: Clock,
+	  Weather: Weather
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(160)(module)))
-
-/***/ },
-/* 160 */
-/***/ function(module, exports) {
-
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
-	}
-
 
 /***/ }
 /******/ ]);

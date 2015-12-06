@@ -1,20 +1,23 @@
 var React = require('react');
 
-var clock = React.createClass({
-  getInitialState : function() {
+var Clock = React.createClass({
+  getInitialState: function () {
     return { time: new Date() };
   },
 
-  render: function() {
+  render: function () {
     return (
-      <div className="clock">
+      <div className='clock'>
         <p>Time: { this.state.time.toTimeString() }</p>
         <p>Date: { this.state.time.toDateString() }</p>
       </div>
-    )
+    );
   }
 });
 
-module.export = {
-  Clock: clock
+var Weather = true
+
+module.exports = {
+  Clock: Clock,
+  Weather: Weather
 }
