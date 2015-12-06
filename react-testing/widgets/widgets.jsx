@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var AutoComplete = require('./auto.jsx');
 var Clock = require('./weather.jsx').Clock;
-var Weather = require('./clock.jsx').Weather;
+var Weather = require('./weather.jsx').Weather;
 
 var names = [
   'Abba',

@@ -48,7 +48,7 @@
 	var ReactDOM = __webpack_require__(157);
 	var AutoComplete = __webpack_require__(158);
 	var Clock = __webpack_require__(159).Clock;
-	// var Weather = require('./clock.jsx').Weather;
+	var Weather = __webpack_require__(159).Weather;
 
 	var names = ['Abba', 'Barney', 'Barbara', 'Jeff', 'Jenny', 'Sarah', 'Sally', 'Xander'];
 
@@ -60,7 +60,8 @@
 	      'div',
 	      null,
 	      React.createElement(AutoComplete, { names: names }),
-	      React.createElement(Clock, null)
+	      React.createElement(Clock, null),
+	      React.createElement(Weather, null)
 	    );
 	  }
 	});
@@ -19548,11 +19549,49 @@
 	  }
 	});
 
+	function toQueryString(obj) {
+	  var parts = [];
+	  for (var i in obj) {
+	    if (obj.hasOwnProperty(i)) {
+	      parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]));
+	    }
+	  }
+	  return parts.join("&");
+	};
+
 	var Weather = React.createClass({
 	  displayName: 'Weather',
 
 	  getInitialState: function () {
 	    return { weather: null };
+	  },
+
+	  componentDidMount: function () {
+	    navigator.geolocation.getCurrentPosition(this.pollWeather);
+	  },
+
+	  pollWeather: function (location) {
+	    var lat = location.coords.latitude;
+	    var long = location.coords.longitude;
+	    var url = "http://api.openweathermap.org/data/2.5/weather?";
+	    var params = {
+	      lat: location.coords.latitude,
+	      lon: location.coords.longitude
+	    };
+	    url += toQueryString(params);
+	    url += "&APPID=645c5d39c7603f17e23fcaffcea1a3c1";
+
+	    var xmlhttp = new XMLHttpRequest();
+	    var that = this;
+
+	    xmlhttp.onreadystatechange = function () {
+	      if (xmlhttp.status == 200 && xmlhttp.readyState == XMLHttpRequest.DONE) {
+	        var data = JSON.parse(xmlhttp.responseText);
+	        that.setState({ weather: data });
+	      }
+	    };
+	    xmlhttp.open("GET", url, true);
+	    xmlhttp.send();
 	  },
 
 	  render: function () {

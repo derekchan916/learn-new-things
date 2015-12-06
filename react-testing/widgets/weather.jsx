@@ -42,8 +42,28 @@ var Weather = React.createClass({
     navigator.geolocation.getCurrentPosition(this.pollWeather);
   },
 
-  pollWeather: function() {
+  pollWeather: function(location) {
+    var lat = location.coords.latitude;
+    var long = location.coords.longitude;
+    var url = "http://api.openweathermap.org/data/2.5/weather?";
+    var params = {
+      lat: location.coords.latitude,
+      lon: location.coords.longitude
+    };
+    url += toQueryString(params)
+    url += "&APPID=645c5d39c7603f17e23fcaffcea1a3c1"
 
+    var xmlhttp = new XMLHttpRequest();
+    var that = this;
+
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.status == 200 && xmlhttp.readyState == XMLHttpRequest.DONE) {
+        var data = JSON.parse(xmlhttp.responseText);
+        that.setState({ weather: data });
+      }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
   },
 
   render: function() {
