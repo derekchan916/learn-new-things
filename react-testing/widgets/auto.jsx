@@ -26,6 +26,10 @@ var AutoComplete = React.createClass({
       }
     });
 
+    if (matches.length === 0) {
+      matches.push("no matches");
+    }
+
     return matches;
   },
   render: function() {
@@ -36,8 +40,8 @@ var AutoComplete = React.createClass({
         <input onChange={this.handleInput} value={this.state.input}></input>
         <ul>
           {
-            results.map(function(result) {
-              return <li onClick={this.handleClick}>{result}</li>
+            results.map(function(result, i) {
+              return <li key={i} onClick={this.handleClick}>{result}</li>
             }.bind(this))
           }
         </ul>

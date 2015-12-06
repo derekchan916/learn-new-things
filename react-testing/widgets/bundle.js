@@ -19470,6 +19470,10 @@
 	      }
 	    });
 
+	    if (matches.length === 0) {
+	      matches.push("no matches");
+	    }
+
 	    return matches;
 	  },
 	  render: function () {
@@ -19482,10 +19486,10 @@
 	      React.createElement(
 	        "ul",
 	        null,
-	        results.map((function (result) {
+	        results.map((function (result, i) {
 	          return React.createElement(
 	            "li",
-	            { onClick: this.handleClick },
+	            { key: i, onClick: this.handleClick },
 	            result
 	          );
 	        }).bind(this))
