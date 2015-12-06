@@ -23,7 +23,21 @@ var Clock = React.createClass({
   }
 });
 
-var Weather = true
+var Weather = React.createClass({
+  getInitialState: function() {
+    return { weather: null }
+  },
+
+  render: function() {
+    var content = "";
+
+    return (
+      <div className="weather">
+        {content}
+      </div>
+    )
+  }
+})
 
 module.exports = {
   Clock: Clock,

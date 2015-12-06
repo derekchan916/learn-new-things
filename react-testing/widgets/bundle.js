@@ -19548,7 +19548,23 @@
 	  }
 	});
 
-	var Weather = true;
+	var Weather = React.createClass({
+	  displayName: 'Weather',
+
+	  getInitialState: function () {
+	    return { weather: null };
+	  },
+
+	  render: function () {
+	    var content = "";
+
+	    return React.createElement(
+	      'div',
+	      { className: 'weather' },
+	      content
+	    );
+	  }
+	});
 
 	module.exports = {
 	  Clock: Clock,
