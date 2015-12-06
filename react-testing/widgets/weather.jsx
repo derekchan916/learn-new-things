@@ -1,11 +1,13 @@
 var React = require('react');
 
-var weatherClock = React.createClass({
+var clock = React.createClass({
   getInitialState : function() {
     return { time: new Date(); }
   },
 
-  
+
 })
 
-module.export = weatherClock;
+module.export = {
+  Clock: clock
+}
