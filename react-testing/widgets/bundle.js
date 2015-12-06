@@ -19449,10 +19449,28 @@
 	    return { input: "" };
 	  },
 	  render: function () {
+	    var results = ["whoa", "guy"];
+
 	    return React.createElement(
-	      "input",
+	      "div",
 	      null,
-	      this.state.input
+	      React.createElement(
+	        "input",
+	        null,
+	        "value=",
+	        this.state.input
+	      ),
+	      React.createElement(
+	        "ul",
+	        null,
+	        results.map(function (result) {
+	          return React.createElement(
+	            "li",
+	            null,
+	            "result"
+	          );
+	        })
+	      )
 	    );
 	  }
 	});

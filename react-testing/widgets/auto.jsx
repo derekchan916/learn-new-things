@@ -5,20 +5,20 @@ var AutoComplete = React.createClass({
     return { input: "" };
   },
   render: function() {
-    result = ["fag", "nigger"];
+    var results = ["whoa", "guy"];
 
     return (
-      <input>
-        value={this.state.input}
-      </input>
-      <ul>
-        {
-          results.map(function(result) {
-            return <li>result</li>
-          })
-        }
-      </ul>
-    )
+      <div>
+        <input value={this.state.input}></input>
+        <ul>
+          {
+            results.map(function(result) {
+              return <li>result</li>
+            })
+          }
+        </ul>
+      </div>
+    );
   }
 });
 
