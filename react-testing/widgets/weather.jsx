@@ -23,9 +23,27 @@ var Clock = React.createClass({
   }
 });
 
+function toQueryString(obj) {
+  var parts = [];
+  for (var i in obj) {
+      if (obj.hasOwnProperty(i)) {
+          parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]));
+      }
+  }
+  return parts.join("&");
+};
+
 var Weather = React.createClass({
   getInitialState: function() {
     return { weather: null }
+  },
+
+  componentDidMount: function () {
+    navigator.geolocation.getCurrentPosition(this.pollWeather);
+  },
+
+  pollWeather: function() {
+
   },
 
   render: function() {
