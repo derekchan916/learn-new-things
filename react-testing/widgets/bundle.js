@@ -19454,10 +19454,17 @@
 	  matches: function () {
 	    var matches = [];
 	    var names = this.props.names;
+	    var input = this.state.input;
 
-	    if (this.state.input.length === 0) {
+	    if (input.length === 0) {
 	      return names;
 	    }
+
+	    names.forEach(function (name) {
+	      if (name.slice(0, input.length).toLowerCase() === input.toLowerCase()) {
+	        matches.push(name);
+	      }
+	    });
 
 	    return matches;
 	  },
