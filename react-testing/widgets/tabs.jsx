@@ -10,6 +10,15 @@ var Headers = React.createClass({
       if (index === selected) {
         klass = "active"
       }
+
+      return (
+        <span
+          key={ index }
+          className={klass}
+          onClick={that.props.onTabChosen.bind(null, index)}>
+          {title}{' '}
+        </span>
+      );
     })
   }
 });
