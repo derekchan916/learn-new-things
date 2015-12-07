@@ -45,6 +45,7 @@ var Weather = React.createClass({
   pollWeather: function(location) {
     var lat = location.coords.latitude;
     var long = location.coords.longitude;
+    this.area = [lat, long]
     var url = "http://api.openweathermap.org/data/2.5/weather?";
     var params = {
       lat: location.coords.latitude,
@@ -55,9 +56,9 @@ var Weather = React.createClass({
 
     var xmlhttp = new XMLHttpRequest();
     var that = this;
-
+    this.url = url
     xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.status == 200 && xmlhttp.readyState == XMLHttpRequest.DONE) {
+      if (xmlhttp.status === 200 && xmlhttp.readyState === XMLHttpRequest.DONE) {
         var data = JSON.parse(xmlhttp.responseText);
         that.setState({ weather: data });
       }
@@ -79,6 +80,8 @@ var Weather = React.createClass({
     return (
       <div className="weather">
         {content}
+        <p>{ this.url }</p>
+        <p>{ this.area }</p>
       </div>
     );
   }

@@ -19573,6 +19573,7 @@
 	  pollWeather: function (location) {
 	    var lat = location.coords.latitude;
 	    var long = location.coords.longitude;
+	    this.area = [lat, long];
 	    var url = "http://api.openweathermap.org/data/2.5/weather?";
 	    var params = {
 	      lat: location.coords.latitude,
@@ -19583,9 +19584,9 @@
 
 	    var xmlhttp = new XMLHttpRequest();
 	    var that = this;
-
+	    this.url = url;
 	    xmlhttp.onreadystatechange = function () {
-	      if (xmlhttp.status == 200 && xmlhttp.readyState == XMLHttpRequest.DONE) {
+	      if (xmlhttp.status === 200 && xmlhttp.readyState === XMLHttpRequest.DONE) {
 	        var data = JSON.parse(xmlhttp.responseText);
 	        that.setState({ weather: data });
 	      }
@@ -19596,11 +19597,28 @@
 
 	  render: function () {
 	    var content = "";
-
+	    if (this.state.weather) {
+	      var weather = this.state.weather;
+	      var temp = (weather.main.temp - 273.15) * 1.8 + 32;
+	      content += weather.name + "\n";
+	      content += temp.toFixed(1) + " degrees";
+	    } else {
+	      content = "loading weather...";
+	    }
 	    return React.createElement(
 	      'div',
 	      { className: 'weather' },
-	      content
+	      content,
+	      React.createElement(
+	        'p',
+	        null,
+	        this.url
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        this.area
+	      )
 	    );
 	  }
 	});
