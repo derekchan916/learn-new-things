@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 var AutoComplete = require('./auto.jsx');
 var Clock = require('./weather.jsx').Clock;
 var Weather = require('./weather.jsx').Weather;
+var Tab = require('./tabs.jsx');
 
 var names = [
   'Abba',
@@ -15,6 +16,12 @@ var names = [
   'Xander'
 ];
 
+var panes = [
+  {title: 'one', content: 'I am the first'},
+  {title: 'two', content: 'Second pane here'},
+  {title: 'three', content: 'Third pane here'}
+];
+
 var MyComponent = React.createClass({
   render: function () {
     return(
@@ -22,6 +29,7 @@ var MyComponent = React.createClass({
         <AutoComplete names={names} />
         <Clock />
         <Weather />
+        <Tab panes={panes}/>
       </div>
     );
   }

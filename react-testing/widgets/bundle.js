@@ -49,8 +49,11 @@
 	var AutoComplete = __webpack_require__(158);
 	var Clock = __webpack_require__(159).Clock;
 	var Weather = __webpack_require__(159).Weather;
+	var Tab = __webpack_require__(160);
 
 	var names = ['Abba', 'Barney', 'Barbara', 'Jeff', 'Jenny', 'Sarah', 'Sally', 'Xander'];
+
+	var panes = [{ title: 'one', content: 'I am the first' }, { title: 'two', content: 'Second pane here' }, { title: 'three', content: 'Third pane here' }];
 
 	var MyComponent = React.createClass({
 	  displayName: 'MyComponent',
@@ -61,7 +64,8 @@
 	      null,
 	      React.createElement(AutoComplete, { names: names }),
 	      React.createElement(Clock, null),
-	      React.createElement(Weather, null)
+	      React.createElement(Weather, null),
+	      React.createElement(Tab, { panes: panes })
 	    );
 	  }
 	});
@@ -19608,7 +19612,11 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'weather' },
-	      content,
+	      React.createElement(
+	        'p',
+	        null,
+	        content
+	      ),
 	      React.createElement(
 	        'p',
 	        null,
@@ -19627,6 +19635,72 @@
 	  Clock: Clock,
 	  Weather: Weather
 	};
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var Headers = React.createClass({
+	  displayName: "Headers",
+
+	  render: function () {
+	    var selected = this.props.selectedPane;
+	    var that = this;
+	    var headers = this.props.panes.map(function (pane, index) {
+	      var title = pane.title;
+	      var klass = "";
+	      if (index === selected) {
+	        klass = "active";
+	      }
+
+	      return React.createElement(
+	        "span",
+	        {
+	          key: index,
+	          className: klass,
+	          onClick: that.props.onTabChosen.bind(null, index) },
+	        title,
+	        ' '
+	      );
+	    });
+	    return React.createElement(
+	      "div",
+	      null,
+	      headers
+	    );
+	  }
+	});
+
+	var Tabs = React.createClass({
+	  displayName: "Tabs",
+
+	  getInitialState: function () {
+	    return { selectedPane: 0 };
+	  },
+	  selectTab: function (num) {
+	    this.setState({ selectedPane: num });
+	  },
+	  render: function () {
+	    var pane = this.props.panes[this.state.selectedPane];
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(Headers, {
+	        selectedPane: this.state.selectedPane,
+	        onTabChosen: this.selectTab,
+	        panes: this.props.panes }),
+	      React.createElement(
+	        "p",
+	        null,
+	        pane.content
+	      )
+	    );
+	  }
+	});
+
+	module.exports = Tabs;
 
 /***/ }
 /******/ ]);
