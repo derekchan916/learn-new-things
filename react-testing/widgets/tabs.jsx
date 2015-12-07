@@ -37,7 +37,19 @@ var Tabs = React.createClass({
     this.setState({selectedPane: num});
   },
   render: function () {
-
+    var pane = this.props.panes[this.state.selectedPane];
+    return (
+      <div>
+        <Headers
+          selectedPane={this.state.selectedPane}
+          onTabChosen={this.selectTab}
+          panes={this.props.panes}>
+        </Headers>
+        <p>
+          {pane.content}
+        </p>
+      </div>
+    );
   }
 });
 
