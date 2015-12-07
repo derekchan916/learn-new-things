@@ -19,7 +19,25 @@ var Headers = React.createClass({
           {title}{' '}
         </span>
       );
-    })
+    });
+    return (
+      <div>
+        {headers}
+      </div>
+
+    );
+  }
+});
+
+var Tabs = React.createClass({
+  getInitialState: function () {
+    return {selectedPane: 0};
+  },
+  selectTab: function (num) {
+    this.setState({selectedPane: num});
+  },
+  render: function () {
+
   }
 });
 
