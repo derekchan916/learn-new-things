@@ -79,7 +79,7 @@ var Weather = React.createClass({
     }
     return (
       <div className="weather">
-        {content}
+        <p>{ content }</p>
         <p>{ this.url }</p>
         <p>{ this.area }</p>
       </div>
