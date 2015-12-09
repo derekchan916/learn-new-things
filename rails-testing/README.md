@@ -25,3 +25,9 @@ module.exports = {
   }
 };
 ```
+
+run $rails g model Todo
+
+run $rake db:migrate
+
+run $rails g controller Todos
