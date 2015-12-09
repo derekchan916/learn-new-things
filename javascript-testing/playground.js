@@ -23,5 +23,12 @@ x[ 2 ]();
 //bam, you need to close the variable and make it private
 
 var foo = {
-  
+  hasOwnProperty: function() {
+    return false;
+  },
+  bar: 'TRICKED YOUUU'
 }
+
+foo.hasOwnProperty('bar') //we are expecting true but we tricked it
+({}).hasOwnProperty(foo, 'bar') //this would be true
+Object.prototype.hasOwnProperty(foo, 'bar')//same thing
