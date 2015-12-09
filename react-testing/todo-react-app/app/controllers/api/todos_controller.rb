@@ -1,4 +1,4 @@
-class TodosController < ApplicationController
+class Api::TodosController < ApplicationController
   def create
     @todo = Todo.new(todo_params)
     @todo.save!
