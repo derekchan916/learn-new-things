@@ -1,8 +1,8 @@
 module.exports = {
   context: __dirname,
-  entry: "./js/component.jsx",
+  entry: "./frontend/todo_react.jsx",
   output: {
-    path: "./",
+    path: "./app/assets/javascripts/",
     filename: "bundle.js"
   },
   module: {
