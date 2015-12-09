@@ -20,3 +20,8 @@ for(var i = 0; i < 10; i++) {
 }
 
 x[ 2 ]();
+//bam, you need to close the variable and make it private
+
+var foo = {
+  
+}
