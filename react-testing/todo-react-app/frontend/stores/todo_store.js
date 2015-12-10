@@ -33,12 +33,12 @@ var TodoStore = {
     });
   },
 
-  create: function(todo) {
+  create: function(object) {
     var that = this;
     $.ajax({
       method: 'POST',
       url: 'api/todos',
-      data: (todo: todo),
+      data: {todo: object},
       success: function(response) {
         _todos.push(response);
         that.changed();

@@ -1,8 +1,11 @@
 class Api::TodosController < ApplicationController
   def create
-    @todo = Todo.new(todo_params)
-    @todo.save!
-    render json: @todo
+    todo = Todo.new(todo_params)
+    if todo.save
+      render json: todo
+    else
+      render json: todo.errors.full_messages, status: 422
+    end
   end
 
   def index
@@ -29,6 +32,6 @@ class Api::TodosController < ApplicationController
 
   private
   def todo_params
-    params.require(:todo).permit(:title, :done, :boolean)
+    params.require(:todo).permit(:title, :done, :body)
   end
 end

@@ -45,10 +45,10 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(159);
+	var ReactDOM = __webpack_require__(158);
 	var root = document.getElementById('root');
 
-	TodoList = __webpack_require__(158);
+	TodoStore = __webpack_require__(159);
 
 /***/ },
 /* 1 */
@@ -19630,6 +19630,15 @@
 
 /***/ },
 /* 158 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = __webpack_require__(3);
+
+
+/***/ },
+/* 159 */
 /***/ function(module, exports) {
 
 	var _todos = [];
@@ -19667,12 +19676,12 @@
 	    });
 	  },
 
-	  create: function (todo) {
+	  create: function (object) {
 	    var that = this;
 	    $.ajax({
 	      method: 'POST',
 	      url: 'api/todos',
-	      data: todo,
+	      data: { todo: object },
 	      success: function (response) {
 	        _todos.push(response);
 	        that.changed();
@@ -19725,15 +19734,6 @@
 	};
 
 	module.exports = TodoStore;
-
-/***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = __webpack_require__(3);
-
 
 /***/ }
 /******/ ]);
