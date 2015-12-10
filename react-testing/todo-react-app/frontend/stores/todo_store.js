@@ -54,7 +54,7 @@ var TodoStore = {
     if (todo) {
       $.ajax({
         method: 'DELETE',
-        url: 'api/todos' + id,
+        url: 'api/todos/' + id,
         success: function(response) {
           _todos.splice(idx, 1);
           that.changed();
@@ -81,7 +81,8 @@ var TodoStore = {
     var done = !todo.done;
     $.ajax({
       method: 'PATCH',
-      url: 'api/todos' + id,
+      url: 'api/todos/' + id,
+      data: { todo: { done: done }},
       success: function(response) {
         todo.done = done;
         that.changed();
