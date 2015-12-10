@@ -48,15 +48,31 @@ var TodoStore = {
 
   destroy: function(id) {
     var that = this;
-    $.ajax({
-      method: 'DELETE',
-      url: 'api/todos',
-      data: (id: id),
-      success: function(response) {
-        _todos.splice(_todos.indexOf(response), 1);
-        that.changed();
+    var idx = this.find(id);
+    var todo = _todos[id];
+
+    if (todo) {
+      $.ajax({
+        method: 'DELETE',
+        url: 'api/todos' + id,
+        success: function(response) {
+          _todos.splice(idx, 1);
+          that.changed();
+        }
+      });
+    }
+  },
+
+  find: function(id) {
+    var idx = -1;
+    for (var i = 0; i < _todos.length; i++) {
+      if (_todos[i].id === id) {
+        idx = i;
+        break;
       }
-    });
+    }
+
+    return idx;
   }
 }
 
