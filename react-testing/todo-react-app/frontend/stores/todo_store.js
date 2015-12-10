@@ -30,7 +30,7 @@ var TodoStore = {
         _todos = response;
         that.changed();
       }
-    })
+    });
   },
 
   create: function(todo) {
@@ -43,7 +43,20 @@ var TodoStore = {
         _todos.push(response);
         that.changed();
       }
-    })
+    });
+  },
+
+  destroy: function(id) {
+    var that = this;
+    $.ajax({
+      method: 'DELETE',
+      url: 'api/todos',
+      data: (id: id),
+      success: function(response) {
+        _todos.splice(_todos.indexOf(response), 1);
+        that.changed();
+      }
+    });
   }
 }
 
