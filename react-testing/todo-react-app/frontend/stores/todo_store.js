@@ -31,6 +31,19 @@ var TodoStore = {
         that.changed();
       }
     })
+  },
+
+  create: function(todo) {
+    var that = this;
+    $.ajax({
+      method: 'POST',
+      url: 'api/todos',
+      data: (todo: todo),
+      success: function(response) {
+        _todos.push(response);
+        that.changed();
+      }
+    })
   }
 }
 
