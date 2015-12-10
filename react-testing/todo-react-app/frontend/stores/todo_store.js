@@ -18,6 +18,19 @@ var TodoStore = {
 
   all: function() {
     return _todos;
+  },
+
+  fetch: function() {
+    var that = this;
+    $.ajax({
+      method: 'GET',
+      url: 'api/todos',
+      datatype: 'json',
+      success: function(response){
+        _todos = response;
+        that.changed();
+      }
+    })
   }
 }
 
