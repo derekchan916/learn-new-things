@@ -73,6 +73,20 @@ var TodoStore = {
     }
 
     return idx;
+  },
+
+  toggleDone: function(id) {
+    var that = this;
+    var todo = _todos[this.find(id)];
+    var done = !todo.done;
+    $.ajax({
+      method: 'PATCH',
+      url: 'api/todos' + id,
+      success: function(response) {
+        todo.done = done;
+        that.changed();
+      }
+    });
   }
 }
 
