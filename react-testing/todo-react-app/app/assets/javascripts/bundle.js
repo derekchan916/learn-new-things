@@ -48,7 +48,7 @@
 	var ReactDOM = __webpack_require__(158);
 	var root = document.getElementById('root');
 
-	TodoStore = __webpack_require__(159);
+	var TodoStore = __webpack_require__(159);
 
 /***/ },
 /* 1 */
