@@ -47,8 +47,9 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
 	var root = document.getElementById('root');
+	var TodoList = __webpack_require__(159);
 
-	var TodoStore = __webpack_require__(159);
+	ReactDom.render(React.createElement(TodoList, null), root);
 
 /***/ },
 /* 1 */
@@ -19639,6 +19640,43 @@
 
 /***/ },
 /* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var TodoStore = __webpack_require__(160);
+
+	var TodoList = React.createClass({
+	  displayName: 'TodoList',
+
+	  getInitialState: function () {
+	    return { todos: TodoStore.all() };
+	  },
+
+	  render: function () {
+	    var todos = this.state.todos;
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'ul',
+	        null,
+	        todos.map(function (todo) {
+	          return React.createElement(
+	            'li',
+	            null,
+	            ' ',
+	            todo.title
+	          );
+	        })
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TodoList;
+
+/***/ },
+/* 160 */
 /***/ function(module, exports) {
 
 	var _todos = [];
