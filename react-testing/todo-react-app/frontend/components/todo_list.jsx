@@ -13,11 +13,11 @@ var TodoList = React.createClass({
         <ul>
           {
             todos.map(function(todo) {
-              return (<li> { todo.title }</li>)
+              return (<li> { todo.title }</li>);
             })
           }
         </ul>
       </div>
-    )
+    );
   }
 })
