@@ -6,6 +6,15 @@ var TodoList = React.createClass({
     return ({ todos: TodoStore.all() });
   },
 
+  _todoChanged: function() {
+    this.setState({ todos: TodoStore.all() })
+  },
+
+  componentDidMount: function() {
+    TodoStore.addChangedHandler(this._todoChanged);
+    TodoStore.fetch();
+  },
+
   render: function() {
     var todos = this.state.todos;
     return (
