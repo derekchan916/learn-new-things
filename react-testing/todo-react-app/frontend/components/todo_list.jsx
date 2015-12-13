@@ -1,5 +1,6 @@
 var React = require('react');
-var TodoStore = require('../stores/todo_store.js')
+var TodoStore = require('../stores/todo_store.js');
+var TodoListItem = require('./todo_list_item.jsx');
 
 var TodoList = React.createClass({
   getInitialState: function() {

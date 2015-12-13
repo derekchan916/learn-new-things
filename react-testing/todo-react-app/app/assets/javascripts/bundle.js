@@ -19644,6 +19644,7 @@
 
 	var React = __webpack_require__(1);
 	var TodoStore = __webpack_require__(160);
+	var TodoListItem = __webpack_require__(161);
 
 	var TodoList = React.createClass({
 	  displayName: 'TodoList',
@@ -19691,7 +19692,7 @@
 	var _todos = [];
 	var _callbacks = [];
 
-	var TodoStore = {
+	TodoStore = {
 	  changed: function () {
 	    _callbacks.forEach(function (cb) {
 	      cb();
@@ -19782,6 +19783,16 @@
 	};
 
 	module.exports = TodoStore;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+
+	var TodoListItem = React.render({});
+
+	module.exports = TodoListItem;
 
 /***/ }
 /******/ ]);
