@@ -19786,10 +19786,15 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	// var TodoStore = require('../stores/todo_store.js')
+	var TodoStore = __webpack_require__(160);
 
 	var TodoListItem = React.createClass({
 	  displayName: 'TodoListItem',
+
+	  handleDestroy: function (e) {
+	    // e.stopPropagation();
+	    // TodoStore.destroy(e.currentTarget.id);
+	  },
 
 	  render: function () {
 	    var todo = this.props.todo;
@@ -19798,7 +19803,12 @@
 	      null,
 	      todo.title,
 	      ' ',
-	      todo.body
+	      todo.body,
+	      React.createElement(
+	        'button',
+	        { onClick: this.handleDestroy },
+	        'Destroy!'
+	      )
 	    );
 	  }
 	});
