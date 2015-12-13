@@ -19,7 +19,6 @@ var StepDoneButton = React.createClass({
 
     return (
       <button
-        className={classname}
         onClick={this.handleDone}>{text}</button>
     );
   }

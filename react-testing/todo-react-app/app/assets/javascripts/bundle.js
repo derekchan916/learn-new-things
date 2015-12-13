@@ -20173,7 +20173,6 @@
 	    return React.createElement(
 	      'button',
 	      {
-	        className: classname,
 	        onClick: this.handleDone },
 	      text
 	    );
