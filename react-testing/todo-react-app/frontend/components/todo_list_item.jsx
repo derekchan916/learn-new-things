@@ -1,5 +1,5 @@
 var React = require('react');
-var TodoStore = require('../stores/todo_store.js')
+// var TodoStore = require('../stores/todo_store.js')
 
 var TodoListItem = React.createClass({
   render: function() {

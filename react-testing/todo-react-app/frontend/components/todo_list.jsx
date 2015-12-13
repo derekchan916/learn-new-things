@@ -20,13 +20,11 @@ var TodoList = React.createClass({
     var todos = this.state.todos;
     return (
       <div>
-        <ul>
-          {
-            todos.map(function(todo) {
-              return (<TodoListItem key={todo.id} todo={todo}/>);
-            })
-          }
-        </ul>
+        {
+          todos.map(function(todo) {
+            return (<TodoListItem key={todo.id} todo={todo}/>);
+          })
+        }
       </div>
     );
   }

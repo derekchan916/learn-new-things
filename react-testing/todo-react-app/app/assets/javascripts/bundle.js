@@ -19667,13 +19667,9 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(
-	        'ul',
-	        null,
-	        todos.map(function (todo) {
-	          return React.createElement(TodoListItem, { key: todo.id, todo: todo });
-	        })
-	      )
+	      todos.map(function (todo) {
+	        return React.createElement(TodoListItem, { key: todo.id, todo: todo });
+	      })
 	    );
 	  }
 	});
@@ -19735,7 +19731,7 @@
 	  destroy: function (id) {
 	    var that = this;
 	    var idx = this.find(id);
-	    var todo = _todos[id];
+	    var todo = _todos[idx];
 
 	    if (todo) {
 	      $.ajax({
@@ -19784,7 +19780,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var TodoStore = __webpack_require__(160);
+	// var TodoStore = require('../stores/todo_store.js')
 
 	var TodoListItem = React.createClass({
 	  displayName: 'TodoListItem',

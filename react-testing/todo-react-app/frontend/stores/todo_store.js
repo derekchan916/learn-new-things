@@ -49,7 +49,7 @@ TodoStore = {
   destroy: function(id) {
     var that = this;
     var idx = this.find(id);
-    var todo = _todos[id];
+    var todo = _todos[idx];
 
     if (todo) {
       $.ajax({
