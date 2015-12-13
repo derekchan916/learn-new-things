@@ -19905,10 +19905,6 @@
 	var TodoDetailView = React.createClass({
 	  displayName: 'TodoDetailView',
 
-	  // getInitialState: function() {
-	  //
-	  // },
-
 	  render: function () {
 	    return React.createElement(
 	      'div',
