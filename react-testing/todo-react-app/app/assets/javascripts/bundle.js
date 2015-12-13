@@ -46,8 +46,9 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var TodoList = __webpack_require__(159);
 	var root = document.getElementById('root');
+	var TodoList = __webpack_require__(159);
+
 	ReactDOM.render(React.createElement(TodoList, null), root);
 
 /***/ },
