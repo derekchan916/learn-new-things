@@ -23,6 +23,13 @@ var TodoForm = React.createClass({
             placeholder="Insert Title"
             onChange={this.updateTitle}/>
         </div>
+        <div className="form-group">
+          <input
+            className="form-control"
+            value={this.state.title}
+            placeholder="Insert Body"
+            onChange={this.state.updateBody}/>
+        </div>
       </form>
     )
   }
