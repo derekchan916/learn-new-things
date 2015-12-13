@@ -19671,12 +19671,7 @@
 	        'ul',
 	        null,
 	        todos.map(function (todo) {
-	          return React.createElement(
-	            'li',
-	            null,
-	            ' ',
-	            todo.title
-	          );
+	          return React.createElement(TodoListItem, { key: todo.id, todo: todo });
 	        })
 	      )
 	    );
@@ -19789,8 +19784,22 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
+	var TodoStore = __webpack_require__(160);
 
-	var TodoListItem = React.render({});
+	var TodoListItem = React.createClass({
+	  displayName: 'TodoListItem',
+
+	  render: function () {
+	    var todo = this.props.todo;
+	    return React.createElement(
+	      'div',
+	      null,
+	      todo.title,
+	      ' ',
+	      todo.body
+	    );
+	  }
+	});
 
 	module.exports = TodoListItem;
 
