@@ -19644,7 +19644,7 @@
 
 	var React = __webpack_require__(1);
 	var TodoStore = __webpack_require__(160);
-	var TodoListItem = __webpack_require__(161);
+	var TodoListItem = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./todo_list_item.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var TodoForm = __webpack_require__(162);
 
 	var TodoList = React.createClass({
@@ -19782,40 +19782,7 @@
 	module.exports = TodoStore;
 
 /***/ },
-/* 161 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var TodoStore = __webpack_require__(160);
-
-	var TodoListItem = React.createClass({
-	  displayName: 'TodoListItem',
-
-	  handleDestroy: function (e) {
-	    // e.stopPropagation();
-	    // TodoStore.destroy(e.currentTarget.id);
-	  },
-
-	  render: function () {
-	    var todo = this.props.todo;
-	    return React.createElement(
-	      'div',
-	      null,
-	      todo.title,
-	      ' ',
-	      todo.body,
-	      React.createElement(
-	        'button',
-	        { onClick: this.handleDestroy },
-	        'Destroy!'
-	      )
-	    );
-	  }
-	});
-
-	module.exports = TodoListItem;
-
-/***/ },
+/* 161 */,
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 

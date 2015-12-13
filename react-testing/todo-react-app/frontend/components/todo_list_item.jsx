@@ -2,6 +2,9 @@ var React = require('react');
 var TodoStore = require('../stores/todo_store.js')
 
 var TodoListItem = React.createClass({
+  getInitialState: function(){
+    return {showDetail: false};
+  }
   handleDestroy: function(e) {
     // e.stopPropagation();
     // TodoStore.destroy(e.currentTarget.id);
