@@ -25,6 +25,8 @@ var TodoDetailView = React.createClass({
     return (
       <div>
         <p className="todo-body">{this.props.todo.body}</p>
+        <StepList todo_id={this.props.todo.id} steps={this.state.steps} />
+        <StepForm todo_id={this.props.todo.id}/>
         <button
           onClick={this.props.handleDestroy}>Delete</button>
       </div>

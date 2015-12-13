@@ -19933,6 +19933,8 @@
 	        { className: 'todo-body' },
 	        this.props.todo.body
 	      ),
+	      React.createElement(StepList, { todo_id: this.props.todo.id, steps: this.state.steps }),
+	      React.createElement(StepForm, { todo_id: this.props.todo.id }),
 	      React.createElement(
 	        'button',
 	        {
