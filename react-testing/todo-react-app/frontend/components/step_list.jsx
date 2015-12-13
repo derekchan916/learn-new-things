@@ -1,5 +1,5 @@
 var React = require('react');
-var StepListItem = require('./step_list_item');
+var StepListItem = require('./step_list_item.jsx');
 
 var StepList = React.createClass({
   componentWillUnmount: function () {

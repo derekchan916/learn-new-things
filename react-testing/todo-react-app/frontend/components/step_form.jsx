@@ -1,5 +1,5 @@
 var React = require('react');
-var StepStore = require('../stores/step_store');
+var StepStore = require('../stores/step_store.js');
 
 var StepForm = React.createClass({
   getInitialState: function () {
@@ -20,7 +20,7 @@ var StepForm = React.createClass({
 
     this.setState({title: ""});
   },
-  
+
   render: function() {
     return(
       <form onSubmit={this.submitForm}>

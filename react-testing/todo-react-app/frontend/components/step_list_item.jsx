@@ -1,5 +1,5 @@
 var React = require('react');
-var StepDoneButton = require('./step_done_button');
+var StepDoneButton = require('./step_done_button.jsx');
 
 var StepListItem = React.createClass({
   render: function () {

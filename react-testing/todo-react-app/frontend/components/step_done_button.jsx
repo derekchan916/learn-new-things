@@ -1,5 +1,5 @@
 var React = require('react');
-var StepStore = require('../stores/step_store');
+var StepStore = require('../stores/step_store.js');
 
 var StepDoneButton = React.createClass({
   handleDone: function(event){

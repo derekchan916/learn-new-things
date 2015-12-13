@@ -19901,8 +19901,8 @@
 
 	var React = __webpack_require__(1);
 	var StepStore = __webpack_require__(165);
-	var StepList = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./step_list\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-	var StepForm = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./step_form\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var StepList = __webpack_require__(166);
+	var StepForm = __webpack_require__(169);
 
 	var TodoDetailView = React.createClass({
 	  displayName: 'TodoDetailView',
@@ -20086,6 +20086,145 @@
 	};
 
 	module.exports = StepStore;
+
+/***/ },
+/* 166 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var StepListItem = __webpack_require__(167);
+
+	var StepList = React.createClass({
+	  displayName: 'StepList',
+
+	  componentWillUnmount: function () {},
+
+	  render: function () {
+	    var that = this;
+	    return React.createElement(
+	      'div',
+	      { className: 'step-list' },
+	      this.props.steps.map(function (step) {
+	        return React.createElement(StepListItem, { key: step.id, step: step, todo_id: that.props.todo_id });
+	      })
+	    );
+	  }
+	});
+
+	module.exports = StepList;
+
+/***/ },
+/* 167 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var StepDoneButton = __webpack_require__(168);
+
+	var StepListItem = React.createClass({
+	  displayName: 'StepListItem',
+
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'div',
+	        null,
+	        this.props.step.title,
+	        React.createElement(StepDoneButton, { step: this.props.step, todo_id: this.props.todo_id }),
+	        React.createElement(
+	          'p',
+	          null,
+	          ' ',
+	          this.props.step.body
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = StepListItem;
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var StepStore = __webpack_require__(165);
+
+	var StepDoneButton = React.createClass({
+	  displayName: 'StepDoneButton',
+
+	  handleDone: function (event) {
+	    event.stopPropagation();
+	    StepStore.toggleDone(this.props.todo_id, this.props.step.id);
+	  },
+
+	  render: function () {
+	    // if(this.props.step.done) {
+	    //   text = "Undo!";
+	    //   classname = "btn btn-xs btn-danger done-step-button";
+	    // } else {
+	    //   text = "Done!";
+	    //   classname = "btn btn-xs btn-success done-step-button";
+	    // }
+	    var text = this.props.step.done ? "Undo" : "Done";
+
+	    return React.createElement(
+	      'button',
+	      {
+	        className: classname,
+	        onClick: this.handleDone },
+	      text
+	    );
+	  }
+	});
+
+	module.exports = StepDoneButton;
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var StepStore = __webpack_require__(165);
+
+	var StepForm = React.createClass({
+	  displayName: 'StepForm',
+
+	  getInitialState: function () {
+	    return { title: "" };
+	  },
+
+	  handleChange: function (e) {
+	    this.setState({ title: e.target.value });
+	  },
+
+	  submitForm: function (e) {
+	    e.preventDefault();
+	    var data = {
+	      todo_id: this.props.todo_id,
+	      title: this.state.title
+	    };
+	    StepStore.create(data, this.props.todo_id);
+
+	    this.setState({ title: "" });
+	  },
+
+	  render: function () {
+	    return React.createElement(
+	      'form',
+	      { onSubmit: this.submitForm },
+	      React.createElement('input', {
+	        type: 'text',
+	        onChange: this.handleChange,
+	        value: this.state.title }),
+	      React.createElement('input', { type: 'submit', value: 'New Step' })
+	    );
+	  }
+	});
+
+	module.exports = StepForm;
 
 /***/ }
 /******/ ]);

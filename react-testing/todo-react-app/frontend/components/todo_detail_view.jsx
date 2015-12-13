@@ -1,7 +1,7 @@
 var React = require('react');
-var StepStore = require('../stores/step_store');
-var StepList = require('./step_list');
-var StepForm = require('./step_form');
+var StepStore = require('../stores/step_store.js');
+var StepList = require('./step_list.jsx');
+var StepForm = require('./step_form.jsx');
 
 var TodoDetailView = React.createClass({
   getInitialState: function(){
