@@ -33,10 +33,11 @@ var TodoForm = React.createClass({
         <div className="form-group">
           <input
             className="form-control"
-            value={this.state.title}
+            value={this.state.body}
             placeholder="Insert Body"
-            onChange={this.state.updateBody}/>
+            onChange={this.updateBody}/>
         </div>
+        <button>Create Todo!</button>
       </form>
     )
   }

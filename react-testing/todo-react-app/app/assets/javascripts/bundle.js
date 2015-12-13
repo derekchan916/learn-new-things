@@ -19645,6 +19645,7 @@
 	var React = __webpack_require__(1);
 	var TodoStore = __webpack_require__(160);
 	var TodoListItem = __webpack_require__(161);
+	var TodoForm = __webpack_require__(162);
 
 	var TodoList = React.createClass({
 	  displayName: 'TodoList',
@@ -19667,9 +19668,14 @@
 	    return React.createElement(
 	      'div',
 	      null,
-	      todos.map(function (todo) {
-	        return React.createElement(TodoListItem, { key: todo.id, todo: todo });
-	      })
+	      React.createElement(
+	        'div',
+	        { className: 'todo-list' },
+	        todos.map(function (todo) {
+	          return React.createElement(TodoListItem, { key: todo.id, todo: todo });
+	        })
+	      ),
+	      React.createElement(TodoForm, null)
 	    );
 	  }
 	});
@@ -19798,6 +19804,67 @@
 	});
 
 	module.exports = TodoListItem;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var TodoStore = __webpack_require__(160);
+
+	var TodoForm = React.createClass({
+	  displayName: 'TodoForm',
+
+	  getInitialState: function () {
+	    return { title: "", body: "" };
+	  },
+
+	  updateTitle: function (e) {
+	    this.setState({ title: e.currentTarget.value });
+	  },
+
+	  updateBody: function (e) {
+	    this.setState({ body: e.currentTarget.value });
+	  },
+
+	  handleSubmit: function (e) {
+	    e.preventDefault();
+	    TodoStore.create({ title: this.state.title, body: this.state.body });
+	    this.setState({ title: "", body: "" });
+	  },
+
+	  render: function () {
+	    return React.createElement(
+	      'form',
+	      { onSubmit: this.handleSubmit },
+	      React.createElement(
+	        'div',
+	        { className: 'form-group' },
+	        React.createElement('input', {
+	          className: 'form-control',
+	          value: this.state.title,
+	          placeholder: 'Insert Title',
+	          onChange: this.updateTitle })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'form-group' },
+	        React.createElement('input', {
+	          className: 'form-control',
+	          value: this.state.body,
+	          placeholder: 'Insert Body',
+	          onChange: this.updateBody })
+	      ),
+	      React.createElement(
+	        'button',
+	        null,
+	        'Create Todo!'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TodoForm;
 
 /***/ }
 /******/ ]);
