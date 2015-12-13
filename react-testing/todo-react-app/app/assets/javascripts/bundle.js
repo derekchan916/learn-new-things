@@ -19644,7 +19644,7 @@
 
 	var React = __webpack_require__(1);
 	var TodoStore = __webpack_require__(160);
-	var TodoListItem = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./todo_list_item.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var TodoListItem = __webpack_require__(161);
 	var TodoForm = __webpack_require__(162);
 
 	var TodoList = React.createClass({
@@ -19782,7 +19782,48 @@
 	module.exports = TodoStore;
 
 /***/ },
-/* 161 */,
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var TodoStore = __webpack_require__(160);
+	// var TodoDetailView = require('./todo_detail_view.jsx');
+
+	var TodoListItem = React.createClass({
+	  displayName: 'TodoListItem',
+
+	  getInitialState: function () {
+	    return { detail: false };
+	  },
+	  handleDestroy: function (e) {
+	    e.stopPropagation();
+	    TodoStore.destroy(e.currentTarget.id);
+	  },
+
+	  toggleDetail: function (e) {
+	    e.preventDefault();
+	    this.setState({ detail: !this.state.detail });
+	  },
+
+	  render: function () {
+	    var detail;
+	    if (this.state.detail) {
+	      detail = React.createElement(TodoDetailView, { todo: this.props.todo });
+	      className = "list-item";
+	    } else {
+	      className = "list-item min";
+	    }
+	    return React.createElement(
+	      'div',
+	      { className: className },
+	      detail
+	    );
+	  }
+	});
+
+	module.exports = TodoListItem;
+
+/***/ },
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 

@@ -2,9 +2,9 @@ var React = require('react');
 var TodoStore = require('../stores/todo_store.js');
 
 var TodoDetailView = React.createClass({
-  getInitialState: function() {
-
-  },
+  // getInitialState: function() {
+  //
+  // },
 
   render: function() {
     render (
