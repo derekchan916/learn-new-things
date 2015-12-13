@@ -1,4 +1,5 @@
 var React = require('react');
+var TodoStore = require('../stores/todo_store.js');
 
 var TodoForm = React.createClass({
   getInitialState: function() {
@@ -11,6 +12,12 @@ var TodoForm = React.createClass({
 
   updateBody: function(e) {
     this.setState({ body: e.currentTarget.value });
+  },
+
+  handleSubmit: function(e) {
+    e.preventDefault();
+    TodoStore.create({title: this.state.title, body: this.state.body});
+    this.setState({title: "", body: ""});
   },
 
   render: function() {
