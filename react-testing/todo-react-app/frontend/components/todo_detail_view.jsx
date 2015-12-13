@@ -7,9 +7,11 @@ var TodoDetailView = React.createClass({
   // },
 
   render: function() {
-    render (
+    return (
       <div>
         <p className="todo-body">{this.props.todo.body}</p>
+        <button
+          onClick={this.props.handleDestroy}>Delete</button>
       </div>
     );
   }

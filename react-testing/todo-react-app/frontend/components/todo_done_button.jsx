@@ -1,9 +1,10 @@
 var React = require('react');
-var TodoStore = require('../stores/todo_store.jsx');
+var TodoStore = require('../stores/todo_store.js');
 
 var TodoDoneButton = React.createClass({
   handleDone: function(e) {
-
+    e.stopPropagation();
+    TodoStore.toggleDone(this.props.todo.id);
   },
 
   render: function() {
@@ -15,7 +16,6 @@ var TodoDoneButton = React.createClass({
     var text = this.props.todo.done ? "Undo" : "Done";
     return (
       <button
-        className={classname}
         onClick={this.handleDone}>{text}</button>
     )
   }

@@ -1,6 +1,7 @@
 var React = require('react');
 var TodoStore = require('../stores/todo_store.js');
-// var TodoDetailView = require('./todo_detail_view.jsx');
+var TodoDetailView = require('./todo_detail_view.jsx');
+var TodoDoneButton = require('./todo_done_button.jsx');
 
 var TodoListItem = React.createClass({
   getInitialState: function(){
@@ -8,7 +9,7 @@ var TodoListItem = React.createClass({
   },
   handleDestroy: function(e) {
     e.stopPropagation();
-    TodoStore.destroy(e.currentTarget.id);
+    TodoStore.destroy(this.props.todo.id); //shows specific todo
   },
 
   toggleDetail: function(e) {
@@ -20,7 +21,7 @@ var TodoListItem = React.createClass({
     var detail;
     if(this.state.detail){
       detail = (
-        <TodoDetailView todo={this.props.todo} />
+        <TodoDetailView handleDestroy={this.handleDestroy} todo={this.props.todo} />
       );
       className = "list-item";
     } else {
@@ -28,6 +29,10 @@ var TodoListItem = React.createClass({
     }
     return (
       <div className={className}>
+        <div className="todo-header">
+          <a onClick={this.toggleDetail}>{this.props.todo.title}</a>
+          <TodoDoneButton todo={this.props.todo}/>
+        </div>
         { detail }
       </div>
     )

@@ -19787,7 +19787,8 @@
 
 	var React = __webpack_require__(1);
 	var TodoStore = __webpack_require__(160);
-	// var TodoDetailView = require('./todo_detail_view.jsx');
+	var TodoDetailView = __webpack_require__(163);
+	var TodoDoneButton = __webpack_require__(164);
 
 	var TodoListItem = React.createClass({
 	  displayName: 'TodoListItem',
@@ -19797,7 +19798,7 @@
 	  },
 	  handleDestroy: function (e) {
 	    e.stopPropagation();
-	    TodoStore.destroy(e.currentTarget.id);
+	    TodoStore.destroy(this.props.todo.id); //shows specific todo
 	  },
 
 	  toggleDetail: function (e) {
@@ -19808,7 +19809,7 @@
 	  render: function () {
 	    var detail;
 	    if (this.state.detail) {
-	      detail = React.createElement(TodoDetailView, { todo: this.props.todo });
+	      detail = React.createElement(TodoDetailView, { handleDestroy: this.handleDestroy, todo: this.props.todo });
 	      className = "list-item";
 	    } else {
 	      className = "list-item min";
@@ -19816,6 +19817,16 @@
 	    return React.createElement(
 	      'div',
 	      { className: className },
+	      React.createElement(
+	        'div',
+	        { className: 'todo-header' },
+	        React.createElement(
+	          'a',
+	          { onClick: this.toggleDetail },
+	          this.props.todo.title
+	        ),
+	        React.createElement(TodoDoneButton, { todo: this.props.todo })
+	      ),
 	      detail
 	    );
 	  }
@@ -19883,6 +19894,75 @@
 	});
 
 	module.exports = TodoForm;
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var TodoStore = __webpack_require__(160);
+
+	var TodoDetailView = React.createClass({
+	  displayName: 'TodoDetailView',
+
+	  // getInitialState: function() {
+	  //
+	  // },
+
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'p',
+	        { className: 'todo-body' },
+	        this.props.todo.body
+	      ),
+	      React.createElement(
+	        'button',
+	        {
+	          onClick: this.props.handleDestroy },
+	        'Delete'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = TodoDetailView;
+
+/***/ },
+/* 164 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var TodoStore = __webpack_require__(160);
+
+	var TodoDoneButton = React.createClass({
+	  displayName: 'TodoDoneButton',
+
+	  handleDone: function (e) {
+	    e.stopPropagation();
+	    TodoStore.toggleDone(this.props.todo.id);
+	  },
+
+	  render: function () {
+	    // if(this.props.done) {
+	    //   text = "Undo!";
+	    // } else {
+	    //   text = "Im done!";
+	    // }
+	    var text = this.props.todo.done ? "Undo" : "Done";
+	    return React.createElement(
+	      'button',
+	      {
+	        onClick: this.handleDone },
+	      text
+	    );
+	  }
+
+	});
+
+	module.exports = TodoDoneButton;
 
 /***/ }
 /******/ ]);
