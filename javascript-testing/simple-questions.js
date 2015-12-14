@@ -48,3 +48,41 @@ function fibonacci(n){
     return last;
   }
 }
+
+function nthfib(n){
+  if(n<=1)
+    return n;
+  else
+    return fibonacci(n-1) + fibonacci (n-2);
+}
+
+//greatest common divisor
+function greatestCommonDivisor(a, b){
+   if(b === 0)
+     return a;
+   else
+     return greatestCommonDivisor(b, a%b);
+};
+
+//uniq
+function uniq(arr) {
+  var seen = {}
+  for (var i=0; i < arr.length; i++){
+    seen[i] = true;
+  }
+
+  var arr = [];
+  for (var key in seen) {
+    arr.push(key);
+  }
+
+  return arr;
+}
+
+//could also use set
+function uniq(a) {
+  var seen = new Set();
+  return a.filter(function(x) {
+    return !seen.has(x) && seen.add(x);
+  })
+}
