@@ -86,3 +86,29 @@ function uniq(a) {
     return !seen.has(x) && seen.add(x);
   })
 }
+
+//bsearch
+function bsearch(numbers, target) {
+  if (numbers.length === 0) {
+    return -1;
+  }
+
+  var probeIdx = Math.floor(numbers.length / 2);
+  var probe = numbers[probeIdx];
+
+  if (target === probe) {
+    return probeIdx;
+  } else if (target < probe) {
+    return bsearch(numbers.slice(0, probeIdx), target);
+  } else {
+    var right = bsearch(numbers.slice(probeIdx + 1), target);
+    return right === -1 ? -1 : right + 1 + probeIdx;
+  }
+}
+
+//merge sort
+function merge(left, right) {
+  var merged = [];
+
+  while (left.length > 0 && right.length > 0)
+}
