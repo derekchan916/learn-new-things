@@ -33,3 +33,12 @@ var toQueryString = function (obj) {
 };
 
 navigator.geolocation.getCurrentPosition(this.pollWeather);
+
+//Getting input from console.
+
+var readline = require("readline");
+
+var reader = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});

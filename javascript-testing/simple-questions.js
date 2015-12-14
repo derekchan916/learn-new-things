@@ -128,3 +128,38 @@ function mergeSort(array) {
     return merge(left, right);
   }
 };
+
+//subsets
+function subsets(array) {
+  if (array.length === 0) {
+    return [[]];
+  }
+  var firstElement = array[0];
+  var subSubsets = subsets(array.slice(1));
+
+  var newSubsets = subSubsets.map(function(subSubset){
+    return [firstElement].concat(subSubset);
+  });
+
+  return subSubsets.concat(newSubsets);
+}
+
+//currying
+function curriedSum(numArgs) {
+  var numbers = [];
+
+  function _curriedSum(num) {
+    numbers.push(num);
+
+    if (numbers.length == numArgs) {
+      var total = 0;
+
+      numbers.forEach(function (num) { total += num });
+      return total;
+    } else {
+      return _curriedSum;
+    }
+  }
+
+  return _curriedSum;
+}
