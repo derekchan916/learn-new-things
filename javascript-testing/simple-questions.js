@@ -163,3 +163,21 @@ function curriedSum(numArgs) {
 
   return _curriedSum;
 }
+
+//currying with a function
+Function.prototype.curry = function (numArgs) {
+  var fn = this;
+  var args = [];
+
+  function _curriedFn(arg) {
+    args.push(arg);
+
+    if (args.length === numArgs) {
+      return fn.apply(null, args);
+    } else {
+      return _curriedFn;
+    }
+  }
+
+  return _curriedFn;
+};
