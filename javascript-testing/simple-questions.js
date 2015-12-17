@@ -68,13 +68,13 @@ function greatestCommonDivisor(a, b){
 function uniq(arr) {
   var seen = {}
   for (var i=0; i < arr.length; i++){
-    seen[i] = true;
+    seen[arr[i]] = true;
   }
 
   var arr = [];
-  for (var key in seen) {
-    arr.push(key);
-  }
+  Object.keys(seen).forEach(function(key) {
+    arr.push(parseInt(key));
+  })
 
   return arr;
 }
