@@ -1,5 +1,5 @@
 module.exports = {
-  receiveAllPokemons = function(pokemons) {
+  receiveAllPokemons: function(pokemons) {
     console.log(pokemons);
   }
 };

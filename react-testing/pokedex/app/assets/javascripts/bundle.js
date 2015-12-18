@@ -47,6 +47,8 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
 
+	// ReactDOM.render(< />, document.getElementById('root'));
+
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {

@@ -1,4 +1,3 @@
-var $ = require('jquery');
 var ApiActions = require('../actions/pokemonActions.js');
 
 module.exports = {
