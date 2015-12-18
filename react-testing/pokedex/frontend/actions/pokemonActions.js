@@ -1,5 +1,10 @@
+var Dispatcher = require('../dispatcher/dispatcher.js');
+
 module.exports = {
   receiveAllPokemons: function(pokemons) {
-    console.log(pokemons);
+    Dispatcher.dispatch({
+      actionType: PokemonConstants.POKEMONS_RECEIVED,
+      pokemons: pokemons
+    });
   }
 };
