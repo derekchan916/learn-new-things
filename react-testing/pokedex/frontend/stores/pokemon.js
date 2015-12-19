@@ -1,10 +1,11 @@
 var Dispatcher = require('../dispatcher/dispatcher.js');
 var Store = require('flux/utils').Store;
 var PokemonStore = new Store(Dispatcher);
+var PokemonConstants = require('../constants/pokemonConstants.js');
 
 var _pokemons = {};
 
-var resetPokemons = function(pokemon) {
+var resetPokemons = function(pokemons) {
   _pokemons = {};
   pokemons.forEach(function(pokemon) {
     _pokemons[pokemon.id] = pokemon;
@@ -21,7 +22,7 @@ PokemonStore.all = function() {
 
 PokemonStore.__onDispatch = function(payload) {
   switch(payload.actionType) {
-    case PokemonConstants.POKEMONS_RECIEVED:
+    case PokemonConstants.POKEMONS_RECEIVED:
       resetPokemons(payload.pokemons);
       break;
   }

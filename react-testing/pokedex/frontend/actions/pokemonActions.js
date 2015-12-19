@@ -1,4 +1,5 @@
 var Dispatcher = require('../dispatcher/dispatcher.js');
+var PokemonConstants = require('../constants/pokemonConstants.js');
 
 module.exports = {
   receiveAllPokemons: function(pokemons) {
