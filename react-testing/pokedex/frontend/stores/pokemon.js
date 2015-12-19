@@ -11,6 +11,14 @@ var resetPokemons = function(pokemon) {
   });
 };
 
+PokemonStore.all = function() {
+  var pokemons = [];
+  Object.keys(_pokemons).forEach(function(id) {
+    pokemons.push(_pokemons[id]);
+  });//if we use for in loop we would need to use hasOwnProperty
+  return pokemons;
+};
+
 PokemonStore.__onDispatch = function(payload) {
   switch(payload.actionType) {
     case PokemonConstants.POKEMONS_RECIEVED:
@@ -19,7 +27,7 @@ PokemonStore.__onDispatch = function(payload) {
   }
 
   PokemonStore.__emitChange();
-}
+};
 
 
 module.exports = PokemonStore;
