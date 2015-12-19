@@ -50,6 +50,7 @@ module.exports = React.createClass({
           <h2>Toys: </h2>
           <ToysIndex toys={this.state.pokemon.toys} />
         </div>
+        {this.props.children}
       </div>
     )
   }

@@ -31284,7 +31284,8 @@
 	          'Toys: '
 	        ),
 	        React.createElement(ToysIndex, { toys: this.state.pokemon.toys })
-	      )
+	      ),
+	      this.props.children
 	    );
 	  }
 	});
