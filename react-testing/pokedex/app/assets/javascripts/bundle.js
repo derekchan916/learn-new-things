@@ -26467,9 +26467,32 @@
 
 /***/ },
 /* 184 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	
+	var React = __webpack_require__(1);
+
+	module.exports = React.createClass({
+	  displayName: "exports",
+
+	  render: function () {
+	    return React.createElement(
+	      "li",
+	      { className: "poke-list-item" },
+	      React.createElement(
+	        "p",
+	        null,
+	        "Name: ",
+	        this.props.pokemon.name
+	      ),
+	      React.createElement(
+	        "p",
+	        null,
+	        "Poke Type: ",
+	        this.props.pokemon.poke_type
+	      )
+	    );
+	  }
+	});
 
 /***/ }
 /******/ ]);
