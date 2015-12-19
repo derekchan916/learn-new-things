@@ -31217,6 +31217,7 @@
 	var React = __webpack_require__(1);
 	var PokemonStore = __webpack_require__(210);
 	var ApiUtil = __webpack_require__(232);
+	var ToysIndex = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../toys/index.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -31272,7 +31273,13 @@
 	              this.state.pokemon[attr]
 	            );
 	          }).bind(this))
-	        )
+	        ),
+	        React.createElement(
+	          'h2',
+	          null,
+	          'Toys: '
+	        ),
+	        React.createElement(ToysIndex, { toys: this.state.pokemon.toys })
 	      )
 	    );
 	  }

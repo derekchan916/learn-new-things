@@ -1,6 +1,7 @@
 var React = require('react');
 var PokemonStore = require('../../stores/pokemon.js');
 var ApiUtil = require('../../util/apiUtil.js');
+var ToysIndex = require('../toys/index.jsx');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -46,6 +47,8 @@ module.exports = React.createClass({
               return <p key={attr}>{attr}: {this.state.pokemon[attr]}</p>;
             }.bind(this))}
           </div>
+          <h2>Toys: </h2>
+          <ToysIndex toys={this.state.pokemon.toys} />
         </div>
       </div>
     )
