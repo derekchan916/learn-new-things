@@ -46,9 +46,11 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var AllPokemon = __webpack_require__(184);
+	var AllPokemon = __webpack_require__(159);
 
-	ReactDOM.render(React.createElement(AllPokemon, null), document.getElementById('root'));
+	document.addEventListener("DOMContentLoaded", function () {
+	  ReactDOM.render(React.createElement(AllPokemon, null), document.getElementById('root'));
+	});
 
 /***/ },
 /* 1 */
@@ -19638,49 +19640,94 @@
 
 
 /***/ },
-/* 159 */,
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var PokemonStore = __webpack_require__(160);
+	var ApiUtil = __webpack_require__(182);
+	var PokemonIndexItem = __webpack_require__(184);
+
+	var PokemonsIndex = React.createClass({
+	  displayName: 'PokemonsIndex',
+
+	  getInitialState: function () {
+	    return { pokemons: PokemonStore.all() };
+	  },
+
+	  _onChange: function () {
+	    this.setState({ pokemons: PokemonStore.all() });
+	  },
+
+	  componentDidMount: function () {
+	    this.pokemonListener = PokemonStore.addListener(this._onChange);
+	    ApiUtil.fetchAllPokemon();
+	  },
+
+	  componentWillUnmount: function () {
+	    this.pokemonListener.remove();
+	  },
+
+	  render: function () {
+	    return React.createElement(
+	      'ul',
+	      null,
+	      this.state.pokemons.map(function (pokemon) {
+	        return React.createElement(PokemonIndexItem, { key: pokemon.id, pokemon: pokemon });
+	      })
+	    );
+	  }
+	});
+
+	module.exports = PokemonsIndex;
+
+/***/ },
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ApiActions = __webpack_require__(161);
+	var Dispatcher = __webpack_require__(161);
+	var Store = __webpack_require__(165).Store;
+	var PokemonStore = new Store(Dispatcher);
+	var PokemonConstants = __webpack_require__(181);
 
-	module.exports = {
-	  fetchAllPokemon: function () {
-	    $.ajax({
-	      url: 'api/pokemon',
-	      type: 'GET',
-	      success: function (response) {
-	        ApiActions.receiveAllPokemons(response);
-	      }
-	    });
-	  }
+	var _pokemons = {};
+
+	var resetPokemons = function (pokemons) {
+	  _pokemons = {};
+	  pokemons.forEach(function (pokemon) {
+	    _pokemons[pokemon.id] = pokemon;
+	  });
 	};
+
+	PokemonStore.all = function () {
+	  var pokemons = [];
+	  Object.keys(_pokemons).forEach(function (id) {
+	    pokemons.push(_pokemons[id]);
+	  }); //if we use for in loop we would need to use hasOwnProperty
+	  return pokemons;
+	};
+
+	PokemonStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case PokemonConstants.POKEMONS_RECEIVED:
+	      resetPokemons(payload.pokemons);
+	      break;
+	  }
+
+	  PokemonStore.__emitChange();
+	};
+
+	module.exports = PokemonStore;
 
 /***/ },
 /* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Dispatcher = __webpack_require__(162);
-	var PokemonConstants = __webpack_require__(183);
-
-	module.exports = {
-	  receiveAllPokemons: function (pokemons) {
-	    Dispatcher.dispatch({
-	      actionType: PokemonConstants.POKEMONS_RECEIVED,
-	      pokemons: pokemons
-	    });
-	  }
-	};
-
-/***/ },
-/* 162 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Dispatcher = __webpack_require__(163).Dispatcher;
+	var Dispatcher = __webpack_require__(162).Dispatcher;
 	module.exports = new Dispatcher();
 
 /***/ },
-/* 163 */
+/* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -19692,11 +19739,11 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 
-	module.exports.Dispatcher = __webpack_require__(164);
+	module.exports.Dispatcher = __webpack_require__(163);
 
 
 /***/ },
-/* 164 */
+/* 163 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -19718,7 +19765,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var invariant = __webpack_require__(165);
+	var invariant = __webpack_require__(164);
 
 	var _prefix = 'ID_';
 
@@ -19933,7 +19980,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 165 */
+/* 164 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -19988,45 +20035,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 166 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Dispatcher = __webpack_require__(162);
-	var Store = __webpack_require__(167).Store;
-	var PokemonStore = new Store(Dispatcher);
-	var PokemonConstants = __webpack_require__(183);
-
-	var _pokemons = {};
-
-	var resetPokemons = function (pokemons) {
-	  _pokemons = {};
-	  pokemons.forEach(function (pokemon) {
-	    _pokemons[pokemon.id] = pokemon;
-	  });
-	};
-
-	PokemonStore.all = function () {
-	  var pokemons = [];
-	  Object.keys(_pokemons).forEach(function (id) {
-	    pokemons.push(_pokemons[id]);
-	  }); //if we use for in loop we would need to use hasOwnProperty
-	  return pokemons;
-	};
-
-	PokemonStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-	    case PokemonConstants.POKEMONS_RECEIVED:
-	      resetPokemons(payload.pokemons);
-	      break;
-	  }
-
-	  PokemonStore.__emitChange();
-	};
-
-	module.exports = PokemonStore;
-
-/***/ },
-/* 167 */
+/* 165 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20038,15 +20047,15 @@
 	 * of patent rights can be found in the PATENTS file in the same directory.
 	 */
 
-	module.exports.Container = __webpack_require__(168);
-	module.exports.MapStore = __webpack_require__(171);
-	module.exports.Mixin = __webpack_require__(182);
-	module.exports.ReduceStore = __webpack_require__(172);
-	module.exports.Store = __webpack_require__(173);
+	module.exports.Container = __webpack_require__(166);
+	module.exports.MapStore = __webpack_require__(169);
+	module.exports.Mixin = __webpack_require__(180);
+	module.exports.ReduceStore = __webpack_require__(170);
+	module.exports.Store = __webpack_require__(171);
 
 
 /***/ },
-/* 168 */
+/* 166 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20068,10 +20077,10 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var FluxStoreGroup = __webpack_require__(169);
+	var FluxStoreGroup = __webpack_require__(167);
 
-	var invariant = __webpack_require__(165);
-	var shallowEqual = __webpack_require__(170);
+	var invariant = __webpack_require__(164);
+	var shallowEqual = __webpack_require__(168);
 
 	var DEFAULT_OPTIONS = {
 	  pure: true,
@@ -20229,7 +20238,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 169 */
+/* 167 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20248,7 +20257,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var invariant = __webpack_require__(165);
+	var invariant = __webpack_require__(164);
 
 	/**
 	 * FluxStoreGroup allows you to execute a callback on every dispatch after
@@ -20310,7 +20319,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 170 */
+/* 168 */
 /***/ function(module, exports) {
 
 	/**
@@ -20365,7 +20374,7 @@
 	module.exports = shallowEqual;
 
 /***/ },
-/* 171 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20386,10 +20395,10 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var FluxReduceStore = __webpack_require__(172);
-	var Immutable = __webpack_require__(181);
+	var FluxReduceStore = __webpack_require__(170);
+	var Immutable = __webpack_require__(179);
 
-	var invariant = __webpack_require__(165);
+	var invariant = __webpack_require__(164);
 
 	/**
 	 * This is a simple store. It allows caching key value pairs. An implementation
@@ -20515,7 +20524,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 172 */
+/* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20536,10 +20545,10 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var FluxStore = __webpack_require__(173);
+	var FluxStore = __webpack_require__(171);
 
-	var abstractMethod = __webpack_require__(180);
-	var invariant = __webpack_require__(165);
+	var abstractMethod = __webpack_require__(178);
+	var invariant = __webpack_require__(164);
 
 	var FluxReduceStore = (function (_FluxStore) {
 	  _inherits(FluxReduceStore, _FluxStore);
@@ -20622,7 +20631,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 173 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20641,11 +20650,11 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var _require = __webpack_require__(174);
+	var _require = __webpack_require__(172);
 
 	var EventEmitter = _require.EventEmitter;
 
-	var invariant = __webpack_require__(165);
+	var invariant = __webpack_require__(164);
 
 	/**
 	 * This class should be extended by the stores in your application, like so:
@@ -20805,7 +20814,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 174 */
+/* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20818,14 +20827,14 @@
 	 */
 
 	var fbemitter = {
-	  EventEmitter: __webpack_require__(175)
+	  EventEmitter: __webpack_require__(173)
 	};
 
 	module.exports = fbemitter;
 
 
 /***/ },
-/* 175 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -20844,11 +20853,11 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var EmitterSubscription = __webpack_require__(176);
-	var EventSubscriptionVendor = __webpack_require__(178);
+	var EmitterSubscription = __webpack_require__(174);
+	var EventSubscriptionVendor = __webpack_require__(176);
 
-	var emptyFunction = __webpack_require__(179);
-	var invariant = __webpack_require__(165);
+	var emptyFunction = __webpack_require__(177);
+	var invariant = __webpack_require__(164);
 
 	/**
 	 * @class BaseEventEmitter
@@ -21022,7 +21031,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 176 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21043,7 +21052,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var EventSubscription = __webpack_require__(177);
+	var EventSubscription = __webpack_require__(175);
 
 	/**
 	 * EmitterSubscription represents a subscription with listener and context data.
@@ -21075,7 +21084,7 @@
 	module.exports = EmitterSubscription;
 
 /***/ },
-/* 177 */
+/* 175 */
 /***/ function(module, exports) {
 
 	/**
@@ -21126,7 +21135,7 @@
 	module.exports = EventSubscription;
 
 /***/ },
-/* 178 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -21145,7 +21154,7 @@
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-	var invariant = __webpack_require__(165);
+	var invariant = __webpack_require__(164);
 
 	/**
 	 * EventSubscriptionVendor stores a set of EventSubscriptions that are
@@ -21235,7 +21244,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 179 */
+/* 177 */
 /***/ function(module, exports) {
 
 	/**
@@ -21278,7 +21287,7 @@
 	module.exports = emptyFunction;
 
 /***/ },
-/* 180 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -21295,7 +21304,7 @@
 
 	'use strict';
 
-	var invariant = __webpack_require__(165);
+	var invariant = __webpack_require__(164);
 
 	function abstractMethod(className, methodName) {
 	   true ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Subclasses of %s must override %s() with their own implementation.', className, methodName) : invariant(false) : undefined;
@@ -21305,7 +21314,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 181 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -26292,7 +26301,7 @@
 	}));
 
 /***/ },
-/* 182 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -26309,9 +26318,9 @@
 
 	'use strict';
 
-	var FluxStoreGroup = __webpack_require__(169);
+	var FluxStoreGroup = __webpack_require__(167);
 
-	var invariant = __webpack_require__(165);
+	var invariant = __webpack_require__(164);
 
 	/**
 	 * `FluxContainer` should be preferred over this mixin, but it requires using
@@ -26415,7 +26424,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
 
 /***/ },
-/* 183 */
+/* 181 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -26423,44 +26432,44 @@
 	};
 
 /***/ },
-/* 184 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
-	var PokemonStore = __webpack_require__(166);
-	var ApiUtil = __webpack_require__(160);
+	var ApiActions = __webpack_require__(183);
 
-	var PokemonsIndex = React.createClass({
-	  displayName: 'PokemonsIndex',
-
-	  getInitialState: function () {
-	    return { pokemons: PokemonStore.all() };
-	  },
-
-	  _onChange: function () {
-	    this.setState({ pokemons: PokemonStore.all() });
-	  },
-
-	  componentDidMount: function () {
-	    this.pokemonListener = PokemonStore.addListener(this.onChange);
-	    ApiUtil.fetchAllPokemons();
-	  },
-
-	  componentWillMount: function () {
-	    this.pokemonListener.remove();
-	  },
-
-	  render: function () {
-	    return React.createElement(
-	      'ul',
-	      null,
-	      this.state.pokemons.length,
-	      ';'
-	    );
+	module.exports = {
+	  fetchAllPokemon: function () {
+	    $.ajax({
+	      url: 'api/pokemon',
+	      type: 'GET',
+	      success: function (response) {
+	        ApiActions.receiveAllPokemons(response);
+	      }
+	    });
 	  }
-	});
+	};
 
-	module.exports = PokemonsIndex;
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Dispatcher = __webpack_require__(161);
+	var PokemonConstants = __webpack_require__(181);
+
+	module.exports = {
+	  receiveAllPokemons: function (pokemons) {
+	    Dispatcher.dispatch({
+	      actionType: PokemonConstants.POKEMONS_RECEIVED,
+	      pokemons: pokemons
+	    });
+	  }
+	};
+
+/***/ },
+/* 184 */
+/***/ function(module, exports) {
+
+	
 
 /***/ }
 /******/ ]);
