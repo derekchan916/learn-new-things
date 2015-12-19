@@ -51,14 +51,19 @@
 	var Route = __webpack_require__(185).Route;
 
 	var App = __webpack_require__(234);
+	var PokemonDetail = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/pokemons/detail.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
-	var Routes = React.createElement(Route, { path: '/', component: App });
+	var Routes = React.createElement(
+	  Route,
+	  { path: '/', component: App },
+	  React.createElement(Route, { path: 'pokemon/:pokemonId', component: PokemonDetail })
+	);
 
 	document.addEventListener("DOMContentLoaded", function () {
 	  ReactDOM.render(React.createElement(
 	    Router,
 	    null,
-	    routes
+	    Routes
 	  ), document.getElementById('root'));
 	});
 
@@ -31163,7 +31168,8 @@
 	        'div',
 	        { className: 'pokemon-index-pane' },
 	        React.createElement(PokemonIndex, null)
-	      )
+	      ),
+	      this.props.children
 	    );
 	  }
 	});

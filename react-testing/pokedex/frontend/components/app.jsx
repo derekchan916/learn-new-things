@@ -8,6 +8,8 @@ module.exports = React.createClass({
         <div className="pokemon-index-pane">
           <PokemonIndex />
         </div>
+
+        {this.props.children}
       </div>
     )
   }
