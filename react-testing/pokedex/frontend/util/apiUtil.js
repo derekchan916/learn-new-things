@@ -19,5 +19,17 @@ module.exports = {
         ApiActions.receiveSinglePokemon(response);
       }
     })
+  },
+
+  createPokemon: function(pokemon, callback) {
+    $.ajax({
+      url: 'api/pokemon',
+      type: 'POST',
+      data: {pokemon: pokemon},
+      success: function(response) {
+        ApiActions.receiveSinglePokemon(response);
+        callback && callback(response.id);
+      }
+    })
   }
 };
