@@ -1,15 +1,20 @@
-var React = require('React');
+var React = require('react');
 var PokemonStore = require('../../stores/pokemon.js');
 var ApiUtil = require('../../util/apiUtil.js');
 
-module.exports = React.creatClass({
+module.exports = React.createClass({
   getInitialState: function() {
-    this.getStateFromStore();
+    return this.getStateFromStore();
   },
 
   getStateFromStore: function() {
     return {
-      pokemon: PokemonStore.find(parseInt(this.props.params.pokemonId));
+      pokemon: PokemonStore.find(parseInt(this.props.params.pokemonId))
+    }
+  },
+
+  componentWillReceiveProps: function(props) {
+    ApiUtil.fetchSinglePokemon(parseInt(props.params.pokemonId));
   },
 
   _onChange: function() {
@@ -22,10 +27,16 @@ module.exports = React.creatClass({
   },
 
   componentWillUnmount: function() {
-    this.pokemonListner.remove();
+    this.pokemonListener.remove();
   },
 
   render: function() {
+    if (this.state.pokemon === undefined) {
+      return (
+        <div></div>
+      )
+    }
+
     return (
       <div>
         <div className="pokemon-detail-pane">

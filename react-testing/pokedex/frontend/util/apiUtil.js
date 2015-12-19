@@ -13,7 +13,7 @@ module.exports = {
 
   fetchSinglePokemon: function(id) {
     $.ajax({
-      url: 'api/pokemon' + id,
+      url: 'api/pokemon/' + id,
       type: 'GET',
       success: function(response) {
         ApiActions.receiveSinglePokemon(response);
