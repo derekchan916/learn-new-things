@@ -46,9 +46,9 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-	var pokemon = __webpack_require__(159);
+	var AllPokemon = __webpack_require__(184);
 
-	// ReactDOM.render(< />, document.getElementById('root'));
+	ReactDOM.render(React.createElement(AllPokemon, null), document.getElementById('root'));
 
 /***/ },
 /* 1 */
@@ -19638,13 +19638,7 @@
 
 
 /***/ },
-/* 159 */
-/***/ function(module, exports, __webpack_require__) {
-
-	ApiUtil = __webpack_require__(160);
-	PokemonStore = __webpack_require__(166);
-
-/***/ },
+/* 159 */,
 /* 160 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -26427,6 +26421,46 @@
 	module.exports = {
 	  POKEMONS_RECEIVED: "POKEMONS_RECEIVED"
 	};
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var PokemonStore = __webpack_require__(166);
+	var ApiUtil = __webpack_require__(160);
+
+	var PokemonsIndex = React.createClass({
+	  displayName: 'PokemonsIndex',
+
+	  getInitialState: function () {
+	    return { pokemons: PokemonStore.all() };
+	  },
+
+	  _onChange: function () {
+	    this.setState({ pokemons: PokemonStore.all() });
+	  },
+
+	  componentDidMount: function () {
+	    this.pokemonListener = PokemonStore.addListener(this.onChange);
+	    ApiUtil.fetchAllPokemons();
+	  },
+
+	  componentWillMount: function () {
+	    this.pokemonListener.remove();
+	  },
+
+	  render: function () {
+	    return React.createElement(
+	      'ul',
+	      null,
+	      this.state.pokemons.length,
+	      ';'
+	    );
+	  }
+	});
+
+	module.exports = PokemonsIndex;
 
 /***/ }
 /******/ ]);
