@@ -7,5 +7,12 @@ module.exports = {
       actionType: PokemonConstants.POKEMONS_RECEIVED,
       pokemons: pokemons
     });
+  },
+
+  receiveSinglePokemon: function(pokemon) {
+    Dispatcher.dispatch({
+      actionType: PokemonConstants.POKEMON_RECEIVED,
+      pokemon: pokemon
+    })
   }
 };

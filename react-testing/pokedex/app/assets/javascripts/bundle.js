@@ -19714,6 +19714,10 @@
 	  });
 	};
 
+	var resetPokemon = function (pokemon) {
+	  _pokemons[pokemon.id] = pokemon;
+	};
+
 	PokemonStore.all = function () {
 	  var pokemons = [];
 	  Object.keys(_pokemons).forEach(function (id) {
@@ -19722,10 +19726,17 @@
 	  return pokemons;
 	};
 
+	PokemonStore.find = function (id) {
+	  return _pokemons[id];
+	};
+
 	PokemonStore.__onDispatch = function (payload) {
 	  switch (payload.actionType) {
 	    case PokemonConstants.POKEMONS_RECEIVED:
 	      resetPokemons(payload.pokemons);
+	      break;
+	    case PokemonConstants.POKEMON_RECEIVED:
+	      resetPokemon(payload.pokemon);
 	      break;
 	  }
 
@@ -26443,7 +26454,8 @@
 /***/ function(module, exports) {
 
 	module.exports = {
-	  POKEMONS_RECEIVED: "POKEMONS_RECEIVED"
+	  POKEMONS_RECEIVED: "POKEMONS_RECEIVED",
+	  POKEMON_RECEIVED: "POKEMON_RECEIVED"
 	};
 
 /***/ },
@@ -26461,6 +26473,16 @@
 	        ApiActions.receiveAllPokemons(response);
 	      }
 	    });
+	  },
+
+	  fetchSinglePokemon: function (id) {
+	    $.ajax({
+	      url: 'api/pokemon' + id,
+	      type: 'GET',
+	      success: function (response) {
+	        ApiActions.receiveSinglePokemon(response);
+	      }
+	    });
 	  }
 	};
 
@@ -26476,6 +26498,13 @@
 	    Dispatcher.dispatch({
 	      actionType: PokemonConstants.POKEMONS_RECEIVED,
 	      pokemons: pokemons
+	    });
+	  },
+
+	  receiveSinglePokemon: function (pokemon) {
+	    Dispatcher.dispatch({
+	      actionType: PokemonConstants.POKEMON_RECEIVED,
+	      pokemon: pokemon
 	    });
 	  }
 	};

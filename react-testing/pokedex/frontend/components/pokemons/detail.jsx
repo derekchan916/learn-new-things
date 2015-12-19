@@ -1,5 +1,6 @@
 var React = require('React');
-var PokemonStore = require('../../stores/pokemon.js')
+var PokemonStore = require('../../stores/pokemon.js');
+var ApiUtil = require('../../util/apiUtil.js');
 
 module.exports = React.creatClass({
   getInitialState: function() {
