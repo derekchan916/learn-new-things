@@ -6,7 +6,7 @@ module.exports = React.createClass({
     return (
       <ul>
         {this.props.toys && this.props.toys.map(function(toy) {
-          return <ToyItem key={toy.id} toy={toy})/>
+          return <ToyItem key={toy.id} toy={toy}/>
         })}
       </ul>
     );

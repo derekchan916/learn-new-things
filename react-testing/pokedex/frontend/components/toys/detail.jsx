@@ -3,6 +3,7 @@ var PokemonStore = require('../../stores/pokemon.js');
 
 module.exports = React.createClass({
   getInitialState: function() {
+    console.log('hit')
     return this.getStateFromStore();
   },
 

@@ -46,24 +46,28 @@
 
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
-
 	var Router = __webpack_require__(159).Router;
 	var Route = __webpack_require__(159).Route;
-
+	var IndexRoute = __webpack_require__(159).IndexRoute;
 	var App = __webpack_require__(208);
 	var PokemonDetail = __webpack_require__(235);
+	var ToyDetail = __webpack_require__(238);
 
-	var Routes = React.createElement(
+	var routes = React.createElement(
 	  Route,
 	  { path: '/', component: App },
-	  React.createElement(Route, { path: 'pokemon/:pokemonId', component: PokemonDetail })
+	  React.createElement(
+	    Route,
+	    { path: 'pokemon/:pokemonId', component: PokemonDetail },
+	    React.createElement(Route, { path: 'toys/:toyId', component: ToyDetail })
+	  )
 	);
 
 	document.addEventListener("DOMContentLoaded", function () {
 	  ReactDOM.render(React.createElement(
 	    Router,
 	    null,
-	    Routes
+	    routes
 	  ), document.getElementById('root'));
 	});
 
@@ -31217,7 +31221,7 @@
 	var React = __webpack_require__(1);
 	var PokemonStore = __webpack_require__(210);
 	var ApiUtil = __webpack_require__(232);
-	var ToysIndex = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../toys/index.jsx\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var ToysIndex = __webpack_require__(236);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -31280,6 +31284,131 @@
 	          'Toys: '
 	        ),
 	        React.createElement(ToysIndex, { toys: this.state.pokemon.toys })
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var ToyItem = __webpack_require__(237);
+
+	module.exports = React.createClass({
+	  displayName: 'exports',
+
+	  render: function () {
+	    return React.createElement(
+	      'ul',
+	      null,
+	      this.props.toys && this.props.toys.map(function (toy) {
+	        return React.createElement(ToyItem, { key: toy.id, toy: toy });
+	      })
+	    );
+	  }
+	});
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var History = __webpack_require__(159).History;
+
+	module.exports = React.createClass({
+	  displayName: 'exports',
+
+	  mixins: [History],
+
+	  showDetail: function () {
+	    var url = '/pokemon/' + this.props.toy.pokemon_id + '/toys/' + this.props.toy.id;
+	    this.history.pushState(null, url, {});
+	  },
+
+	  render: function () {
+	    var attrs = ['name', 'happiness', 'price'].map((function (attr) {
+	      return React.createElement(
+	        'p',
+	        { key: attr },
+	        attr,
+	        ': ',
+	        this.props.toy[attr]
+	      );
+	    }).bind(this));
+
+	    return React.createElement(
+	      'li',
+	      { onClick: this.showDetail, className: 'toy-list-item' },
+	      attrs
+	    );
+	  }
+	});
+
+/***/ },
+/* 238 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1);
+	var PokemonStore = __webpack_require__(210);
+
+	module.exports = React.createClass({
+	  displayName: 'exports',
+
+	  getInitialState: function () {
+	    console.log('hit');
+	    return this.getStateFromStore();
+	  },
+
+	  getStateFromStore: function () {
+	    var pokemon = PokemonStore.find(parseInt(this.props.params.pokemonId));
+	    var toy;
+	    pokemon && pokemon.toys && pokemon.toys.forEach((function (t) {
+	      if (t.id === parseInt(this.props.params.toyId)) {
+	        toy = t;
+	      }
+	    }).bind(this));
+	    return { toy: toy };
+	  },
+
+	  _onChange: function () {
+	    this.setState(this.getStateFromStore());
+	  },
+
+	  componentDidMount: function () {
+	    this.pokemonListener = PokemonStore.addListener(this._onChange);
+	  },
+
+	  componentWillUnmount: function () {
+	    this.pokemonListener.remove();
+	  },
+
+	  componentWillReceiveProps: function () {
+	    this._onChange();
+	  },
+
+	  render: function () {
+	    if (this.state.toy === undefined) {
+	      return React.createElement('div', null);
+	    }
+
+	    return React.createElement(
+	      'div',
+	      { className: 'toy-detail-pane' },
+	      React.createElement(
+	        'div',
+	        { className: 'detail' },
+	        React.createElement('img', { src: this.state.toy.image_url }),
+	        ['name', 'happiness', 'price'].map((function (attr) {
+	          return React.createElement(
+	            'p',
+	            { key: attr },
+	            attr,
+	            ': ',
+	            this.state.toy[attr]
+	          );
+	        }).bind(this))
 	      )
 	    );
 	  }

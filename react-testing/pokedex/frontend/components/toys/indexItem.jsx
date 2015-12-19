@@ -1,11 +1,11 @@
 var React = require('react');
 var History = require('react-router').History;
 
-Module.exports = function() {
+module.exports = React.createClass({
   mixins: [History],
 
   showDetail: function() {
-    var url = '/pokemon/' + this.props.toys.pokemon_id + '/toys/' + this.props.toys.id;
+    var url = '/pokemon/' + this.props.toy.pokemon_id + '/toys/' + this.props.toy.id;
     this.history.pushState(null, url, {});
   },
 
@@ -15,9 +15,9 @@ Module.exports = function() {
     }.bind(this));
 
     return (
-      <li onClick={this.showDetail} className="toy-list-itme">
+      <li onClick={this.showDetail} className="toy-list-item">
         {attrs}
       </li>
     );
   }
-}
+});
