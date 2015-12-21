@@ -23,7 +23,9 @@ var MyFirstProject = React.createClass({
     var movie = MOCKED_MOVIES_DATA[0];
     return (
       <View style={style.container}>
-
+        <Text>{movie.title}</Text>
+        <Text>{movie.year}</Text>
+        <Image source={{uri: movie.posters.thumbnail}} />
       </View>
     );
   }
