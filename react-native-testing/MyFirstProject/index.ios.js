@@ -10,22 +10,20 @@ var {
   StyleSheet,
   Text,
   View,
+  Image,
 } = React;
+
+var MOCKED_MOVIES_DATA = [
+  {title: 'Title', year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}},
+];
+
 
 var MyFirstProject = React.createClass({
   render: function() {
+    var movie = MOCKED_MOVIES_DATA[0];
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Testing this project!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+      <View style={style.container}>
+
       </View>
     );
   }
