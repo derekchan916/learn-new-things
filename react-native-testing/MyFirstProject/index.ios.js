@@ -17,8 +17,29 @@ var MOCKED_MOVIES_DATA = [
   {title: 'Title', year: '2015', posters: {thumbnail: 'http://i.imgur.com/UePbdph.jpg'}},
 ];
 
+var REQUEST_URL = 'https://raw.githubusercontent.com/facebook/react-native/master/docs/MoviesExample.json';
+
 
 var MyFirstProject = React.createClass({
+  getInitialState: function() {
+    return {movies: null}
+  },
+
+  componentDidMount: function() {
+    this.fetchData();
+  },
+
+  fetchData: function() {
+    fetch(REQUEST_URL)
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState({
+          movies: responseData.movies,
+        })
+      })
+      .done();
+  },
+
   render: function() {
     var movie = MOCKED_MOVIES_DATA[0];
     return (
