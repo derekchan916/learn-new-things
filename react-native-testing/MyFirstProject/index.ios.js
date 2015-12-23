@@ -22,7 +22,7 @@ var MyFirstProject = React.createClass({
   render: function() {
     var movie = MOCKED_MOVIES_DATA[0];
     return (
-      <View style={style.container}>
+      <View style={styles.container}>
         <Text>{movie.title}</Text>
         <Text>{movie.year}</Text>
         <Image source={{uri: movie.posters.thumbnail}} />
