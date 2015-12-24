@@ -10,10 +10,16 @@ var {
 
 var SearchBar = require('./SearchBar.js');
 
+var resultsCache = {
+  dataForQuery: {},
+  nextPageNumberForQuery: {},
+  totalForQuery: {},
+};
+
 var SearchScreen = React.createClass({
   getInitialState: function() {
     return {
-      isLoading: false,
+      isLoading: true,
       isLoadingTail: false,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
@@ -26,7 +32,8 @@ var SearchScreen = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
-        <Text>This nigga</Text>
+        <SearchBar
+          isLoading={this.state.isLoading} />
       </View>
     );
   }
