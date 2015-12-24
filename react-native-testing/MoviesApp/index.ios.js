@@ -11,10 +11,17 @@ var {
   StyleSheet,
 } = React;
 
+var SearchScreen = require('./SearchScreen.js');
+
 var MoviesApp = React.createClass({
   render: function() {
     return (
-      
+      <NavigatorIOS
+        style={styles.container}
+        initialRoute={{
+          title: 'Movies',
+          component: SearchScreen,
+        }} />
     );
   }
 });
