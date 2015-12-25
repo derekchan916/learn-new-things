@@ -19,7 +19,7 @@ var resultsCache = {
 var SearchScreen = React.createClass({
   getInitialState: function() {
     return {
-      isLoading: true,
+      isLoading: false,
       isLoadingTail: false,
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
