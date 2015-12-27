@@ -12,15 +12,14 @@ var {
   View,
 } = React;
 
-var BrowseTracksView = require('./BrowseTracks.jsx');
-var NowPlayingFooterView = require('./NowPlayingFooter.jsx');
+var BrowseTracksView = require('./BrowseTracks.js');
+
 
 var SoundCloudApp = React.createClass({
   render: function() {
     return (
       <View style={styles.container}>
         <BrowseTracksView />
-        <NowPlayingFooterView />
       </View>
     );
   }
