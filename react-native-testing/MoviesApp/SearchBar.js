@@ -15,7 +15,7 @@ var SearchBar = React.createClass({
         <TextInput
           autoCapitalize="none"
           autoCorrect={false}
-
+          onChange={this.props.onSearchChange}
           placeholder="Search a movie..."
 
           style={styles.searchBarInput} />
@@ -41,7 +41,7 @@ var styles = StyleSheet.create({
     height: 30,
   },
   spinner: {
-    width: 30,
+    width: 60,
   }
 });
 

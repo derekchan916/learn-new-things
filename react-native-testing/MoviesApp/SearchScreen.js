@@ -17,6 +17,8 @@ var resultsCache = {
 };
 
 var SearchScreen = React.createClass({
+  timeoutID: (null: any),
+
   getInitialState: function() {
     return {
       isLoading: false,
@@ -29,10 +31,22 @@ var SearchScreen = React.createClass({
     };
   },
 
+  onSearchChange: function(event: Object) {
+    var filter = event.nativeEvent.text.toLowerCase();
+
+    this.clearTimeout(this.timeoutID);
+    this.timeoutID = this.setTimeout(() => this.searchMovies(filter), 100)
+  },
+
+  searchMovies: function(filter) {
+    console.log("awww snap")
+  },
+
   render: function() {
     return (
       <View style={styles.container}>
         <SearchBar
+          onSearchChange={this.onSearchChange}
           isLoading={this.state.isLoading} />
       </View>
     );
