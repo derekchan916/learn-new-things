@@ -9,6 +9,7 @@ var {
 } = React;
 
 var SearchBar = require('./SearchBar.js');
+var TimerMixin = require('react-timer-mixin');
 
 var resultsCache = {
   dataForQuery: {},
@@ -39,6 +40,8 @@ var SearchScreen = React.createClass({
   },
 
   searchMovies: function(filter) {
+    this.timeoutID = null;
+
     console.log("awww snap")
   },
 
