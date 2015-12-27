@@ -18,6 +18,7 @@ var resultsCache = {
 };
 
 var SearchScreen = React.createClass({
+  mixins: [TimerMixin],
   timeoutID: (null: any),
 
   getInitialState: function() {
