@@ -103,13 +103,17 @@ var styles = StyleSheet.create({
     height: 50,
   },
   rightContainer: {
-
+    flex: 1,
   },
   trackTitle: {
-
+    fontSize: 20,
+    marginBottom: 8,
+    textAlign: 'center',
   },
   trackArtist: {
-
+    fontSize: 12,
+    marginBottom: 6,
+    textAlign: 'center',
   }
 })
 
