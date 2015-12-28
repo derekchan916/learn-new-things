@@ -37,6 +37,10 @@ var styles = StyleSheet.create({
   appContainer: {
     flex: 1,
     paddingTop: 20,
+    backgroundColor: '#F5FCFF',
+  },
+  navContainer: {
+    flex: 1,
   },
 });
 

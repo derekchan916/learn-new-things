@@ -52,7 +52,7 @@ var BrowseTracksView = React.createClass({
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderTrack}
-        style={styles.ListView} />
+        style={styles.listView} />
     );
   },
 
@@ -84,8 +84,23 @@ var TrackCell = React.createClass({
 })
 
 var styles = StyleSheet.create({
-  ListView: {
-
+  listView: {
+    backgroundColor: '#F5FCFF',
+  },
+  trackCell: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 4,
+    marginRight: 4,
+    padding: 4,
+    borderBottomWidth: .5,
+    borderColor: 'lightgray',
+  },
+  thumbnail: {
+    width: 50,
+    height: 50,
   },
   rightContainer: {
 

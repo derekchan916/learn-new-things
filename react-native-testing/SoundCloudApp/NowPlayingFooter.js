@@ -29,7 +29,8 @@ var NowPlayingFooterView = React.createClass({
 
 var styles = StyleSheet.create({
   nowPlayingFooter: {
-
+    flex: 0,
+    borderTopWidth: 1,
   },
   trackTitle: {
 
