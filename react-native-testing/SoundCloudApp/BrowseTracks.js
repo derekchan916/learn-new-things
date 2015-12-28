@@ -8,6 +8,7 @@ var {
   StyleSheet,
   View,
   Text,
+  Image,
 } = React;
 
 var mockedData = var mockedData = [
@@ -63,7 +64,23 @@ var BrowseTracksView = React.createClass({
 });
 
 var TrackCell = React.createClass({
-
+  render: function() {
+    return (
+      <View style={styles.trackCell}>
+        <Image
+          source={{uri: this.props.track.artwork_url}}
+          style={styles.thumbnail} />
+        <View style={styles.rightContainer}>
+          <Text style={styles.trackTitle}>
+            {this.props.track.title}
+          </Text>
+          <Text style={styles.trackArtist}>
+            {this.props.track.user.username}
+          </Text>
+        </View>
+      </View>
+    )
+  }
 })
 
 module.exports = BrowseTracksView;
