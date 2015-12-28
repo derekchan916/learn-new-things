@@ -11,7 +11,7 @@ var {
   Image,
 } = React;
 
-var mockedData = var mockedData = [
+var mockedData = [
   {
     genre: "Deep House",
     title: "Coffee (Manhattoes Remix)",
@@ -32,7 +32,7 @@ var BrowseTracksView = React.createClass({
   getInitialState: function() {
     return {
       dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 != row2.
+        rowHasChanged: (row1, row2) => row1 != row2
       }).cloneWithRows(mockedData)
     };
   },
@@ -43,7 +43,7 @@ var BrowseTracksView = React.createClass({
 
   fetchData : function() {
     this.setData({
-      dataSource: this.state.dataSource.cloneWithRows(MockData)
+      dataSource: this.state.dataSource.cloneWithRows(mockedData)
     })
   },
 
@@ -52,7 +52,7 @@ var BrowseTracksView = React.createClass({
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderTrack}
-        style={style.ListView} />
+        style={styles.ListView} />
     );
   },
 
@@ -80,6 +80,21 @@ var TrackCell = React.createClass({
         </View>
       </View>
     )
+  }
+})
+
+var styles = StyleSheet.create({
+  ListView: {
+
+  },
+  rightContainer: {
+
+  },
+  trackTitle: {
+
+  },
+  trackArtist: {
+
   }
 })
 
