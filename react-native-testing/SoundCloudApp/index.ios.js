@@ -17,7 +17,7 @@ var NowPlayingFooterView = require('./NowPlayingFooter.js')
 
 
 var SoundCloudApp = React.createClass({
-  getInitialState = function() {
+  getInitialState: function() {
     return {
       nowPlaying: null
     }
@@ -25,7 +25,7 @@ var SoundCloudApp = React.createClass({
 
   render: function() {
     return (
-      <View style={styles.container}>
+      <View style={styles.appContainer}>
         <BrowseTracksView />
         <NowPlayingFooterView nowPlaying={this.state.nowPlaying}/>
       </View>
@@ -34,7 +34,7 @@ var SoundCloudApp = React.createClass({
 });
 
 var styles = StyleSheet.create({
-  container: {
+  appContainer: {
     flex: 1,
     paddingTop: 20,
   },
