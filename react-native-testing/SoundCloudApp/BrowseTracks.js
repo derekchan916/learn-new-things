@@ -42,7 +42,7 @@ var BrowseTracksView = React.createClass({
   },
 
   fetchData : function() {
-    this.setData({
+    this.setState({
       dataSource: this.state.dataSource.cloneWithRows(mockedData)
     })
   },
