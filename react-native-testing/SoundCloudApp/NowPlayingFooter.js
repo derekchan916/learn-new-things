@@ -33,11 +33,15 @@ var styles = StyleSheet.create({
     borderTopWidth: 1,
   },
   trackTitle: {
-
+    fontSize: 20,
+    marginBottom: 8,
+    textAlign: 'center',
   },
   trackArtist: {
-
-  },
+    fontSize: 12,
+    marginBottom: 6,
+    textAlign: 'center',
+  }
 })
 
 module.exports = NowPlayingFooterView;
