@@ -15,7 +15,6 @@ var {
 var BrowseTracksView = require('./BrowseTracks.js');
 var NowPlayingFooterView = require('./NowPlayingFooter.js')
 
-
 var SoundCloudApp = React.createClass({
   getInitialState: function() {
     return {
