@@ -53,7 +53,17 @@ var BrowseTracksView = React.createClass({
         renderRow={this.renderTrack}
         style={style.ListView} />
     );
+  },
+
+  renderTrack: function(track) {
+    return (
+      <TrackCell track={track} />
+    )
   }
 });
+
+var TrackCell = React.createClass({
+
+})
 
 module.exports = BrowseTracksView;
