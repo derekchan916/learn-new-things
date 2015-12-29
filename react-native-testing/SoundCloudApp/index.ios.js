@@ -10,6 +10,7 @@ var {
   StyleSheet,
   Text,
   View,
+  NavigatorIOS,
 } = React;
 
 var BrowseTracksView = require('./BrowseTracks.js');
@@ -25,7 +26,12 @@ var SoundCloudApp = React.createClass({
   render: function() {
     return (
       <View style={styles.appContainer}>
-        <BrowseTracksView />
+        <NavigatorIOS style={styles.navContainer}
+          barTintColor='#F5FCFF'
+          initialRoute={{
+            title: 'React Native Music',
+            component: BrowseTracksView,
+          }} />
         <NowPlayingFooterView nowPlaying={this.state.nowPlaying}/>
       </View>
     );

@@ -17,23 +17,6 @@ var TimerMixin = require('react-timer-mixin')
 var SOUNDCLOUD_CLIENT_ID = 'df29e29195ea771102e4aa8d6c20b23d';
 var SOUNDCLOUD_CLIENT_SECRET = 'f1917164abef1002f7f1a8b6005bf438';
 
-var mockedData = [
-  {
-    genre: "Deep House",
-    title: "Coffee (Manhattoes Remix)",
-    user:  { username: "manhattoes" },
-    artwork_url: "https://i1.sndcdn.com/artworks-000107004661-v4xg0d-large.jpg",
-    stream_url: "https://api.soundcloud.com/tracks/191554493/stream"
-  },
-  {
-    genre: "Bass",
-    title: "Threadsafe",
-    user: { username: "manhattoes" },
-    artwork_url: "https://i1.sndcdn.com/artworks-000104588970-5kyi09-large.jpg",
-    stream_url: "https://api.soundcloud.com/tracks/187885871/stream"
-  }
-];
-
 var BrowseTracksView = React.createClass({
   mixins: [TimerMixin],
   timeoutID: (null: any),
@@ -72,6 +55,8 @@ var BrowseTracksView = React.createClass({
 
   onSearchChange: function(event) {
     var q = event.nativeEvent.text.toLowerCase();
+    this.clearTimeout(this.timeoutID);
+    this.timeoutID = this.setTimeout(() => this.fetchData(q), 100)
   },
 
   render: function() {
@@ -155,10 +140,18 @@ var styles = StyleSheet.create({
     textAlign: 'center',
   },
   searchCell: {
-
+    flex: 1,
+    flexDirection: 'row',
   },
   searchContainer: {
-
+    height: 40,
+    width: 100,
+    flex: 1,
+    margin: 4,
+    padding: 4,
+    borderColor: 'gray',
+    color: 'black',
+    borderWidth: 1
   },
 })
 
