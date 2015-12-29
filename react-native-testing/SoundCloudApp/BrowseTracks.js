@@ -9,6 +9,7 @@ var {
   View,
   Text,
   Image,
+  TextInput,
 } = React;
 
 var SOUNDCLOUD_CLIENT_ID = 'df29e29195ea771102e4aa8d6c20b23d';
@@ -35,8 +36,8 @@ var BrowseTracksView = React.createClass({
   getInitialState: function() {
     return {
       dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 != row2
-      }).cloneWithRows(mockedData)
+        rowHasChanged: (row1, row2) => row1 !== row2,
+      })
     };
   },
 
@@ -44,27 +45,32 @@ var BrowseTracksView = React.createClass({
     this.fetchData();
   },
 
-  fetchData : function() {
+  fetchData: function() {
     fetch(this.fetchEndpoint)
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData)
         })
-      })
-      .catch((error) => {
-        console.warn(error);
+        .catch((error) => {
+          console.warn(error);
+        });
       })
       .done();
   },
-
+  
   fetchEndpoint: 'http://api.soundcloud.com/tracks.json?client_id=' + SOUNDCLOUD_CLIENT_ID,
+
+  onSearchChange: function() {
+
+  },
 
   render: function() {
     return (
       <ListView
         dataSource={this.state.dataSource}
         renderRow={this.renderTrack}
+        renderHeader={this.renderSearchBar}
         style={styles.listView} />
     );
   },
@@ -72,6 +78,17 @@ var BrowseTracksView = React.createClass({
   renderTrack: function(track) {
     return (
       <TrackCell track={track} />
+    )
+  },
+
+  renderSearchBar: function() {
+    return (
+      <View style={styles.searchCell}>
+        <TextInput
+          onChange={this.onSearchChange}
+          placeholder={'Search Here'}
+          style={styles.searchContainer} />
+      </View>
     )
   }
 });
@@ -127,7 +144,13 @@ var styles = StyleSheet.create({
     fontSize: 12,
     marginBottom: 6,
     textAlign: 'center',
-  }
+  },
+  searchCell: {
+
+  },
+  searchContainer: {
+
+  },
 })
 
 module.exports = BrowseTracksView;
