@@ -12,6 +12,8 @@ var {
   TextInput,
 } = React;
 
+var TimerMixin = require('react-timer-mixin')
+
 var SOUNDCLOUD_CLIENT_ID = 'df29e29195ea771102e4aa8d6c20b23d';
 var SOUNDCLOUD_CLIENT_SECRET = 'f1917164abef1002f7f1a8b6005bf438';
 
@@ -33,6 +35,9 @@ var mockedData = [
 ];
 
 var BrowseTracksView = React.createClass({
+  mixins: [TimerMixin],
+  timeoutID: (null: any),
+
   getInitialState: function() {
     return {
       dataSource: new ListView.DataSource({
@@ -45,20 +50,24 @@ var BrowseTracksView = React.createClass({
     this.fetchData();
   },
 
-  fetchData: function() {
-    fetch(this.fetchEndpoint)
+  fetchData: function(query) {
+    var queryString = '';
+    if (query) {
+      queryString = '&q=' + query
+    }
+    fetch(this.fetchEndpoint + queryString)
       .then((response) => response.json())
       .then((responseData) => {
         this.setState({
           dataSource: this.state.dataSource.cloneWithRows(responseData)
         })
-        .catch((error) => {
-          console.warn(error);
-        });
+      })
+      .catch((error) => {
+        console.warn(error);
       })
       .done();
   },
-  
+
   fetchEndpoint: 'http://api.soundcloud.com/tracks.json?client_id=' + SOUNDCLOUD_CLIENT_ID,
 
   onSearchChange: function() {
