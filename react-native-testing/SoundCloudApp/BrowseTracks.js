@@ -70,8 +70,8 @@ var BrowseTracksView = React.createClass({
 
   fetchEndpoint: 'http://api.soundcloud.com/tracks.json?client_id=' + SOUNDCLOUD_CLIENT_ID,
 
-  onSearchChange: function() {
-
+  onSearchChange: function(event) {
+    var q = event.nativeEvent.text.toLowerCase();
   },
 
   render: function() {
