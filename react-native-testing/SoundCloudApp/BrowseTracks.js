@@ -10,9 +10,12 @@ var {
   Text,
   Image,
   TextInput,
+  TouchableOpacity,
 } = React;
 
-var TimerMixin = require('react-timer-mixin')
+var TimerMixin = require('react-timer-mixin');
+
+var TrackScreen = require('./TrackScreen.js');
 
 var SOUNDCLOUD_CLIENT_ID = 'df29e29195ea771102e4aa8d6c20b23d';
 var SOUNDCLOUD_CLIENT_SECRET = 'f1917164abef1002f7f1a8b6005bf438';
@@ -71,7 +74,7 @@ var BrowseTracksView = React.createClass({
 
   renderTrack: function(track) {
     return (
-      <TrackCell track={track} />
+      <TrackCell track={track} navigator={this.props.navigator}/>
     )
   },
 
@@ -90,20 +93,32 @@ var BrowseTracksView = React.createClass({
 var TrackCell = React.createClass({
   render: function() {
     return (
-      <View style={styles.trackCell}>
-        <Image
-          source={{uri: this.props.track.artwork_url}}
-          style={styles.thumbnail} />
-        <View style={styles.rightContainer}>
-          <Text style={styles.trackTitle}>
-            {this.props.track.title}
-          </Text>
-          <Text style={styles.trackArtist}>
-            {this.props.track.user.username}
-          </Text>
+      <TouchableOpacity
+        onPress={() => this.selectTrack(this.props.track)}
+        style={styles.rightContainer} >
+        <View style={styles.trackCell}>
+          <Image
+            source={{uri: this.props.track.artwork_url}}
+            style={styles.thumbnail} />
+          <View style={styles.rightContainer}>
+            <Text style={styles.trackTitle}>
+              {this.props.track.title}
+            </Text>
+            <Text style={styles.trackArtist}>
+              {this.props.track.user.username}
+            </Text>
+          </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
+  },
+
+  selectTrack: function(track) {
+    this.props.navigator.push({
+      title: track.title,
+      component: TrackScreen,
+      passProps: {track},
+    })
   }
 })
 
