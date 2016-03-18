@@ -13,6 +13,8 @@ run$ npm install --save react-dom
 
 run$ npm install --save webpack
 
+can also run$ npm install --save react react-dom webpack babel-core babel-loader babel-preset-react
+
 Ignore the WARNs. If you want to fix it, change it to look like this
 ```JavaScript
 {

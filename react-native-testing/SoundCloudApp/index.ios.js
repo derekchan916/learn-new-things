@@ -30,9 +30,9 @@ var SoundCloudApp = React.createClass({
           barTintColor='#F5FCFF'
           initialRoute={{
             title: 'React Native Music',
-            component: BrowseTracksView,
+            component: BrowseTracksView
           }} />
-        <NowPlayingFooterView nowPlaying={this.state.nowPlaying}/>
+        <NowPlayingFooterView nowPlaying={this.props.nowPlaying}/>
       </View>
     );
   }
