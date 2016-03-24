@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Kanto YU5 Speaker System",
+    "description": "After rocking the suburbs around Vancouver, the Canadian audio outfit Kanto set their speakers upon the world to instant acclaim. Five years later, and they keep coming with awe-inspiring products available at reasonable prices. The largest and most powerful model in their well received YU line, the Kanto YU5 Speaker System turns your home office into a concert hall. Feel free to pick any seat in the house, as the integrated aptX Bluetooth protocol lets you wirelessly stream without losing a speck of quality.",
+    "msrp": 499.99,
+    "prices": [
+      269.99,
+      249.99
+    ],
+    "customers-needed": 50,
+    "customers-pledged": 0
+  },
+  {
+    "id": 2,
+    "name": "Gustard H10",
+    "description": "Well-designed and solidly built, the Gustard H10 is a powerful, Class A, output stage headphone amplifier designed for home listening. Measuring 10” x 7” and weighing 7 lbs., the H10 features two independent amplification circuits for the left and right channels, four gain switches, two RCA inputs, and two balanced XLR inputs.",
+    "msrp": 469.99,
+    "prices": [
+      319.99,
+      300.99,
+      289.99
+    ],
+    "customers-needed": 15,
+    "customers-pledged": 0
+  }
+]
