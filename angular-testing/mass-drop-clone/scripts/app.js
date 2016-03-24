@@ -2,22 +2,29 @@
 
 var mdClone = angular.module('mdClone', [
   'ngRoute',
+  // 'ngResource',
 
-  'mdClone.controller.productStore'
-]);
+  'mdClone.controller.productStore',
+  'mdClone.controller.productDetail'
+])
 
-mdClone.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.
-    when('/', {
-      templateUrl: 'views/product-store.html',
-      controller: 'ProductStoreCtrl'
-    })
-    .when('/product/:productId', {
-      templateUrl: '../views/product-detail.html'
-    })
-  }
-]);
+.config(function($routeProvider) {
+  $routeProvider.
+  when('/', {
+    templateUrl: 'views/product-store.html',
+    controller: 'ProductStoreCtrl'
+  })
+  .when('/product/:productId', {
+    templateUrl: 'views/product-detail.html',
+    controller: 'ProductDetailCtrl'
+  })
+})
+//
+// .factory('Product', function($resourceProvider) {
+  // return $resource('product/:productId.json', {}, {
+  //   query: {method:'GET', params:{productId:'product'}, isArray:true}
+  // });
+// });
 
 // function move() {
 //     var elem = document.getElementById("myBar");
