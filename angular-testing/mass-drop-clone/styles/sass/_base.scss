@@ -1,6 +1,18 @@
-$main-container-width: 700px;
+// Fonts
+h1 {
+  font-size: 30px;
+}
+
+// Colors
+$company-light-grey:#BFBFBF;
+$company-green: #88C100;
+
+// Containers
+$primary-container-width: 70%;
+$sub-container-width: 29%;
+
 $main-container-padding: 20px;
 $main-border-radius: 5px;
-$main-container-margin: 30px;
+$main-container-margin: 20px;
 
 $container-border: 1px solid #BFBFBF;
