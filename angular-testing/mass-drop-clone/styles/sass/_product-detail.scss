@@ -1,0 +1,25 @@
+.main-container {
+  width: $main-container-width;
+  padding: $main-container-padding;
+  margin: $main-container-margin;
+  border-radius: $main-border-radius;
+  border: $container-border;
+
+  .progress-bar {
+    position: relative;
+    width: 100%;
+    height: 10px;
+    background-color: #BFBFBF;
+    border-radius: $main-border-radius;
+
+    .bar {
+      position: absolute;
+      width: 50%;
+      height: 100%;
+      background-color: #88C100;
+      border-top-left-radius: $main-border-radius;
+      border-bottom-left-radius: $main-border-radius;
+    }
+  }
+
+}

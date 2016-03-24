@@ -19,12 +19,6 @@ var mdClone = angular.module('mdClone', [
     controller: 'ProductDetailCtrl'
   })
 })
-//
-// .factory('Product', function($resourceProvider) {
-  // return $resource('product/:productId.json', {}, {
-  //   query: {method:'GET', params:{productId:'product'}, isArray:true}
-  // });
-// });
 
 // function move() {
 //     var elem = document.getElementById("myBar");
