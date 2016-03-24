@@ -1,18 +1,21 @@
-(function() {
-  var app = angular.module('mdClone', [
-    'mdClone.controller.productList'
-  ])
+'use strict';
 
-  // .config(['$routeProvider', function($routeProvider) {
-  //   $routeProvider
-  //   .when('/products/:productId', {
-  //     templateUrl: '../views/product-detail.html'
-  //   })
-  //   .otherwise({
-  //     redirectTo: '/'
-  //   })
-  // }])
-})();
+var mdClone = angular.module('mdClone', [
+  'mdClone.controller.productStore'
+]);
+
+// mdClone.config(['$routeProvider',
+//   function($routeProvider) {
+    // $routeProvider.
+    // when('/', {
+    //   templateUrl: 'views/product-store.html',
+    //   controller: 'ProductStoreCtrl'
+    // })
+//   .when('/products/:productId', {
+//     templateUrl: '../views/product-detail.html'
+//   })
+//   }
+// ]);
 
 // function move() {
 //     var elem = document.getElementById("myBar");
