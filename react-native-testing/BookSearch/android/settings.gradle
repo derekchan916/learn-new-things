@@ -1,3 +1,0 @@
-rootProject.name = 'BookSearch'
-
-include ':app'
