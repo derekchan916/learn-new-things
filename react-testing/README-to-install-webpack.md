@@ -41,12 +41,16 @@ Ignore the WARNs. If you want to fix it, change it to look like this
 ```
 Create a new webpack.config.js file and copy this into it.
 ```JavaScript
+var path = require("path");
+
 module.exports = {
   context: __dirname,
-  entry: "./js/component.jsx",
+  entry: "./frontend/nivita_app.jsx",
   output: {
-    path: "./",
-    filename: "bundle.js"
+    path: path.join(__dirname, 'app', 'assets', 'javascripts'),
+    filename: "bundle.js",
+    devtoolModuleFilenameTemplate: '[resourcePath]',
+    devtoolFallbackModuleFilenameTemplate: '[resourcePath]?[hash]'
   },
   module: {
     loaders: [
@@ -59,8 +63,14 @@ module.exports = {
         }
       }
     ]
+  },
+  devtool: 'source-maps',
+  resolve: {
+    extensions: ["", ".js", ".jsx" ]
   }
 };
+
+
 ```
 Here is my build so far:
 
