@@ -1,0 +1,12 @@
+---
+:api_key: 8ee822187d1c6fe9677073365fb58957
+:password: e2420d26a068b549aece3a4298429c3c
+:store: nivitashop.myshopify.com
+:theme_id: 
+:whitelist_files:
+- layout/
+- assets/
+- config/
+- snippets/
+- templates/
+- locales/

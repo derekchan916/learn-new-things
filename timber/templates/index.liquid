@@ -1,0 +1,46 @@
+{% comment %}
+
+  This is the homepage of your site.
+
+  More info on global variables (available on all templates):
+    - http://docs.shopify.com/themes/liquid-variables/global
+{% endcomment %}
+
+{% if settings.home_section_1 != blank %}
+  {% include settings.home_section_1 %}
+{% endif %}
+
+{% if settings.home_section_2 != blank %}
+  {% unless settings.home_section_1 == 'slider' %}
+    <hr>
+  {% endunless %}
+  {% include settings.home_section_2 %}
+{% endif %}
+<hr>
+<div class="steps-container" style="min-width:850; text-align:center; margin-top:40px;">
+  <span style="font-size:25px; color:#403f3f;">How this works</span>
+  <div>
+    <div class="step" style="display:inline-block; padding:20px; min-width:210px">
+      <div class="icon" style="width:100px; margin:auto;"><img src="//cdn.shopify.com/s/files/1/1226/1372/files/noun_101939_cc.svg?12212136980442819365" alt="icon-checkout" style="width:100%;"></div>
+      <div class="text">Order soup ingredients</div>
+    </div>
+    <div class="step" style="display:inline-block; padding:20px; min-width:210px">
+      <div class="icon" style="width:100px; margin:auto;"><img src="//cdn.shopify.com/s/files/1/1226/1372/files/noun_105053_cc.svg?12212136980442819365" alt="icon-cook" style="width:100%;"></div>
+      <div class="text">Boil with water</div>
+    </div>
+    <div class="step" style="display:inline-block; padding:20px; min-width:210px">
+      <div class="icon" style="width:100px; margin:auto;"><img src="//cdn.shopify.com/s/files/1/1226/1372/files/noun_101314_cc.svg?6013501841806421028" alt="icon-soup" style="width:100%;"></div>
+      <div class="text">Kick back and enjoy</div>
+    </div>
+  </div>
+</div>
+
+{% if settings.home_section_3 != blank %}
+  <hr>
+  {% include settings.home_section_3 %}
+{% endif %}
+
+{% if settings.home_section_4 != blank %}
+  <hr>
+  {% include settings.home_section_4 %}
+{% endif %}

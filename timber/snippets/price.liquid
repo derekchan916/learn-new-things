@@ -1,0 +1,19 @@
+{% assign price_numeric = price | times: 1 %}
+{% if price_numeric < 0 %}
+  {% comment %} Prefix the price with minus sign since it's a discount {% endcomment %}
+  -
+  {% assign positive_price = price_numeric | times: -1 %}
+{% else %}
+  {% assign positive_price = price_numeric %}
+{% endif %}
+{% if shop.money_format == '${{amount}}' %}
+  {% assign formatted_price = positive_price | money | remove: '.00' | replace: '$','<sup>$</sup>'%}</sup>
+{% elsif shop.money_format == '${{amount_with_comma_separator}}' %}
+  {% assign formatted_price = positive_price | money | remove: ',00' | replace: '$','<sup>$</sup>'%}</sup>
+{% elsif shop.money_format == '${{amount_no_decimals}}' %}
+  {% assign formatted_price = positive_price | money | remove: '.00' | replace: '$', '<sup>$</sup>'%}
+{% else %}
+  {% assign formatted_price = positive_price | money %}
+{% endif %}
+
+{{ formatted_price }}
