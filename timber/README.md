@@ -86,7 +86,7 @@ License
 Timber is released under the [MIT License](LICENSE).
 
 [1]: http://docs.shopify.com/themes
-[2]: https://github.com/Shopify/shopify_theme
+[2]: https://github.com/Shopify/shopify_theme - theme commands
 [3]: http://apps.shopify.com/desktop-theme-editor
 [4]: http://cheat.markdunkley.com
 [5]: https://www.shopify.com/retailtour
