@@ -1,4 +1,3 @@
-<!-- /snippets/comment.liquid -->
 {% comment %}
 
   This snippet generates the structure of a comment.
@@ -10,14 +9,18 @@
 
 {% endcomment %}
 
-<div class="comment">
-  <div class="rte">
+<div class="comment grid--full">
+
+  <div class="comment__details grid-item one-fifth">
+    {% assign comment_date = comment.created_at | date: '%b %d, %Y' %}
+    <p class="comment__author">
+      {{ comment.author }}
+    </p>
+    <p class="comment__date">
+      {{ comment_date }}
+    </p>
+  </div>
+  <div class="comment__content grid-item four-fifths rte">
     {{ comment.content }}
   </div>
-
-  <span>
-    {% capture author %}<strong>{{ comment.author }}</strong>{% endcapture %}
-    {% capture date %}<strong><time datetime="{{ comment.created_at | date: '%Y-%m-%d' }}">{{ comment.created_at | date: format: 'month_day_year' }}</time></strong>{% endcapture %}
-    {{ 'blogs.article.comment_meta_html' | t: author: author, date: date }}
-  </span>
 </div>

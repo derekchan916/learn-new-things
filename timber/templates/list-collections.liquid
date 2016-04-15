@@ -1,4 +1,3 @@
-<!-- /templates/list-collections.liquid -->
 {% comment %}
 
   This page represents the /collections and /products pages.
@@ -9,33 +8,35 @@
 
 {% endcomment %}
 
-{% include 'breadcrumb' %}
-
 {% comment %}
-  Loop through each collection, except 'frontpage'
+  Custom order collections by 'all-collections' linklist
 {% endcomment %}
-{% for collection in collections %}
+<!-- list-collections.liquid -->
+<div class="grid--full collection-list">
+  <div class="grid-item one-whole collection-list__header section-header text-center">
+    <p class="h1">{{ "collections.title" | t }}</p>
+  </div>
+  <div class="grid-item text-center medium--three-quarters push--medium--one-eighth large--three-quarters push--large--one-eighth">
+    {% for link in linklists.all-collections.links %}
 
-  {% unless collection.handle == 'frontpage' %}
+      {% assign collection = link.object %}
+      {% include 'collection-grid-item' %}
 
-    {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
+    {% else %}
+      {% comment %}
+        Default collection order
+      {% endcomment %}
+      {% for collection in collections %}
 
-    <div class="section-header">
-      <p class="h1 section-header__left">{{ collection_title }}</p>
-      <div class="section-header__right">
-        <a href="{{ collection.url }}" title="{{ 'collections.general.link_title' | t: title: collection_title }}">More {{ collection_title }} &rsaquo;</a>
-      </div>
-    </div>
+        {% unless collection.handle == 'frontpage' %}
+          {% include 'collection-grid-item' %}
+        {% endunless %}
 
-    <div class="grid-uniform">
-      {% for product in collection.products limit:5 %}
-        {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
-        {% include 'product-grid-item' %}
       {% endfor %}
-    </div>
 
-    {% unless forloop.last %}<hr>{% endunless %}
+    {% endfor %}
+  </div>
+</div>
 
-  {% endunless %}
 
-{% endfor %}
+
