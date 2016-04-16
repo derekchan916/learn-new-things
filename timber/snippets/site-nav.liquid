@@ -11,44 +11,48 @@ More info on dropdowns:
 - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
 {% endcomment %}
 <!-- site-nav.liquid -->
-<a href="/" itemprop="url">
-  <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
-</a>
-<ul class="site-nav" id="accessibleNav">
-  {% for link in linklists.main-menu.links %}
-    {% assign child_list_handle = link.title | handleize %}
-    {% if linklists[child_list_handle].links != blank %}
-      <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
-        <a href="{{ link.url }}">{{ link.title }}</a>
-        <ul class="site-nav--dropdown">
-          {% for childlink in linklists[child_list_handle].links %}
-            <li {% if childlink.active %}class="site-nav--active"{% endif %}><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
-          {% endfor %}
-        </ul>
-      </li>
-    {% else %}
-      <li {% if link.active %}class="site-nav--active"{% endif %}>
-        <a href="{{ link.url }}">{{ link.title }}</a>
-      </li>
-    {% endif %}
-  {% endfor %}
+<div class="nav-bar-main">
+	<a class="logo" href="/" itemprop="url">
+		<img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+	</a>
+	<ul class="site-nav2" id="accessibleNav">
+		{% for link in linklists.main-menu.links %}
+			{% assign child_list_handle = link.title | handleize %}
+			{% if linklists[child_list_handle].links != blank %}
+				<li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
+					<a href="{{ link.url }}">{{ link.title }}</a>
+					<ul class="site-nav--dropdown">
+						{% for childlink in linklists[child_list_handle].links %}
+						<li {% if childlink.active %}class="site-nav--active"{% endif %}><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
+						{% endfor %}
+					</ul>
+				</li>
+			{% else %}
+				<li class="nav-btn" {% if link.active %}class="site-nav--active"{% endif %}>
+					<a href="{{ link.url }}">{{ link.title }}</a>
+				</li>
+			{% endif %}
+		{% endfor %}
 
-  {% if shop.customer_accounts_enabled %}
-    {% if customer %}
-      <li class="customer-navlink medium--hide large--hide"><a href="/account">{{ 'layout.customer.view_account' | t }}</a></li>
-      <li class="customer-navlink medium--hide large--hide">{{ 'layout.customer.log_out' | t | customer_logout_link }}</li>
-    {% else %}
-      <li class="customer-navlink medium--hide large--hide">{{ 'layout.customer.sign_in' | t | customer_login_link }}</li>
-      <li class="customer-navlink medium--hide large--hide">{{ 'layout.customer.create_account' | t | customer_register_link }}</li>
-    {% endif %}
-  {% endif %}
-</ul>
-<a href="/cart" class="cart-toggle mobile-nav-bar__link">
-  {{ 'layout.cart.title' | t }}
-  <span class="cart-icon-wrapper">
-	<span class="icon-fallback-text">
-	  <span class="icon icon-cart" aria-hidden="true"></span>
-	</span>
-	<span class="cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
-  </span>
-</a>
+		{% if shop.customer_accounts_enabled %}
+			{% if customer %}
+				<li class="customer-navlink medium--hide large--hide"><a href="/account">{{ 'layout.customer.view_account' | t }}</a></li>
+				<li class="customer-navlink medium--hide large--hide">{{ 'layout.customer.log_out' | t | customer_logout_link }}</li>
+			{% else %}
+				<li class="customer-navlink medium--hide large--hide">{{ 'layout.customer.sign_in' | t | customer_login_link }}</li>
+				<li class="customer-navlink medium--hide large--hide">{{ 'layout.customer.create_account' | t | customer_register_link }}</li>
+			{% endif %}
+		{% endif %}
+		<li class="nav-btn">
+			<a href="/cart" class="cart-toggle mobile-nav-bar__link" style="display:inline-block;">
+			  {{ 'layout.cart.title' | t }}
+			  <span class="cart-icon-wrapper">
+				<span class="icon-fallback-text">
+				  <span class="icon icon-cart" aria-hidden="true"></span>
+				</span>
+				<span class="cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+			  </span>
+			</a>
+		</li>
+	</ul>
+</div>

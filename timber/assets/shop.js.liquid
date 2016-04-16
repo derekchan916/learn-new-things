@@ -253,11 +253,11 @@ timber.responsiveNav = function () {
   timber.cache.$window.on('resize', function () {
     afterResize(function(){
       // Replace original nav items and remove more link
-      timber.cache.$navigation.append($('.js-more-menu--list').html());
-      $('.js-more-menu').remove();
-      timber.alignMenu();
-      timber.accessibleNav();
-    }, 200, 'uniqueID');
+    //   timber.cache.$navigation.append($('.js-more-menu--list').html());
+    //   $('.js-more-menu').remove();
+    //   timber.alignMenu();
+    //   timber.accessibleNav();
+    // }, 200, 'uniqueID');
   });
   timber.alignMenu();
   timber.accessibleNav();
@@ -765,7 +765,7 @@ timber.equalHeights = function () {
   if (timber.cache.$carousel) {
     timber.carouselEqualHeights();
   }
-  
+
   var $gridImageArray = [];
   var gridContainerLength = timber.cache.$gridContainer.length;
 

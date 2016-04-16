@@ -72,11 +72,11 @@
   Add the page template as a class for easy page or template specific styling.
 {% endcomment %}
 
-<nav class="wrapper nav-bar" role="navigation">
+<nav class="wrapper nav-bar2" role="navigation">
   {% include 'site-nav' %}
 </nav>
 
-<body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}{% if settings.home_section_1 == 'slider' and template == 'index' %}attached-slider {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
+<!-- <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}{% if settings.home_section_1 == 'slider' and template == 'index' %}attached-slider {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}" >
 
   <header class="site-header" role="banner">
       <div class="wrapper">
@@ -169,7 +169,7 @@
           </div>
         </div>
       </div>
-  </header>
+  </header> -->
   <hr class="visible--small hr--header">
 
 

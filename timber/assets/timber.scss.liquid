@@ -232,6 +232,12 @@ $socialIconFontStack: 'icons';
   *zoom: 1;
 }
 
+.group:after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
 @mixin clearfix() {
   &:after {
     content: "";
@@ -764,7 +770,7 @@ body {
   @include clearfix();
   // max-width: $siteWidth;
   margin: 0 auto;
-  padding: 0 $gutter;
+  // padding: 0 $gutter;
 }
 
 .main-content {
@@ -2362,47 +2368,38 @@ $shareBorderColor: $colorBorder;
   #Site Nav and Dropdowns
 ==============================================================================*/
 .nav-bar2 {
-	top: 110%;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: $colorNav;
-    font-family: $accentFontStack;
+	background-color: $colorNav;
+	font-family: $accentFontStack;
 
 	@media (min-width: $site-width-mobile-large) {
 		.nav-bar {
-		  margin: 0 auto;
-
-		  .attached-slider & {
-			border-bottom-right-radius: 0;
-			border-bottom-left-radius: 0;
-		  }
-		}
-
-		.site-nav {
-		  text-align: center;
-		  white-space: nowrap;
-		  margin-left: -$gutter / 2;
-
-		  & > li {
-			position: relative;
-			display: inline-block;
-		  }
-
-		  a {
-			white-space: nowrap;
-		  }
 		}
 	}
 
-	a {
-      color: $colorNavText;
-    }
+	.nav-bar-main {
+		width: 70%;
+		margin: 0 auto;
+		display: flex;
 
-    li {
-      margin: 0;
-    }
+		.logo {
+			flex-grow: 1;
+			img {
+				width: 100px;
+			}
+		}
+
+		.site-nav2 {
+			display: flex;
+			justify-content: flex-end;
+			flex-grow: 1;
+			
+			.nav-btn {
+				flex: 0 1 100px;
+			}
+		}
+	}
 }
+
 .nav-bar {
   top: 110%;
   bottom: 0;
