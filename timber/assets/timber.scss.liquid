@@ -56,6 +56,15 @@ $small: 480px;
 $medium: 768px;
 $large: 769px;
 
+$gutter-width: 10px;
+$site-width-mobile: 320px;
+$site-width-mobile-new: 360px; //Iphone 6 and new androids
+$site-width-mobile-large: 568px; //iphone 5 in landscape
+$site-width-small-portrait: 768px; // tablets in portrait and 7 inch class tablets
+$site-width-small: 960px; // tablets and older laptops
+$site-width-medium: 1200px;
+$site-width-large: 1500px;
+
 $postSmall: $small + $viewportIncrement;
 $preMedium: $medium - $viewportIncrement;
 $preLarge: $large - $viewportIncrement;
@@ -753,7 +762,7 @@ body {
 
 .wrapper {
   @include clearfix();
-  max-width: $siteWidth;
+  // max-width: $siteWidth;
   margin: 0 auto;
   padding: 0 $gutter;
 }
@@ -2352,6 +2361,48 @@ $shareBorderColor: $colorBorder;
 /*============================================================================
   #Site Nav and Dropdowns
 ==============================================================================*/
+.nav-bar2 {
+	top: 110%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $colorNav;
+    font-family: $accentFontStack;
+
+	@media (min-width: $site-width-mobile-large) {
+		.nav-bar {
+		  margin: 0 auto;
+
+		  .attached-slider & {
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
+		  }
+		}
+
+		.site-nav {
+		  text-align: center;
+		  white-space: nowrap;
+		  margin-left: -$gutter / 2;
+
+		  & > li {
+			position: relative;
+			display: inline-block;
+		  }
+
+		  a {
+			white-space: nowrap;
+		  }
+		}
+	}
+
+	a {
+      color: $colorNavText;
+    }
+
+    li {
+      margin: 0;
+    }
+}
 .nav-bar {
   top: 110%;
   bottom: 0;
@@ -2409,7 +2460,8 @@ $shareBorderColor: $colorBorder;
 /*================ Small screen nav styles ================*/
 @include at-query ($max, $small) {
   .nav-bar {
-    background-color: #333;
+	background-color: red;
+    // background-color: #333;
     margin: 0 auto;
     position: fixed;
     z-index: 2000;
@@ -2465,6 +2517,7 @@ $shareBorderColor: $colorBorder;
 /*================ Medium screen size only ================*/
 @include at-query (null, $postSmall, $medium) {
   .nav-bar {
+	  background-color: green;
     .show-nav & {
       top: $mobileNavBarHeight;
       bottom: 0;
@@ -2473,10 +2526,10 @@ $shareBorderColor: $colorBorder;
 }
 
 /*================ Large screen bar navigation ================*/
-@include at-query ($min, $large) {
+@media (min-width: $site-width-small) {
+// @include at-query ($min, $large) {
   .nav-bar {
     margin: 0 auto;
-    border-radius: 3px;
 
     .attached-slider & {
       border-bottom-right-radius: 0;
@@ -2498,8 +2551,8 @@ $shareBorderColor: $colorBorder;
       white-space: nowrap;
     }
   }
+// }
 }
-
 /*================ Dropdowns ================*/
 .site-nav--dropdown {
   visibility: hidden;

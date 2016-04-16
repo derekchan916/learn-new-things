@@ -4,15 +4,18 @@
   More info on linklists:
     - http://docs.shopify.com/themes/liquid-variables/linklists
 {% endcomment %}
+{% comment %}
+Create a dropdown menu by naming a linklist the same as a link in the parent nav
+
+More info on dropdowns:
+- http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
+{% endcomment %}
 <!-- site-nav.liquid -->
+<a href="/" itemprop="url">
+  <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+</a>
 <ul class="site-nav" id="accessibleNav">
   {% for link in linklists.main-menu.links %}
-    {% comment %}
-      Create a dropdown menu by naming a linklist the same as a link in the parent nav
-
-      More info on dropdowns:
-        - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
-    {% endcomment %}
     {% assign child_list_handle = link.title | handleize %}
     {% if linklists[child_list_handle].links != blank %}
       <li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
@@ -39,7 +42,13 @@
       <li class="customer-navlink medium--hide large--hide">{{ 'layout.customer.create_account' | t | customer_register_link }}</li>
     {% endif %}
   {% endif %}
-
-
-
 </ul>
+<a href="/cart" class="cart-toggle mobile-nav-bar__link">
+  {{ 'layout.cart.title' | t }}
+  <span class="cart-icon-wrapper">
+	<span class="icon-fallback-text">
+	  <span class="icon icon-cart" aria-hidden="true"></span>
+	</span>
+	<span class="cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+  </span>
+</a>
