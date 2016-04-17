@@ -50,12 +50,6 @@
 /*============================================================================
   #Breakpoint and Grid Variables
 ==============================================================================*/
-$viewportIncrement: 1px;
-
-$small: 480px;
-$medium: 768px;
-$large: 769px;
-
 $gutter-width: 10px;
 $site-width-mobile: 320px;
 $site-width-mobile-new: 360px; //Iphone 6 and new androids
@@ -64,6 +58,18 @@ $site-width-small-portrait: 768px; // tablets in portrait and 7 inch class table
 $site-width-small: 960px; // tablets and older laptops
 $site-width-medium: 1200px;
 $site-width-large: 1500px;
+
+$main-width-large: 1000px;
+
+$primary-color: #333333;
+$white-color: #ffffff;
+
+$viewportIncrement: 1px;
+
+$small: 480px;
+$medium: 768px;
+$large: 769px;
+
 
 $postSmall: $small + $viewportIncrement;
 $preMedium: $medium - $viewportIncrement;
@@ -2371,7 +2377,7 @@ $shareBorderColor: $colorBorder;
   #Site Nav and Dropdowns
 ==============================================================================*/
 .nav-bar2 {
-	background-color: $colorNav;
+	background-color: $primary-color;
 	font-family: $accentFontStack;
 
 	@media (min-width: $site-width-mobile-large) {
@@ -2380,30 +2386,31 @@ $shareBorderColor: $colorBorder;
 	}
 
 	.nav-bar-main {
-		width: 70%;
+		max-width: $main-width-large;
 		margin: 0 auto;
-		display: flex;
 		font-size: $nav-font-size;
-
-		.logo {
-			flex-grow: 1;
-			line-height: 45px;
-
-			img {
-				vertical-align: middle;
-				width: 100px;
-			}
-		}
 
 		.site-nav2 {
 			display: flex;
-			justify-content: flex-end;
-			flex-grow: 1;
+			justify-content: space-around;
 			margin: 0;
 
 			.nav-btn {
 				line-height: 45px;
-				flex: 0 1 100px;
+				margin-bottom: 0px;
+
+				a {
+					color: $white-color;
+				}
+
+				.logo {
+					line-height: 45px;
+
+					img {
+						vertical-align: middle;
+						width: 100px;
+					}
+				}
 			}
 		}
 	}
