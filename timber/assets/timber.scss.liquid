@@ -197,6 +197,9 @@ $headerFontStack: {{ header_family }};
 $headerFontWeight: {{ header_weight }};
 $headerFontSize: {{ settings.type_heading_size }};
 
+// Navigation for
+$nav-font-size: 16px;
+
 // Body Font
 $bodyFontStack: {{ base_family }};
 $baseFontSize: {{ settings.type_base_size }};
@@ -2380,10 +2383,14 @@ $shareBorderColor: $colorBorder;
 		width: 70%;
 		margin: 0 auto;
 		display: flex;
+		font-size: $nav-font-size;
 
 		.logo {
 			flex-grow: 1;
+			line-height: 45px;
+
 			img {
+				vertical-align: middle;
 				width: 100px;
 			}
 		}
@@ -2392,8 +2399,10 @@ $shareBorderColor: $colorBorder;
 			display: flex;
 			justify-content: flex-end;
 			flex-grow: 1;
-			
+			margin: 0;
+
 			.nav-btn {
+				line-height: 45px;
 				flex: 0 1 100px;
 			}
 		}
