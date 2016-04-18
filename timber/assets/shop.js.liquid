@@ -31,7 +31,9 @@ timber.cacheSelectors = function () {
 
     // Navigation
     $navigation         : $('#accessibleNav'),
-    $menuToggle         : $('.menu-toggle'),
+    // $menuToggle         : $('.menu-toggle'),
+	$menuToggle         : $('#menu-toggle'),
+	$navDropdown   		: $('#nav-dropdown'),
     $hasDropdownItem    : $('.site-nav--has-dropdown'),
     $mobileNav          : $('.mobile-nav--sticky'),
     $siteHeader         : $('.site-header'),
@@ -250,18 +252,19 @@ timber.accessibleNav = function () {
 };
 
 timber.responsiveNav = function () {
-  timber.cache.$window.on('resize', function () {
-    afterResize(function(){
-      // Replace original nav items and remove more link
-    //   timber.cache.$navigation.append($('.js-more-menu--list').html());
-    //   $('.js-more-menu').remove();
-    //   timber.alignMenu();
-    //   timber.accessibleNav();
-    // }, 200, 'uniqueID');
-  });
-  timber.alignMenu();
-  timber.accessibleNav();
-  timber.positionSubNav();
+	timber.cache.$window.on('resize', function () {
+		afterResize(function(){
+			timber.cache.$navDropdown.removeClass('show-dropdown');
+			//   Replace original nav items and remove more link
+			// timber.cache.$navigation.append($('.js-more-menu--list').html());
+			// $('.js-more-menu').remove();
+			timber.alignMenu();
+			timber.accessibleNav();
+		}, 200, 'uniqueID');
+	});
+	timber.alignMenu();
+	timber.accessibleNav();
+	timber.positionSubNav();
 };
 
 timber.alignMenu = function () {
@@ -305,29 +308,37 @@ timber.alignMenu = function () {
   }
 };
 
+// timber.toggleMenu = function () {
+//   timber.cache.$menuToggle.on('click', function() {
+//     timber.cache.$body.toggleClass('show-nav');
+//
+//     // Close ajax cart if open (keep selectors live, modal is inserted with JS)
+//     if ($('#ajaxifyModal').hasClass('is-visible')) {
+//       $('#ajaxifyModal').removeClass('is-visible');
+//       timber.cache.$body.addClass('show-nav');
+//     }
+//   });
+//
+//   // Open sub navs on small screens
+//   timber.cache.$hasDropdownItem.on('click touchend', function(evt) {
+//     if (timber.cache.$body.hasClass('show-nav')) {
+//       var $el = $(this);
+//
+//       if (!$el.hasClass('show-dropdown')) {
+//         evt.preventDefault();
+//         $el.addClass('show-dropdown');
+//       }
+//     }
+//   });
+// };
+
 timber.toggleMenu = function () {
-  timber.cache.$menuToggle.on('click', function() {
-    timber.cache.$body.toggleClass('show-nav');
+	timber.cache.$menuToggle.on('click', function(event){
+		event.preventDefault();
 
-    // Close ajax cart if open (keep selectors live, modal is inserted with JS)
-    if ($('#ajaxifyModal').hasClass('is-visible')) {
-      $('#ajaxifyModal').removeClass('is-visible');
-      timber.cache.$body.addClass('show-nav');
-    }
-  });
-
-  // Open sub navs on small screens
-  timber.cache.$hasDropdownItem.on('click touchend', function(evt) {
-    if (timber.cache.$body.hasClass('show-nav')) {
-      var $el = $(this);
-
-      if (!$el.hasClass('show-dropdown')) {
-        evt.preventDefault();
-        $el.addClass('show-dropdown');
-      }
-    }
-  });
-};
+		timber.cache.$navDropdown.toggleClass('show-dropdown');
+	})
+}
 
 timber.productPage = function (options) {
   var moneyFormat = options.moneyFormat,
