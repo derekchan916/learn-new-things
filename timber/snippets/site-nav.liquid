@@ -19,8 +19,8 @@ More info on dropdowns:
 			</a>
 		</li>
 		{% for link in linklists.main-menu.links %}
-			<!-- {% assign child_list_handle = link.title | handleize %}
-			{% if linklists[child_list_handle].links != blank %}
+			{% assign child_list_handle = link.title | handleize %}
+			<!-- {% if linklists[child_list_handle].links != blank %}
 				<li class="site-nav--has-dropdown{% if link.active %} site-nav--active{% endif %}" aria-haspopup="true">
 					<a href="{{ link.url }}">{{ link.title }}</a>
 					<ul class="site-nav--dropdown">
@@ -28,8 +28,8 @@ More info on dropdowns:
 						<li {% if childlink.active %}class="site-nav--active"{% endif %}><a href="{{ childlink.url }}">{{ childlink.title | escape }}</a></li>
 						{% endfor %}
 					</ul>
-				</li> -->
-			{% else %}
+				</li>
+			{% else %} -->
 				<li class="nav-btn" {% if link.active %}class="site-nav--active"{% endif %}>
 					<a href="{{ link.url }}">{{ link.title }}</a>
 				</li>
@@ -59,19 +59,32 @@ More info on dropdowns:
 	</ul>
 
 	<!-- for smaller screen sizes -->
-	<span id="menu-toggle" class="site-nav-dropdown2">
-		More
-		<ul id="nav-dropdown" class="nav-dropdown2">
-			{% for link in linklists.main-menu.links %}
-				<li class="nav-btn" {% if link.active %}class="site-nav--active"{% endif %}>
-					<a href="{{ link.url }}">{{ link.title }}</a>
-				</li>
-			{% endfor %}
-			<li class="nav-btn">
-				<a class="logo" href="/" itemprop="url">
-					<img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
-				</a>
-			</li>
-		</ul>
-	</span>
+	<ul class="site-nav-dropdown2">
+		<li id="menu-toggle" class="nav-btn site-nav-dropdown-btn">
+			More
+			<ul id="nav-dropdown" class="nav-dropdown2">
+				{% for link in linklists.main-menu.links %}
+					<li class="nav-btn" {% if link.active %}class="site-nav--active"{% endif %}>
+						<a href="{{ link.url }}">{{ link.title }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</li>
+		<li class="nav-btn">
+			<a class="logo" href="/" itemprop="url">
+				<img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+			</a>
+		</li>
+		<li class="nav-btn">
+			<a href="/cart" class="cart-toggle mobile-nav-bar__link" style="display:inline-block;">
+			  {{ 'layout.cart.title' | t }}
+			  <span class="cart-icon-wrapper">
+				<span class="icon-fallback-text">
+				  <span class="icon icon-cart" aria-hidden="true"></span>
+				</span>
+				<span class="cart-count{% if cart.item_count == 0 %} hidden-count{% endif %}">{{ cart.item_count }}</span>
+			  </span>
+			</a>
+		</li>
+	</ul>
 </div>

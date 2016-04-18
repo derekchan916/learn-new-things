@@ -2376,6 +2376,24 @@ $shareBorderColor: $colorBorder;
 /*============================================================================
   #Site Nav and Dropdowns
 ==============================================================================*/
+.nav-btn {
+	flex-basis: 100px;
+	line-height: 45px;
+	margin-bottom: 0px;
+
+	a {
+		color: $white-color;
+	}
+	.logo {
+		line-height: 45px;
+
+		img {
+			vertical-align: middle;
+			width: 100px;
+		}
+	}
+}
+
 .nav-bar2 {
 	background-color: $primary-color;
 	font-family: $accentFontStack;
@@ -2386,36 +2404,20 @@ $shareBorderColor: $colorBorder;
 		font-size: $nav-font-size;
 
 		.site-nav2 {
+			justify-content: space-around;
+			margin: 0;
+
 			@media (min-width: $site-width-mobile) {
 				display: none;
 			}
 			@media (min-width: $site-width-mobile-large) {
 				display: flex;
-			}
-			justify-content: space-around;
-			margin: 0;
-
-			.nav-btn {
-				line-height: 45px;
-				margin-bottom: 0px;
-
-				a {
-					color: $white-color;
-				}
-
-				.logo {
-					line-height: 45px;
-
-					img {
-						vertical-align: middle;
-						width: 100px;
-					}
-				}
 			}
 		}
 
 		.site-nav-dropdown2 {
-			position: relative;
+			display: flex;
+			justify-content: space-between;
 
 			@media (min-width: $site-width-mobile) {
 				display: flex;
@@ -2423,16 +2425,16 @@ $shareBorderColor: $colorBorder;
 			@media (min-width: $site-width-mobile-large) {
 				display: none;
 			}
+			.site-nav-dropdown-btn {
+				position: relative;
 
+				.nav-dropdown2 {
+					display: none;
 
-			.nav-dropdown2 {
-				display: none;
-
-				&.show-dropdown {
-					display: block;
+					&.show-dropdown {
+						display: flex;
+					}
 				}
-
-
 			}
 		}
 	}
