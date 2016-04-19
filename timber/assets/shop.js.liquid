@@ -59,11 +59,12 @@ timber.cacheSelectors = function () {
     $tagsDropdown       : $('#sortTags'),
 
     // Carousels
-    $carousel           : $('.carousel-items'),
-    $carouselItems      : $('.product-item'),
-    carouselItemsSmall  : 1,
-    carouselItemsMedium : 2,
-    carouselItemsLarge  : 3,
+    // $carousel           : $('.carousel-items'),
+    // $carouselItems      : $('.product-item'),
+    // carouselItemsSmall  : 1,
+    // carouselItemsMedium : 2,
+    // carouselItemsLarge  : 3,
+	$carousel           : $('#carousel'),
 
     //RTE
     $rte                : $('.rte')
@@ -558,7 +559,7 @@ timber.markActiveThumb = function ($el) {
 };
 
 timber.carousel = function () {
-
+	this.activeIdx = 0;
 }
 
 timber.blogFilters = function () {
