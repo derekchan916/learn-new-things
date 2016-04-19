@@ -86,6 +86,7 @@ timber.init = function () {
   timber.setBreakpoint();
   timber.positionSubNav();
   timber.rteBannerImages();
+  timber.carousel();
 
   // Bind Events
   timber.cache.$sortDropdown.on('change', timber.sortCollection);
@@ -555,6 +556,10 @@ timber.markActiveThumb = function ($el) {
     });
   }
 };
+
+timber.carousel = function () {
+
+}
 
 timber.blogFilters = function () {
   var path        = window.location.pathname,

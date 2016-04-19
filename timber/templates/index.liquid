@@ -16,6 +16,42 @@
   {% endunless %}
   {% include settings.home_section_2 %}
 {% endif %}
+
+
+{% assign slider_enabled = true %}
+
+<!-- <div class="homepage-slider grid--full">
+  <ul class="homepage-slider__slides owl-carousel grid-item one-whole">
+    {% for i in (1..6) %}
+      {% capture slide %}slide_{{ i }}{% endcapture %}
+      {% capture slide_link %}slide_{{ i }}_link{% endcapture %}
+      {% capture slide_img %}slide_{{ i }}.jpg{% endcapture %}
+      {% capture slide_alt %}slide_{{ i }}_alt.jpg{% endcapture %}
+      {% if settings[slide] %}
+        <li>
+          {% unless settings[slide_link] == blank %}
+          <a href="{{ settings[slide_link] }}" class="slide-link">
+            {{ slide_img | asset_url | img_tag: slide_alt }}
+          </a>
+          {% else %}
+            {{ slide_img | asset_url | img_tag: slide_alt }}
+          {% endunless %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div> -->
+
+<figure class="carousel-container">
+  <div class="carousel">
+    <ul class="active">
+      <li><img src="../assets/celadon.png" alt="Celadon"></li>
+      <li><img src="../assets/car_logo_PNG1667.png" alt="Volkswagen"></li>
+      <li><img src="../assets/car_logo_PNG1666.png" alt="Ford"></li>
+    </ul>
+  </div>
+</figure>
+
 <hr>
 <div class="steps-container" style="min-width:850; text-align:center; margin-top:40px;">
   <span style="font-size:25px; color:#403f3f;">How this works</span>

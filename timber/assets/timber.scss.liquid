@@ -45,6 +45,9 @@
   #Cart Page
   #Password Page
   #Search Page
+
+  V2
+  #Site Nav and Dropdowns
 ==============================================================================*/
 
 /*============================================================================
@@ -2376,70 +2379,6 @@ $shareBorderColor: $colorBorder;
 /*============================================================================
   #Site Nav and Dropdowns
 ==============================================================================*/
-.nav-btn {
-	flex-basis: 100px;
-	line-height: 45px;
-	margin-bottom: 0px;
-
-	a {
-		color: $white-color;
-	}
-	.logo {
-		line-height: 45px;
-
-		img {
-			vertical-align: middle;
-			width: 100px;
-		}
-	}
-}
-
-.nav-bar2 {
-	background-color: $primary-color;
-	font-family: $accentFontStack;
-
-	.nav-bar-main {
-		max-width: $main-width-large;
-		margin: 0 auto;
-		font-size: $nav-font-size;
-
-		.site-nav2 {
-			justify-content: space-around;
-			margin: 0;
-
-			@media (min-width: $site-width-mobile) {
-				display: none;
-			}
-			@media (min-width: $site-width-mobile-large) {
-				display: flex;
-			}
-		}
-
-		.site-nav-dropdown2 {
-			display: flex;
-			justify-content: space-between;
-
-			@media (min-width: $site-width-mobile) {
-				display: flex;
-			}
-			@media (min-width: $site-width-mobile-large) {
-				display: none;
-			}
-			.site-nav-dropdown-btn {
-				position: relative;
-
-				.nav-dropdown2 {
-					display: none;
-
-					&.show-dropdown {
-						display: flex;
-					}
-				}
-			}
-		}
-	}
-}
-
 .nav-bar {
   top: 110%;
   bottom: 0;
@@ -4411,4 +4350,77 @@ button::-moz-focus-inner {
   top: 0;
   right: 0;
   padding-top: 0;
+}
+
+//Site Nav and Dropdowns //site-nav.liquid
+.nav-btn {
+	flex-basis: 100px;
+	line-height: 45px;
+	margin-bottom: 0px;
+
+	a {
+		color: $white-color;
+	}
+	.logo {
+		line-height: 45px;
+
+		img {
+			vertical-align: middle;
+			width: 100px;
+		}
+	}
+}
+
+.nav-bar2 {
+	background-color: $primary-color;
+	font-family: $accentFontStack;
+
+	.nav-bar-main {
+		max-width: $main-width-large;
+		margin: 0 auto;
+		font-size: $nav-font-size;
+
+		.site-nav2 {
+			justify-content: space-around;
+			margin: 0;
+
+			@media (min-width: $site-width-mobile) {
+				display: none;
+			}
+			@media (min-width: $site-width-mobile-large) {
+				display: flex;
+			}
+		}
+
+		.site-nav-dropdown2 {
+			display: flex;
+			justify-content: space-between;
+
+			@media (min-width: $site-width-mobile) {
+				display: flex;
+			}
+			@media (min-width: $site-width-mobile-large) {
+				display: none;
+			}
+			.site-nav-dropdown-btn {
+				position: relative;
+
+				.nav-dropdown2 {
+					display: none;
+
+					&.show-dropdown {
+						display: flex;
+					}
+				}
+			}
+		}
+	}
+}
+
+//homepage carousel //slider.liquid
+.carousel-container {
+	height: 500px;
+	margin: 0 0 0 0;
+	background-color: green;
+	position: relative;
 }
