@@ -559,8 +559,62 @@ timber.markActiveThumb = function ($el) {
 };
 
 timber.carousel = function () {
+	this.$slides = timber.cache.$carousel.find("li");
 	this.activeIdx = 0;
+	this.transitioning = false;
+	this.$carouselNav = $("<nav></nav>");
+
+	this.slideTo(0);
+	this.buildNav();
+
+	timber.cache.$carousel.on("click", "button", this.clickButton.bind(this));
+	timber.cache.$carousel.on("click", "span", this.clickNav.bind(this));
 }
+
+
+timber.clickButton = function (event) {
+	this.slide(parseInt($(event.currentTarget).attr("data-dir")));
+};
+
+timber.clickNav = function (event) {
+  this.slideTo($(event.currentTarget).index());
+};
+
+timber.slide = function (dir) {
+	this.slideTo((this.activeIdx + dir + this.$slides.length) % this.$slides.length);
+};
+
+timber.slideTo = function (newIdx) {
+	if (newIdx == this.activeIdx) {
+		return;
+	}
+
+	this.$slides.removeClass("is-previous");
+
+	this.$slides.eq(this.activeIdx)
+		.removeClass("is-active")
+		.addClass("is-previous");
+
+	this.$slides.eq(newIdx).addClass("is-active");
+	this.activeIdx = newIdx;
+	this.updateNav();
+}
+
+timber.buildNav = function () {
+	this.$slides.each(function (){
+		this.$carouselNav.append("<span></span>");
+	}.bind(this));
+
+	timber.cache.$carousel.append(this.$carouselNav);
+	this.updateNav();
+};
+
+timber.updateNav = function () {
+	this.$carouselNav.children()
+		.removeClass("is-current")
+		.eq(this.activeIdx)
+		.addClass("is-current");
+};
 
 timber.blogFilters = function () {
   var path        = window.location.pathname,
