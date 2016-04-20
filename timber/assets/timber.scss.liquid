@@ -68,6 +68,9 @@ $primary-color: #333333;
 $gray-contrast: #777777;
 $white-color: #ffffff;
 
+//fonts
+$primary-title-color: #403f3f;
+
 $viewportIncrement: 1px;
 
 $small: 480px;
@@ -271,6 +274,12 @@ button {
 	content: "";
 	display: block;
 	clear: both;
+}
+
+.title {
+	margin: 10px 0;
+	font-size: 25px;
+	color: $primary-title-color;
 }
 
 @mixin clearfix() {
@@ -4517,6 +4526,48 @@ button::-moz-focus-inner {
 			&.is-current {
 				background: $primary-color;
 			}
+		}
+	}
+}
+
+//homepage blurb
+.homepage-blurb {
+	margin: 20px auto;
+	padding: 0 30px;
+	text-align: center;
+	color: $primary-title-color;
+	@media (min-width: $site-width-small) {
+		width: $main-width-large;
+	}
+	.first {
+		display: block;
+	}
+	.second {
+		margin-top: 5px;
+		font-size: 16px;
+		display: block;
+	}
+	.third {
+		margin-top: 10px;
+		font-size: 20px;
+		display: block;
+		font-weight: bold;
+	}
+}
+
+//how this works
+.steps-container {
+	min-width: 850;
+	text-align: center;
+	margin-top: 40px;
+	.step {
+		display: inline-block;
+		padding: 20px;
+		min-width: 210px;
+
+		.icon {
+			width: 100px;
+			margin: auto;
 		}
 	}
 }
