@@ -81,8 +81,14 @@ Additional resources
 - [Retail Tours][5]: Sign up for a workshop in a city near you to learn all things Shopify.
 - Need more help? Ask a question in our [Design Forums][6].
 
-Icons & Fonts
+Icons
 ---------------------
+- Go to [Icomoon](https://icomoon.io)
+- Click on "Import Icons" at the top and find the file assets/icons.json
+- Add the icon you want inside, change the name, make sure you turn off the color
+- Click "Generate Font" in the bottom and download the file
+- Replace the files assets/icons.eot, icons.svg, icons.ttf, icons.woff
+- Copy and past the style.css content into timber.scss.liquid
 
 
 License
