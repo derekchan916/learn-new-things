@@ -81,6 +81,10 @@ Additional resources
 - [Retail Tours][5]: Sign up for a workshop in a city near you to learn all things Shopify.
 - Need more help? Ask a question in our [Design Forums][6].
 
+Icons & Fonts
+---------------------
+
+
 License
 ---------------------
 Timber is released under the [MIT License](LICENSE).
