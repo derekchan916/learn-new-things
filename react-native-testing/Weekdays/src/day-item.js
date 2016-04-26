@@ -20,7 +20,7 @@ class DayItem extends Component {
 		}
 	};
 	color() {
-		var opacity = 1 / this.props.daysUntil;
+		var opacity = 1 / (this.props.daysUntil + 0.1);
 		return 'rgba(0, 0, 0, ' + opacity + ')';
 	};
 	fontWeight() {
