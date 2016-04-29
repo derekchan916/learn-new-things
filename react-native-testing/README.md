@@ -13,6 +13,7 @@ apps:
 minutes-seconds-milliseconds -> time formatter
 moment -> current days
 lodash -> capitalize
+firebase
 
 Tutorials for firebase
 https://www.firebase.com/blog/2016-01-20-tutorial-firebase-react-native.html
