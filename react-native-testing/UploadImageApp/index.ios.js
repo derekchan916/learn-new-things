@@ -45,6 +45,26 @@ class UploadImageApp extends Component {
 		);
 	}
 
+	_renderImage(asset) {
+		const imageSize = 150;
+		const imageStyle = [styles.image, {width: imageSize, height: imageSize}];
+		return (
+			<TouchableOpacity key={asset}>
+				<View style={styles.row}>
+					<Image
+						source={asset.node.image}
+						style={imageStyle}
+					/>
+					<View style={styles.info}>
+						<Text style={styles.url}>{asset.node.image.uri}</Text>
+						<Text>{asset.node.group_name}</Text>
+						<Text>{new Date(asset.node.timestamp).toString()}</Text>
+					</View>
+				</View>
+			</TouchableOpacity>
+		);
+	}
+
 	loadAsset(asset){
 		if (this.props.navigator) {
 			this.props.navigator.push({
@@ -54,29 +74,6 @@ class UploadImageApp extends Component {
 				passProps: { asset: asset },
 			});
 		}
-	}
-
-	_renderImage(asset) {
-		const imageSize = 150;
-		const imageStyle = [styles.image, {width: imageSize, height: imageSize}];
-		const location = asset.node.location.longitude ?
-		JSON.stringify(asset.node.location) : 'Unknown location';
-		return (
-			<TouchableOpacity key={asset} onPress={(asset) => loadAsset(asset) }>
-				<View style={styles.row}>
-					<Image
-						source={asset.node.image}
-						style={imageStyle}
-					/>
-					<View style={styles.info}>
-						<Text style={styles.url}>{asset.node.image.uri}</Text>
-						<Text>{location}</Text>
-						<Text>{asset.node.group_name}</Text>
-						<Text>{new Date(asset.node.timestamp).toString()}</Text>
-					</View>
-				</View>
-			</TouchableOpacity>
-		);
 	}
 
 	_onSliderChange(value) {
