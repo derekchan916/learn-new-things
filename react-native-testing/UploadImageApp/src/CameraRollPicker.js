@@ -18,9 +18,8 @@ class CameraRollPicker extends Component {
 	constructor() {
 		super();
 		this.state = {
-			imageSource: null,
 			dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
-			imageSourceArr: ['wass', 'asdf', 'fdaf', 'bad', 'versace', 'what']
+			imageSourceArr: [null]
 		}
 	}
 
@@ -30,7 +29,7 @@ class CameraRollPicker extends Component {
 		})
 	}
 
-	selectPhotoTapped() {
+	selectPhotoTapped(imgId) {
 		const options = {
 			title: 'Photo Picker',
 			takePhotoButtonTitle: 'Take Photo',
@@ -59,17 +58,24 @@ class CameraRollPicker extends Component {
 				console.log('User tapped custom button: ', response.customButton);
 			}
 			else {
-				//const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
-				const source = {uri: response.uri.replace('file://', ''), isStatic: true};
-
-				this.setState({ imageSource: source });
+				const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+				// const source = {uri: response.uri.replace('file://', ''), isStatic: true};
+				var localImageArray = this.state.imageSourceArr.slice();
+				this.setState({
+					imageSourceArr: localImageArray
+									.slice(0, localImageArray.length -1 )
+									.concat(source, localImageArray[localImageArray.length - 1])
+				 });
 			}
+			this.setState({
+				dataSource: this.state.dataSource.cloneWithRows(this.state.imageSourceArr)
+			})
 		});
 	}
 
-	removeImage(rowData) {
+	removeImage(imgId) {
 		this.setState({
-			imageSourceArr : this.state.imageSourceArr.filter((_, i) => i !== 3),
+			imageSourceArr : this.state.imageSourceArr.filter((_, i) => i !== imgId),
 			dataSource: this.state.dataSource.cloneWithRows(this.state.imageSourceArr)
 		})
 	}
@@ -79,22 +85,22 @@ class CameraRollPicker extends Component {
 			<View>
 				<ListView contentContainerStyle={styles.list}
 			        dataSource={this.state.dataSource}
-			        renderRow={(rowData) => this.renderRow(rowData)}
+			        renderRow={(rowData, sectionID, rowID) => this.renderRow(rowData, sectionID, rowID)}
 				/>
 			</View>
 		)
 	}
 
-	renderRow(rowData) {
+	renderRow(rowData: string, sectionID: number, rowID: number) {
 		return (
 			<View>
-				<TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+				<TouchableOpacity onPress={() => this.selectPhotoTapped(parseInt(rowID))}>
 					<View style={[styles.image, styles.imageContainer]}>
-						{ this.state.imageSource === null ? <Text>+</Text> :
-							<Image style={styles.image} source={this.state.imageSource} />
+						{ rowData === null ? <Text>+</Text> :
+							<Image style={styles.image} source={rowData.imageSource} />
 						}
 					</View>
-				<Text onPress={() => this.removeImage(rowData)}>X</Text>
+				<Text onPress={() => this.removeImage(parseInt(rowID))}>X</Text>
 				</TouchableOpacity>
 			</View>
 		)
@@ -114,7 +120,6 @@ const styles = StyleSheet.create({
 		height: 100
 	},
 	list: {
-        justifyContent: 'center',
 		alignItems: 'center',
         flexDirection: 'row',
         flexWrap: 'wrap'
