@@ -24,6 +24,7 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8F4B32A31CE4F02C0063588D /* libRNUploader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4B32A21CE4F0000063588D /* libRNUploader.a */; };
 		8F4B32AA1CE5176E0063588D /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4B32A91CE517660063588D /* libRCTCameraRoll.a */; };
+		8F4B32B41CE63B1A0063588D /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F4B32B31CE63B030063588D /* libRNImagePicker.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +119,13 @@
 			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
 			remoteInfo = RCTCameraRoll;
 		};
+		8F4B32B21CE63B030063588D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8F4B32AE1CE63B030063588D /* RNImagePicker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 014A3B5C1C6CF33500B6D375;
+			remoteInfo = RNImagePicker;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +152,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8F4B32931CE4F0000063588D /* RNUploader.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNUploader.xcodeproj; path = "../node_modules/react-native-uploader/RNUploader/RNUploader.xcodeproj"; sourceTree = "<group>"; };
 		8F4B32A41CE517660063588D /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
+		8F4B32AE1CE63B030063588D /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +167,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F4B32B41CE63B1A0063588D /* libRNImagePicker.a in Frameworks */,
 				8F4B32AA1CE5176E0063588D /* libRCTCameraRoll.a in Frameworks */,
 				8F4B32A31CE4F02C0063588D /* libRNUploader.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -282,6 +292,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				8F4B32AE1CE63B030063588D /* RNImagePicker.xcodeproj */,
 				8F4B32A41CE517660063588D /* RCTCameraRoll.xcodeproj */,
 				8F4B32931CE4F0000063588D /* RNUploader.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -339,6 +350,14 @@
 			isa = PBXGroup;
 			children = (
 				8F4B32A91CE517660063588D /* libRCTCameraRoll.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8F4B32AF1CE63B030063588D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8F4B32B31CE63B030063588D /* libRNImagePicker.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -454,6 +473,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 8F4B32AF1CE63B030063588D /* Products */;
+					ProjectRef = 8F4B32AE1CE63B030063588D /* RNImagePicker.xcodeproj */;
+				},
+				{
 					ProductGroup = 8F4B32941CE4F0000063588D /* Products */;
 					ProjectRef = 8F4B32931CE4F0000063588D /* RNUploader.xcodeproj */;
 				},
@@ -549,6 +572,13 @@
 			fileType = archive.ar;
 			path = libRCTCameraRoll.a;
 			remoteRef = 8F4B32A81CE517660063588D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8F4B32B31CE63B030063588D /* libRNImagePicker.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNImagePicker.a;
+			remoteRef = 8F4B32B21CE63B030063588D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

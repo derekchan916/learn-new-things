@@ -17,9 +17,9 @@ const CameraRollPicker = require('./src/CameraRollPicker')
 class UploadImageApp extends Component {
 	render() {
 		return (
-			<UploadImage />
+			<CameraRollPicker />
 		);
 	}
 }
 
-AppRegistry.registerComponent('UploadImageApp', () => UploadImage);
+AppRegistry.registerComponent('UploadImageApp', () => UploadImageApp);
