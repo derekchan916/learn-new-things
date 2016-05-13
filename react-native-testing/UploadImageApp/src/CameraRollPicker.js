@@ -61,6 +61,7 @@ class CameraRollPicker extends Component {
 				const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
 				// const source = {uri: response.uri.replace('file://', ''), isStatic: true};
 				var localImageArray = this.state.imageSourceArr.slice();
+				//need to do check if the item is null, if it is then add item, if it isnt then replace.
 				this.setState({
 					imageSourceArr: localImageArray
 									.slice(0, localImageArray.length -1 )
