@@ -7,8 +7,7 @@ const {
 	View,
 	PixelRatio,
 	TouchableOpacity,
-	Image,
-	Platform
+	Image
 } = React;
 
 const ImagePickerManager = require('NativeModules').ImagePickerManager;
@@ -17,7 +16,7 @@ class CameraRollPicker extends Component {
 	constructor() {
 		super();
 		this.state = {
-			avatarSource: null
+			imageSource: null
 		}
 	}
 
@@ -25,7 +24,10 @@ class CameraRollPicker extends Component {
 		const options = {
 			title: 'Photo Picker',
 			takePhotoButtonTitle: 'Take Photo...',
-			chooseFromLibraryButonTitle: 'Choose from Library...',
+			chooseFromLibraryButtonTitle: 'Choose from Library...',
+			customButtons: {
+				'Choose from Facebook...': 'fbImage',
+			},
 			quality: 0.5,
 			maxWidth: 300,
 			maxHeight: 300,
@@ -37,28 +39,21 @@ class CameraRollPicker extends Component {
 
 		ImagePickerManager.showImagePicker(options, (response) => {
 			console.log('Response = ', response);
-
 			if (response.didCancel) {
-			console.log('User cancelled photo picker');
+				console.log('User cancelled photo picker');
 			}
 			else if (response.error) {
-			console.log('ImagePickerManager Error: ', response.error);
+				console.log('ImagePickerManager Error: ', response.error);
 			}
 			else if (response.customButton) {
-			console.log('User tapped custom button: ', response.customButton);
+				console.log('User tapped custom button: ', response.customButton);
 			}
 			else {
-				// You can display the image using either:
 				//const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
-				var source;
-				if (Platform.OS === 'android') {
-					source = {uri: response.uri, isStatic: true};
-				} else {
-					source = {uri: response.uri.replace('file://', ''), isStatic: true};
-				}
+				const source = {uri: response.uri.replace('file://', ''), isStatic: true};
 
 				this.setState({
-					avatarSource: source
+					imageSource: source
 				});
 			}
 		});
@@ -68,9 +63,9 @@ class CameraRollPicker extends Component {
 		return (
 			<View style={styles.container}>
 				<TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-					<View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
-						{ this.state.avatarSource === null ? <Text>Select a Photo</Text> :
-							<Image style={styles.avatar} source={this.state.avatarSource} />
+					<View style={[styles.image, styles.imageContainer, {marginBottom: 20}]}>
+						{ this.state.imageSource === null ? <Text>Select a Photo</Text> :
+							<Image style={styles.image} source={this.state.imageSource} />
 						}
 					</View>
 				</TouchableOpacity>
@@ -86,13 +81,13 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#F5FCFF'
 	},
-		avatarContainer: {
+		imageContainer: {
 		borderColor: '#9B9B9B',
 		borderWidth: 1 / PixelRatio.get(),
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-		avatar: {
+		image: {
 		borderRadius: 75,
 		width: 150,
 		height: 150
