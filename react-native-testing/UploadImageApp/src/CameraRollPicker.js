@@ -49,7 +49,7 @@ class CameraRollPicker extends Component {
 		};
 
 		ImagePickerManager.showImagePicker(options, (response) => {
-			console.log('Response = ', response);
+			// console.log('Response = ', response);
 			if (response.didCancel) {
 				console.log('User cancelled photo picker');
 			}
@@ -60,18 +60,15 @@ class CameraRollPicker extends Component {
 				console.log('User tapped custom button: ', response.customButton);
 			}
 			else {
-				const source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
+				var source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
 				// const source = {uri: response.uri.replace('file://', ''), isStatic: true};
 				var localImageArray = this.state.imageSourceArr.slice();
-				//need to do check if the item is null, if it is then add item, if it isnt then replace.
-				// this.setState({
-				// 	imageSourceArr: localImageArray
-				// 					.slice(0, localImageArray.length -1 )
-				// 					.concat(source, localImageArray[localImageArray.length - 1])
-				//  });
+				// need to do check if the item is null, if it is then add item, if it isnt then replace.
 				this.setState({
-					imageSource: source
-				})
+					imageSourceArr: localImageArray
+									.slice(0, localImageArray.length -1 )
+									.concat(source, localImageArray[localImageArray.length - 1])
+				 });
 			}
 			this.setState({
 				dataSource: this.state.dataSource.cloneWithRows(this.state.imageSourceArr)
@@ -80,15 +77,16 @@ class CameraRollPicker extends Component {
 	}
 
 	removeImage(imgId) {
+		var editedSourceArr = this.state.imageSourceArr.filter((_, i) => i !== imgId);
 		this.setState({
-			imageSourceArr : this.state.imageSourceArr.filter((_, i) => i !== imgId),
-			dataSource: this.state.dataSource.cloneWithRows(this.state.imageSourceArr)
+			imageSourceArr : editedSourceArr,
+			dataSource: this.state.dataSource.cloneWithRows(editedSourceArr)
 		})
 	}
 
 	render() {
-		var testing = true;
-
+		console.log('THIS IS THE STATE', this.state.imageSourceArr);
+		var testing = false;
 		if (!testing) {
 			return (
 				<View>
@@ -124,7 +122,7 @@ class CameraRollPicker extends Component {
 				{ rowData === null ? null :
 					<TouchableOpacity onPress={() => this.selectPhotoTapped(parseInt(rowID))}>
 						<View style={[styles.image, styles.imageContainer]}>
-							<Image style={styles.image} source={rowData.imageSource} />
+							<Image style={styles.image} source={rowData} />
 						</View>
 						<Text onPress={() => this.removeImage(parseInt(rowID))}>X</Text>
 					</TouchableOpacity>
