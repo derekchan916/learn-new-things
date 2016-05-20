@@ -1,5 +1,6 @@
 //https://github.com/marcshilling/react-native-image-picker
 const React = require('react-native');
+const SortableListView = require('react-native-sortable-listview');
 
 const {
 	StyleSheet,
@@ -9,11 +10,34 @@ const {
 	View,
 	PixelRatio,
 	TouchableOpacity,
+	TouchableHighlight,
 	ListView,
 	Image
 } = React;
 
 const ImagePickerManager = require('NativeModules').ImagePickerManager;
+
+let data = {
+  hello: {text: 'world'},
+  how: {text: 'are you'},
+  test: {text: 123},
+  this: {text: 'is'},
+  a: {text: 'a'},
+  real: {text: 'real'},
+  drag: {text: 'drag and drop'},
+  bb: {text: 'bb'},
+  cc: {text: 'cc'},
+  dd: {text: 'dd'},
+  ee: {text: 'ee'},
+  ff: {text: 'ff'},
+  gg: {text: 'gg'},
+  hh: {text: 'hh'},
+  ii: {text: 'ii'},
+  jj: {text: 'jj'},
+  kk: {text: 'kk'}
+}
+
+let order = Object.keys(data);
 
 class CameraRollPicker extends Component {
 	constructor() {
@@ -62,8 +86,9 @@ class CameraRollPicker extends Component {
 			else {
 				var source = {uri: 'data:image/jpeg;base64,' + response.data, isStatic: true};
 				// const source = {uri: response.uri.replace('file://', ''), isStatic: true};
-				var localImageArray = this.state.imageSourceArr.slice();
+				// var localImageArray = this.state.imageSourceArr.slice();
 				// need to do check if the item is null, if it is then add item, if it isnt then replace.
+
 				this.setState({
 					imageSourceArr: localImageArray
 									.slice(0, localImageArray.length -1 )
@@ -86,47 +111,56 @@ class CameraRollPicker extends Component {
 
 	render() {
 		console.log('THIS IS THE STATE', this.state.imageSourceArr);
-		var testing = false;
-		if (!testing) {
-			return (
-				<View>
-					<ListView contentContainerStyle={styles.list}
-						dataSource={this.state.dataSource}
-						renderRow={(rowData, sectionID, rowID) => this.renderRow(rowData, sectionID, rowID)}
-					/>
-					<TouchableOpacity onPress={() => this.selectPhotoTapped(this.state.imageSourceArr.length - 1)}>
-						<View style={[styles.image, styles.imageContainer]}>
-							<Text>+</Text>
-						</View>
-					</TouchableOpacity>
-				</View>
-			)
-		} else {
-			return (
-				<View style={styles.container}>
-		        <TouchableOpacity onPress={() => this.selectPhotoTapped(1)}>
-		          <View style={[styles.image, styles.imageContainer, {marginBottom: 20}]}>
-		          { this.state.imageSource === null ? <Text>Select a Photo</Text> :
-		            <Image style={styles.image} source={this.state.imageSource} />
-		          }
-		          </View>
-		        </TouchableOpacity>
-		      </View>
-			)
-		}
-	}
-
-	renderRow(rowData: string, sectionID: number, rowID: number) {
+		// return (
+		// 	<View>
+		// 		<ListView contentContainerStyle={styles.list}
+		// 			dataSource={this.state.dataSource}
+		// 			renderRow={(rowData, sectionID, rowID) => this.renderRow(rowData, sectionID, rowID)}
+		// 		/>
+		// 		<TouchableOpacity onPress={() => this.selectPhotoTapped(this.state.imageSourceArr.length - 1)}>
+		// 			<View style={[styles.image, styles.imageContainer]}>
+		// 				<Text>+</Text>
+		// 			</View>
+		// 		</TouchableOpacity>
+		// 	</View>
+		// )
 		return (
 			<View>
-				{ rowData === null ? null :
-					<TouchableOpacity onPress={() => this.selectPhotoTapped(parseInt(rowID))}>
-						<View style={[styles.image, styles.imageContainer]}>
-							<Image style={styles.image} source={rowData} />
-						</View>
-						<Text onPress={() => this.removeImage(parseInt(rowID))}>X</Text>
-					</TouchableOpacity>
-				}
+				<SortableListView
+					contentContainerStyle={styles.list}
+					data={data}
+					order={order}
+					onRowMoved={e => {
+		              order.splice(e.to, 0, order.splice(e.from, 1)[0]);
+		              this.forceUpdate();
+		            }}
+					renderRow={row => this.renderRow(row)}
+				/>
+			</View>
+		)
+	}
+
+	// renderRow(rowData: string, sectionID: number, rowID: number) {
+	renderRow(data) {
+		// return (
+		// 	<View>
+		// 		{ rowData === null ? null :
+		// 			<TouchableOpacity onPress={() => this.selectPhotoTapped(parseInt(rowID))}>
+		// 				<View style={[styles.image, styles.imageContainer]}>
+		// 					<Image style={styles.image} source={rowData} />
+		// 				</View>
+		// 				<Text onPress={() => this.removeImage(parseInt(rowID))}>X</Text>
+		// 			</TouchableOpacity>
+		// 		}
+		// 	</View>
+		// )
+		return (
+			<View>
+				<TouchableHighlight onLongPress={this.props.onLongPress}>
+					<View style={[styles.image, styles.imageContainer]}>
+						<Text>{data.text}</Text>
+					</View>
+				</TouchableHighlight>
 			</View>
 		)
 	}
