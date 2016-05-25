@@ -9,10 +9,12 @@ import {
 
 import Login from './components/login';
 import Channels from './components/channels';
+import Chat from './components/chat';
 
 var ROUTES = {
 	login: Login,
 	channels: Channels,
+	chat: Chat,
 };
 
 class Main extends Component{

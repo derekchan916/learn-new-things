@@ -13,7 +13,7 @@ import {
 import sendbird from 'sendbird';
 const PULLDOWN_DISTANCE = 40;
 
-class Channels extends Component{
+class Channels extends Component {
 	constructor(props) {
 		super(props)
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -66,7 +66,7 @@ class Channels extends Component{
 					sendbird.connect({
 						successFunc: (data) => {
 							sendbird.getChannelInfo((channel) => {
-								console.log(channel);
+								this.props.navigator.push({ name: 'chat' });
 							})
 						},
 						errorFunc: (status, error) => {
