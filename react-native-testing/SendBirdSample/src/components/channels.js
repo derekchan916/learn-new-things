@@ -26,6 +26,10 @@ class Channels extends Component{
 		};
 	}
 
+	componentWillMount () {
+		this.getChannelList(1);
+	}
+
 	render () {
 		return (
 			<View style={styles.container}>
@@ -55,7 +59,26 @@ class Channels extends Component{
 	}
 
 	onChannelPress (url) {
-		console.log(url);
+		sendbird.joinChannel(
+			url,
+			{
+				successFunc: (data) => {
+					sendbird.connect({
+						successFunc: (data) => {
+							sendbird.getChannelInfo((channel) => {
+								console.log(channel);
+							})
+						},
+						errorFunc: (status, error) => {
+							console.log(status, error);
+						}
+					})
+				},
+				errorFunc: (status, error) => {
+					console.log(status, error);
+				}
+			}
+		)
 	}
 
 	getChannelList (page) {
