@@ -2,39 +2,41 @@ import React, { Component } from 'react';
 
 import {
 	Navigator,
-  StyleSheet,
-  Text,
-  View
+	StyleSheet,
+	Text,
+	View
 } from 'react-native';
 
 import Login from './components/login';
+import Channels from './components/channels';
 
- var ROUTES = {
-   login: Login
- };
+var ROUTES = {
+	login: Login,
+	channels: Channels,
+};
 
 class Main extends Component{
-   renderScene(route, navigator) {
-     var Component = ROUTES[route.name];
-     return <Component route={route} navigator={navigator} />;
-   }
+	renderScene(route, navigator) {
+		var Component = ROUTES[route.name];
+		return <Component route={route} navigator={navigator} />;
+	}
 
-   render() {
-     return (
-       <Navigator
-         style={ styles.container }
-         initialRoute={ {name: 'login'} }
-         renderScene={this.renderScene}
-         configureScene={ () => { return Navigator.SceneConfigs.FloatFromRight; } }
-       />
-     );
-   }
+	render() {
+		return (
+			<Navigator
+				style={ styles.container }
+				initialRoute={ {name: 'login'} }
+				renderScene={this.renderScene}
+				configureScene={ () => { return Navigator.SceneConfigs.FloatFromRight; } }
+			/>
+		);
+	}
  };
 
- var styles = StyleSheet.create({
-   container: {
-     flex: 1
-   }
- });
+var styles = StyleSheet.create({
+	container: {
+		flex: 1
+	}
+});
 
  module.exports = Main;
