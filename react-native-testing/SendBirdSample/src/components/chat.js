@@ -6,6 +6,7 @@ import {
 	StyleSheet,
 	TouchableHighlight,
 	TextInput,
+	ScrollView,
 	Dimensions,
 } from 'react-native';
 
@@ -16,11 +17,33 @@ class Chat extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			message: ''
-		}
+			message: '',
+			messageList: [],
+		};
+	}
+
+	componentWillMount() {
+		sendbird.events.onMessageReceived = (obj) => {
+			this.setState({messageList: this.state.messageList.concat([obj])});
+		};
+		this.getMessages();
 	}
 
 	render() {
+		var list = this.state.messageList.map((item, index) => {
+			return (
+				<View
+					style={styles.messageContainer}
+					key={index}
+					>
+					<Text style={this.nameLabel}>
+						{item.user.name}
+						<Text style={styles.messageLabel}> : {item.message}</Text>
+					</Text>
+				</View>
+			);
+		});
+
 		return (
 			<View style={styles.container}>
 				<View style={styles.topContainer}>
@@ -31,9 +54,18 @@ class Chat extends Component {
 						<Text style={{color: '#fff'}}>&lt; Back</Text>
 					</TouchableHighlight>
 				</View>
+
 				<View style={styles.chatContainer}>
-					<Text style={{color: '#000'}}>Chat</Text>
+					<ScrollView
+						ref={(c) => this._scrollView = c}
+						onScroll={this.handleScroll}
+						scrollEventThrottle={16}
+						onContentSizeChange={(e) => {}}
+						>
+						{list}
+					</ScrollView>
 				</View>
+
 				<View style={styles.inputContainer}>
 					<View style={styles.textContainer}>
 						<TextInput
@@ -56,12 +88,31 @@ class Chat extends Component {
 	}
 
 	onBackPress () {
+		sendbird.disconnect();
 		this.props.navigator.pop();
 	}
 
 	onSendPress () {
-		console.log(this.state.message);
+		sendbird.message(this.state.message);
 		this.setState({message: ''});
+	}
+
+	getMessages () {
+		sendbird.getMessageLoadMore({
+			limit: 100,
+			successFunc: (data) => {
+				var _messageList = [];
+				data.messages.reverse().forEach(function(msg, index){
+					if(sendbird.isMessage(msg.cmd)) {
+					  _messageList.push(msg.payload);
+					}
+				});
+				this.setState({ messageList: _messageList.concat(this.state.messageList) });
+			},
+			errorFunc: (status, error) => {
+				console.log(status, error);
+			}
+		});
 	}
 }
 

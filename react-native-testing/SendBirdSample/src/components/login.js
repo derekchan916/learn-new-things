@@ -12,7 +12,7 @@ import sendbird from 'sendbird';
 
 class Login extends Component{
 	constructor(props) {
-		super(props)
+		super(props);
 		this.state = {
 			username: ''
 		};
