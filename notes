@@ -1,0 +1,35 @@
+// Methods
+// To merge two objects together
+var obj1 = {'key1': 1};
+var obj2 = {'key2': 2};
+
+	// using Angular.extend
+angular.extend({}, obj1, obj2);
+
+
+// Finding a randomized product from the top 10 products, from PairingModalComponent
+const WINE = {
+	count: 1,
+	keys: ['wine', 'white', 'white.sauvignon-blanc']
+}
+	// This will recursively go down the tree until it finds white.sauvignon-blanc
+getProducts (categories, keys, count) {
+	var category = categories.filter(obj => obj.value.indexOf(keys[0]) !== -1)[0];
+
+	if (!category) { return []; }
+
+	if (keys.length === 1) {
+		// Lodash method for randomly grabbing x number of products in array
+		return _.sampleSize(category.products.slice(0, 10), count);
+	} else {
+		return this.getProducts(category.children, keys.slice(1), count);
+	}
+}
+
+
+// Safely returning a value inside an object
+var obj = {first: {second: {third : [1, 2, 3]}}};
+return obj && obj.first && obj.first.second && obj.first.second.third && obj.first.second.third[0];
+
+	// This would give an error
+return obj && obj.first && obj.second[0];
