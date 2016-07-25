@@ -5,14 +5,21 @@ var obj2 = {'key2': 2};
 
 	// using Angular.extend
 angular.extend({}, obj1, obj2);
-
+// --------------------------------
 
 // Finding a randomized product from the top 10 products, from PairingModalComponent
-const WINE = {
-	count: 1,
-	keys: ['wine', 'white', 'white.sauvignon-blanc']
-}
-	// This will recursively go down the tree until it finds white.sauvignon-blanc
+const WINE = [
+	{
+		count: 1,
+		keys: ['wine', 'white', 'white.sauvignon-blanc']
+	},
+	{
+		count: 1,
+		keys: ['wine', 'white', 'white.chardonnay']
+	}
+];
+
+	// This will recursively go down the tree (category) until it finds white.sauvignon-blanc
 getProducts (categories, keys, count) {
 	var category = categories.filter(obj => obj.value.indexOf(keys[0]) !== -1)[0];
 
@@ -26,6 +33,14 @@ getProducts (categories, keys, count) {
 	}
 }
 
+var selectedProducts = WINE.map((product) => ({
+	...product,
+	products: this.getProducts(nextProps.alcoholData.categories, product.keys, product.count)
+}));
+// selectedProducts will return an array like [{count: 2, keys: [...], products: [{product1}, {product2}]}]
+// since we want an flattened array of all the products (selectedProducts.products is an array) we must do the following:
+var items = [].concat.apply([], selectedProducts.map(p => p.products));
+// --------------------------------
 
 // Safely returning a value inside an object
 var obj = {first: {second: {third : [1, 2, 3]}}};
@@ -33,3 +48,21 @@ return obj && obj.first && obj.first.second && obj.first.second.third && obj.fir
 
 	// This would give an error
 return obj && obj.first && obj.second[0];
+//---------------------------------
+
+// Waiting for images (array) to complete loading
+this.state = {
+	imageLoaded = false
+};
+
+loadImages (images) {
+	Promise.all(images.map(image => new Promise(function (resolve, reject) {
+		var img = new Image();
+		img.onload = resolve;
+		img.onerror = resolve;
+		img.src = image;
+	}))).then(_ => {
+		this.setState({ imageLoaded: true });
+		setTimeout(_ => this.setState({ animationReady: true }), TRANSITION_ANIMATE_TIME);
+	});
+}
