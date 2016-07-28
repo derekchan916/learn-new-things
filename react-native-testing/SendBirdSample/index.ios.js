@@ -13,6 +13,8 @@ import {
   View
 } from 'react-native';
 
-import Main from './src/main';
+//switch these two for basic and extended example.
+// import Main from './src/main';
+import Main from './src2/main';
 
 AppRegistry.registerComponent('SendBirdSample', () => Main);

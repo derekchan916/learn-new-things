@@ -1,4 +1,4 @@
-// Methods
+// Javascript Methods
 // To merge two objects together
 var obj1 = {'key1': 1};
 var obj2 = {'key2': 2};
@@ -66,3 +66,5 @@ loadImages (images) {
 		setTimeout(_ => this.setState({ animationReady: true }), TRANSITION_ANIMATE_TIME);
 	});
 }
+
+// CSS Notes
