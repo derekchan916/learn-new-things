@@ -67,7 +67,38 @@ loadImages (images) {
 	});
 }
 
+// BEM => Block, Element, Model
+
+// https://github.com/getify/You-Dont-Know-JS/
+// List of JavaScript weirdness
+var a = null;
+typeof a; //returns "object"
+
+// Default parameters
+function foo(a = 2) { // ES6 syntax
+    console.log( a );
+} // becomes transpiled into
+function foo() {
+    var a = arguments[0] !== (void 0) ? arguments[0] : 2;
+    console.log( a );
+}
+
+// Coercion rules http://www.ecma-international.org/ecma-262/5.1/#sec-11.9.3
+
+// Closure example
+function makeAdder(x) {
+	function add(y) {
+		return x + y;
+	};
+	return add;
+};
+
+var plusOne = makeAdder(1);
+plusOne(4); // 5; 1 + 5
+plusOne(9); // 10; 1 + 9
+
 // CSS Notes
+
 // Using SVG http://alistapart.com/article/practical-svg
 // Difference between viewport and viewBox
 <svg width="100" height="100" viewBox="0 0 100 100">
