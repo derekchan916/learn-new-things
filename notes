@@ -68,3 +68,11 @@ loadImages (images) {
 }
 
 // CSS Notes
+// Using SVG http://alistapart.com/article/practical-svg
+// Difference between viewport and viewBox
+<svg width="100" height="100" viewBox="0 0 100 100">
+
+// Use an svg property called preserveAspectRatio => default is xMidYMid
+<svg perserveAspectRatio="xMinYmax meet"> or "xMinYmax slice"
+// Meet means you want to contain the viewBox within viewport, slice means you can cut it.
+// preserveAspectRatio="xMinYmax meet" is the same as background-position: 0 100%; background-size: contain;
