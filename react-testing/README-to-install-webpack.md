@@ -136,4 +136,6 @@ we can also run this in a local environment.
 
 run$ npm install -g http-server
 
+run$ webpack --watch
+
 We can now load the server by simply running http-server. Do this in another terminal tab, then navigate to http://localhost:8080 and ensure you can still see your modified "Hello World" component.
