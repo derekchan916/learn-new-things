@@ -1,0 +1,8 @@
+node_modules
+.tmp
+.tmp
+.sass-cache
+.DS_Store
+npm-debug.log
+/.idea/
+.idea/workspace.xml
